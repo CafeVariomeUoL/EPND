@@ -1,6 +1,6 @@
 # REST API specification for querying EPND resources
 
-> This API specification is defined in the context of the EJPRD project, complying with the latest [Beacon v2 Specification](https://github.com/ga4gh-beacon/beacon-v2).
+> This API specification is defined in the context of the EPND project, complying with the latest [Beacon v2 Specification](https://github.com/ga4gh-beacon/beacon-v2).
 
 <!-- In this work, we present API specification for querying RD patient registries, biobanks and similar resources at the safe record level (i.e, resources whose available assets are described by RD patient data). Resources that implement this specification would ideally collect data based on the set of common data elements for rare diseases registration, as recommended by the European commission Joint Research Centre. In this specification, where possible, we also make use of ontological terms recommended by the CDE semantic data model group. -->
 
@@ -11,14 +11,14 @@
 <!-- * [Try out this API in Swagger](#-try-out-the-api-) -->
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
-    * [Individuals endpoint](#-individuals-endpoint)
+    <!-- * [Individuals endpoint](#-individuals-endpoint)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-individuals-endpoint-)
       * [Filters description](#-individuals-filters-description-)
       * [Example request & response](#-example-request-and-response-for-individuals-)
     * [Biosamples endpoint](#-biosamples-endpoint)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-biosamples-endpoint-)
       * [Filters description](#-biosamples-filters-description-)
-      * [Example request & response](#-example-request-and-response-for-biosamples-)
+      * [Example request & response](#-example-request-and-response-for-biosamples-) -->
     * [Catalogs endpoint](#-catalogs-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-catalogs-endpoint-)
       * [Filters description](#-catalogs-filters-description-)
@@ -48,19 +48,18 @@ The request and response conforms to the [Beacon Reference Framework](https://gi
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines three query endpoints to query resources using filters - [/individuals](#-individuals-endpoint), [/biosamples](#-biosamples-endpoint) and [/catalogs](#-catalogs-endpoint-). 
-
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/catalogs](#-catalogs-endpoint-).
 <hr>
 
-<h2 id="-query-endpoints-"> Query Endpoints ( Mandatory to implement atleast one of the query endpoints) </h2>
+<h2 id="-query-endpoints-"> Query Endpoints </h2>
 
 This specification defines POST endpoints to request information about resources. Each endpoint makes use of the [Filters](http://docs.genomebeacons.org/filters/) capability of the Beacon API.
 
-<h3 id="-individuals-endpoint"> Individuals endpoint</h3>
+<!-- <h3 id="-individuals-endpoint"> Individuals endpoint</h3>
 
-> **HTTP Request Method : POST**
+> **HTTP Request Method : POST** -->
 
-[/individuals](#-individuals-endpoint) endpoint returns the **__maximum value of individuals within a specified range__** from a RD resource. Filters are provided as a part of the body while using a HTTP POST request to query resources. 
+<!-- [/individuals](#-individuals-endpoint) endpoint returns the **__maximum value of individuals within a specified range__** from a RD resource. Filters are provided as a part of the body while using a HTTP POST request to query resources. 
 
 Please **do not use HTTP GET method** to query the individuals endpoint, as it is **not permitted** per this specification, and will result in a 403 error response.
 
@@ -518,14 +517,14 @@ Please **do not use HTTP GET method** to query the biosamples endpoint, as it is
 ```
 Notes about the `resultCount` and the filters for the `/individuals` endpoint apply also for `biospecimens`
 
-[ ^ Back to the top](#top)
+[ ^ Back to the top](#top) -->
 
 <hr>
 <h3 id="-catalogs-endpoint-"> Catalogs endpoint </h3>
 
 > Method: POST
 
-[/catalogs](https://app.swaggerhub.com/apis/DVS6_1/virtual-platform_beacon_api/v2.0#/Query%20Endpoints/catalogs_request) endpoint returns the **__metadata of RD resources__**, using as response, a model compatible with the [Resource Metadata Schema](https://github.com/ejp-rd-vp/resource-metadata-schema). Filters are provided as a part of the body while using a POST request to query resources. Available filters correspond also to dcat properties from the Resource Metadata Schema
+[/catalogs](#-catalogs-endpoint-) endpoint returns the **__metadata of EPND resources__**, using as response. Filters are provided as a part of the body while using a POST request to query resources.
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-catalogs-endpoint-"> List of filters and permitted values for the catalogs endpoint </h4>
 
