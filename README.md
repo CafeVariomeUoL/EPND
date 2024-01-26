@@ -715,22 +715,14 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
 ```JSON
 {
     "meta": {
-        "beaconId": "epnd.beacon.directory.bbmri-eric.eu",
-        "apiVersion": "v2.0.0",
+        "beaconId": "org.example.beacon.v2",
+        "apiVersion": "v2.0.2",
         "returnedGranularity": "record",
         "receivedRequestSummary": {
-            "apiVersion": "2.0",
+            "apiVersion": "v2.0.0",
             "requestedSchemas": [],
             "filters": [
-                {
-                    "id": "ordo:Orphanet_730"
-                },
-                {
-                "id": "rdf:type",
-                "operator": "=",
-                "value": "epnd:Biobank"
-
-                }
+                {}
             ],
             "requestParameters": {},
             "includeResultsetResponses": "HIT",
@@ -742,12 +734,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
             "testMode": false
         },
         "returnedSchemas": [
-            {
-                "entityType": "resources",
-                "schema": "epnd-resources-v1.0.0",
-                "name": "EPND schema for resources",
-                "url": "https://raw.githubusercontent",
-                "version": "v1.0.0"
+            { 
             }
         ]
     },
@@ -769,28 +756,9 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
         "resultSets": [
             {
                 "resultsCount": 1,
-                "results": [{
-                    "@context": "https://raw.githubusercontent.com",
-                    "@id": "biobank-1:collection:collection-1",
-                    "@type": "ejprd:Biobank",
-                    "title": "Rare Disease Biobank",
-                    "logo": "http:/biobank.eu/logo.png",
-                    "description": "biobank with data about muscular distrophy",
-                    "populationCoverage": "European",
-                    "theme": "ordo:Orphanet_730",
-                    "vpConnection": "epnd:VPContentDiscovery",
-                    "landingPage": ["http://biobank.org"],
-                    "personalData": "true",
-                    "language": "EN",
-                    "publisher": {
-                        "@id": "biobank-1",
-                        "title": "Biobank hosting collection",
-                        "description": "The biobank that hosts the collection",
-                        "spatial": {
-                            "title": "Italy"
-                        }
-                    }
-                }]
+                "results": [
+                    {}
+                ]
             }
         ]
     }
