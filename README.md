@@ -560,10 +560,10 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td rowspan="5">Alphanumerical</td>
         <td rowspan="5">A single value or an array of values representing a resource type of the resource. It must be one of the types defined in EJP Resource Metadata Schema</td>
         <td rowspan="5">=</td>
-        <td>ejprd:PatientRegistry</td>
+        <td>epnd:PatientRegistry</td>
     </tr>
-    <tr><td>ejprd:Biobank</td></tr>
-    <tr><td>ejprd:Guideline</td></tr>
+    <tr><td>epnd:Biobank</td></tr>
+    <tr><td>epnd:Guideline</td></tr>
     <tr><td>dcat:Dataset</td></tr>
     <tr><td>An array of any of the above</td></tr>
     <tr>
