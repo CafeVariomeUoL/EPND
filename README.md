@@ -599,7 +599,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 <h3 id="-catalogs-filters-description-"> Catalogs Filters Description </h3>
 
-**Disease or Disorder**: All rare diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
+**Disease or Disorder**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
 
 **Phenotype**: HPO terms of all phenotypes observed **within a catalog** of rare disease resources. The values follow CURIE syntax and use the `HP:` prefix. 
 
@@ -611,13 +611,13 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 **Organisation**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
 
-**Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `ejprd:PatientRegistry`, `ejprd:Biobank`, `ejprd:Guideline`, `dcat:Datasest` or an array of any of these values.
+**Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `epnd:PatientRegistry`, `epnd:Biobank`, `epnd:Guideline`, `dcat:Datasest` or an array of any of these values.
 
 [ ^ Back to the top](#top)
 
 <hr>
 
-<h3 id="catalogs-response">Catalogs Response</h3>
+<!-- <h3 id="catalogs-response">Catalogs Response</h3>
 
 The response is a Beacon Collection response that corresponds to a Resource described by the Resource Metadata Schema. Depending on the resource type, the properties may slighlty differ: for example some resource types can have properties that others don't have. Notice that an important field in all resources is the `@context` that specifies the semantics of the properties returned. It must be the [link](https://raw.githubusercontent.com/ejp-rd-vp/vp-api-specs/main/json-ld-contexts/ejprd-context.json) to the `json-ld-contexts/ejprd-context.json` file  in this repository. The schemas for each specific resource are in the `/schemas` directory.
 In the meta section of the response, the `returnedSchemas` object must specify the correct json schema for the resource. An example is:
@@ -634,7 +634,7 @@ In the meta section of the response, the `returnedSchemas` object must specify t
 ]
 ```
 
-<h3 id="-example-request-and-response-for-catalogs-"> Example request and response for catalogs </h3>
+<h3 id="-example-request-and-response-for-catalogs-"> Example request and response for catalogs </h3> -->
 
 **EXAMPLE /catalogs REQUEST**
 
@@ -651,7 +651,7 @@ In the meta section of the response, the `returnedSchemas` object must specify t
         {
           "id": "rdf:type",
           "operator": "=",
-          "value": "ejprd:Biobank"
+          "value": "epnd:Biobank"
 
         }
       ],
@@ -666,7 +666,7 @@ The following is an example response
 ```JSON
 {
     "meta": {
-        "beaconId": "ejprd.beacon.directory.bbmri-eric.eu",
+        "beaconId": "epnd.beacon.directory.bbmri-eric.eu",
         "apiVersion": "v2.0.0",
         "returnedGranularity": "record",
         "receivedRequestSummary": {
@@ -679,7 +679,7 @@ The following is an example response
                 {
                 "id": "rdf:type",
                 "operator": "=",
-                "value": "ejprd:Biobank"
+                "value": "epnd:Biobank"
 
                 }
             ],
@@ -695,9 +695,9 @@ The following is an example response
         "returnedSchemas": [
             {
                 "entityType": "resources",
-                "schema": "ejprd-resources-v1.0.0",
-                "name": "EJPRD schema for resources",
-                "url": "https://raw.githubusercontent.com/ejp-rd-vp/vp-api-specs/main/schemas/biobank-registry-schema.json",
+                "schema": "epnd-resources-v1.0.0",
+                "name": "EPND schema for resources",
+                "url": "https://raw.githubusercontent",
                 "version": "v1.0.0"
             }
         ]
@@ -712,16 +712,16 @@ The following is an example response
             {
                 "resultsCount": 1,
                 "results": [{
-                    "@context": "https://raw.githubusercontent.com/ejp-rd-vp/vp-api-specs/main/json-ld-contexts/ejprd-context.json",
+                    "@context": "https://raw.githubusercontent.com",
                     "@id": "biobank-1:collection:collection-1",
                     "@type": "ejprd:Biobank",
                     "title": "Rare Disease Biobank",
-                    "logo": "http://raredisease.biobank.eu/logo.png",
-                    "description": "Rare disease biobank with data about muscular distrophy",
+                    "logo": "http:/biobank.eu/logo.png",
+                    "description": "biobank with data about muscular distrophy",
                     "populationCoverage": "European",
                     "theme": "ordo:Orphanet_730",
-                    "vpConnection": "ejprd:VPContentDiscovery",
-                    "landingPage": ["http://biobank.raredisease.org"],
+                    "vpConnection": "epnd:VPContentDiscovery",
+                    "landingPage": ["http://biobank.org"],
                     "personalData": "true",
                     "language": "EN",
                     "publisher": {
@@ -741,7 +741,7 @@ The following is an example response
 
 [ ^ Back to the top](#top)
 
-<hr>
+
 
 <!-- <h2 id="-authentication-using-header-"> Authentication using Header </h2>
 
@@ -1084,7 +1084,7 @@ This specification defines GET endpoints to request information about resources.
 
 /info returns the information about the Beacon.
 
-<!-- <h3 id="-example-request-and-response-for-info-"> Example response for info </h3>
+<h3 id="-example-request-and-response-for-info-"> Example response for info </h3>
 
 
 
@@ -1093,7 +1093,7 @@ This specification defines GET endpoints to request information about resources.
 ```JSON
 {
     "meta": {
-        "beaconId": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "beaconId": "BeaconAPI.cv2.epnd.org",
         "apiVersion": "v2.0",
         "returnedSchemas": {
             "entityType": "Info Endpoint",
@@ -1101,7 +1101,7 @@ This specification defines GET endpoints to request information about resources.
         }
     },
     "response": {
-        "id": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "id": "BeaconAPI.cv2.epnd.org",
         "name": "Cafe Variome Beacon",
         "apiVersion": "v2.0",
         "createDateTime": "2021-02-03 15:07 BST",
@@ -1113,7 +1113,7 @@ This specification defines GET endpoints to request information about resources.
             "name": "University of Leicester",
             "address": "University Road, Leicester, LE1 7RH",
             "contactUrl": "mailto:admin@cafevariome.org?subject=Beacon Info",
-            "logoUrl": "https://rdnexusdev.molgeniscloud.org/cv2/resources/images/logos/cafevariome-logo-full.png",
+            "logoUrl": "https://epnd.org/cv2/resources/images/logos/cafevariome-logo-full.png",
             "welcomeUrl": "https://le.ac.uk/health-data-research/",
             "description": "Cafe Variome is a flexible data discovery software. Cafe Variome + Beacon makes discovering genomic data easier."
         },
@@ -1121,25 +1121,25 @@ This specification defines GET endpoints to request information about resources.
         "alternativeUrl": "https://le.ac.uk/health-data-research/activities/"
     }
 }
-``` -->
+```
 <h3 id="service-info-endpoint"> Service-info endpoint</h3>
 
 > **HTTP Request Method : GET**
 
 /service-info returns the information about the basic metadata concerning its service, based on the [reference specification](https://github.com/ga4gh-discovery/ga4gh-service-info/).
 
-<!-- <h3 id="-example-request-and-response-for-service-info"> Example response for service-info </h3>
+<h3 id="-example-request-and-response-for-service-info"> Example response for service-info </h3>
 
 
 
 
 ```JSON
 {
-    "id": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+    "id": "BeaconAPI.cv2.epnd.org",
     "name": "Cafe Variome Beacon",
     "type": {
         "artifact": "beacon",
-        "group": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "group": "BeaconAPI.cv2.epnd.org",
         "version": "v2.0"
     },
     "organization": {
@@ -1154,21 +1154,21 @@ This specification defines GET endpoints to request information about resources.
     "environment": "dev",
     "version": "v2.0"
 }
-``` -->
+```
 <h3 id="configuration-endpoint">Configuration</h3>
 
 > **HTTP Request Method : GET**
 
 /configuration returns the information about the Beacon.
 
-<!-- <h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
+<h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
 
 
 
 ```JSON
 {
     "meta": {
-        "beaconId": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "beaconId": "BeaconAPI.cv2.epnd.org",
         "apiVersion": "v2.0",
         "returnedSchemas": [
             {
@@ -1219,14 +1219,14 @@ This specification defines GET endpoints to request information about resources.
         }
     }
 }
-``` -->
+```
 <h3 id="entry-types-endpoint">Entry-types</h3>
 
 > **HTTP Request Method : GET**
 
 /entry-types returns the information about the Beacon.
 
-<!-- <h3 id="example-request-and-response-for-entry-types"> Example response for entry-types </h3>
+<h3 id="example-request-and-response-for-entry-types"> Example response for entry-types </h3>
 
 
 
@@ -1235,7 +1235,7 @@ This specification defines GET endpoints to request information about resources.
 ```JSON
 {
     "meta": {
-        "beaconId": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "beaconId": "BeaconAPI.cv2.epnd.org",
         "apiVersion": "v2.0",
         "returnedSchemas": [
             {
@@ -1279,23 +1279,20 @@ This specification defines GET endpoints to request information about resources.
         }
     }
 }
-``` -->
+```
 <h3 id="filtering_terms-endpoint">Filtering_terms</h3>
 
 **HTTP Request Method : GET**
 
 /filtering_terms returns the information about the Beacon.
 
-<!-- <h3 id="example-request-and-response-for-filtering_terms"> Example response for filtering_terms </h3> -->
+<h3 id="example-request-and-response-for-filtering_terms"> Example response for filtering_terms </h3>
 
 
-
-
-
-<!-- ```JSON
+```JSON
 {
     "meta": {
-        "beaconId": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "beaconId": "BeaconAPI.cv2.epnd.org",
         "apiVersion": "v2.0",
         "returnedSchemas": [
             {
@@ -1353,7 +1350,7 @@ This specification defines GET endpoints to request information about resources.
         ]
     }
 }
-``` --> 
+``` 
 
 <h3 id="map-endpoint">Map</h3>
 
@@ -1361,14 +1358,14 @@ This specification defines GET endpoints to request information about resources.
 
 /map returns the information related to the list of endpoints included in this Beacon instance.
 
-<!-- <h3 id="example-request-and-response-for-map"> Example response for map </h3>
+<h3 id="example-request-and-response-for-map"> Example response for map </h3>
 
 
 
 ```JSON
 {
     "meta": {
-        "beaconId": "BeaconAPI.cv2.rdnexusdev.molgeniscloud.org",
+        "beaconId": "BeaconAPI.cv2.epnd.org",
         "apiVersion": "v2.0",
         "returnedSchemas": [
             {
@@ -1386,19 +1383,19 @@ This specification defines GET endpoints to request information about resources.
         "endpointSets": {
             "Individuals": {
                 "entryType": "Individuals",
-                "rootUrl": "https://rdnexusdev.molgeniscloud.org/cv2/BeaconAPI/Individuals",
+                "rootUrl": "https://epnd.org/cv2/BeaconAPI/Individuals",
                 "filteringTermsUrl": "https://rdnexusdev.molgeniscloud.org/cv2/resources/beacon/filtering_terms.json"
             },
             "Biosamples": {
                 "entryType": "Biosamples",
-                "rootUrl": "https://rdnexusdev.molgeniscloud.org/cv2/BeaconAPI/Biosamples"
+                "rootUrl": "https://epnd.org/cv2/BeaconAPI/Biosamples"
             }
         }
     }
 }
 ```
 
-[ ^ Back to the top](#top) -->
+[ ^ Back to the top](#top)
 
 <!-- <hr>
 
