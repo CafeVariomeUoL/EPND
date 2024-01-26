@@ -660,6 +660,7 @@ In the meta section of the response, the `returnedSchemas` object must specify t
 }
 ```
 
+
 The following is an example response 
 
 **EXAMPLE /catalogs RESPONSE**
@@ -740,6 +741,101 @@ The following is an example response
 ```
 
 [ ^ Back to the top](#top)
+
+<hr>
+
+The "resultCount" attribute in the above response is the **maximum value of whatever range that result** is within, rather than giving out the actual count of individuals. More information on responding using ranges can be found [here](#ranges). 
+
+The filter **SHOULD** be one of the terms from the [filters and permitted values table](#individuals). Please note that not all resources will support all of the filters. In such cases the response should include a [warning message in the 'info' part](#warning-response-example) indicating which requested filters are unsupported and these were not included in the query.
+
+**EXAMPLE warning when unsupported filters are requested**
+
+
+```JSON
+{
+    "meta": {
+        "beaconId": "epnd.beacon.directory.bbmri-eric.eu",
+        "apiVersion": "v2.0.0",
+        "returnedGranularity": "record",
+        "receivedRequestSummary": {
+            "apiVersion": "2.0",
+            "requestedSchemas": [],
+            "filters": [
+                {
+                    "id": "ordo:Orphanet_730"
+                },
+                {
+                "id": "rdf:type",
+                "operator": "=",
+                "value": "epnd:Biobank"
+
+                }
+            ],
+            "requestParameters": {},
+            "includeResultsetResponses": "HIT",
+            "pagination": {
+                "skip": 0,
+                "limit": 50
+            },
+            "requestedGranularity": "record",
+            "testMode": false
+        },
+        "returnedSchemas": [
+            {
+                "entityType": "resources",
+                "schema": "epnd-resources-v1.0.0",
+                "name": "EPND schema for resources",
+                "url": "https://raw.githubusercontent",
+                "version": "v1.0.0"
+            }
+        ]
+    },
+    "responseSummary": {
+        "exists": true,
+        "numTotalResults": 1
+    },
+    "beaconHandovers": [],
+    "info": {
+        "warnings": {
+            "unsupportedFilters": [
+                "NCIT_C83164",
+                "NCIT_C124353",
+                "NCIT_C156420"
+            ]
+        }
+    },
+    "response": {
+        "resultSets": [
+            {
+                "resultsCount": 1,
+                "results": [{
+                    "@context": "https://raw.githubusercontent.com",
+                    "@id": "biobank-1:collection:collection-1",
+                    "@type": "ejprd:Biobank",
+                    "title": "Rare Disease Biobank",
+                    "logo": "http:/biobank.eu/logo.png",
+                    "description": "biobank with data about muscular distrophy",
+                    "populationCoverage": "European",
+                    "theme": "ordo:Orphanet_730",
+                    "vpConnection": "epnd:VPContentDiscovery",
+                    "landingPage": ["http://biobank.org"],
+                    "personalData": "true",
+                    "language": "EN",
+                    "publisher": {
+                        "@id": "biobank-1",
+                        "title": "Biobank hosting collection",
+                        "description": "The biobank that hosts the collection",
+                        "spatial": {
+                            "title": "Italy"
+                        }
+                    }
+                }]
+            }
+        ]
+    }
+}
+```
+
 
 
 
@@ -1089,39 +1185,43 @@ This specification defines GET endpoints to request information about resources.
 
 
 
-
 ```JSON
+
 {
-    "meta": {
-        "beaconId": "BeaconAPI.cv2.epnd.org",
-        "apiVersion": "v2.0",
-        "returnedSchemas": {
-            "entityType": "Info Endpoint",
-            "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/endpoints.json"
-        }
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "alternativeUrl": "https://example.org/beacon/authenticated",
+    "apiVersion": "v2.0.1",
+    "createDateTime": "2014-07-19",
+    "description": "string",
+    "environment": "prod",
+    "id": "org.example.beacon.v2",
+    "info": {},
+    "name": "string",
+    "organization": {
+      "address": "string",
+      "contactUrl": "string",
+      "description": "string",
+      "id": "string",
+      "info": {},
+      "logoUrl": "string",
+      "name": "string",
+      "welcomeUrl": "string"
     },
-    "response": {
-        "id": "BeaconAPI.cv2.epnd.org",
-        "name": "Cafe Variome Beacon",
-        "apiVersion": "v2.0",
-        "createDateTime": "2021-02-03 15:07 BST",
-        "updateDateTime": "2022-10-05 17:18 BST",
-        "description": "This Beacon is based on the Beacon specification by GA4GH. Implemented by The Brookeslab @ University of Leicester, this Beacon contains all informational endpoints along with individuals and biosamples discovery.",
-        "environment": "dev",
-        "organization": {
-            "id": "ULEIC",
-            "name": "University of Leicester",
-            "address": "University Road, Leicester, LE1 7RH",
-            "contactUrl": "mailto:admin@cafevariome.org?subject=Beacon Info",
-            "logoUrl": "https://epnd.org/cv2/resources/images/logos/cafevariome-logo-full.png",
-            "welcomeUrl": "https://le.ac.uk/health-data-research/",
-            "description": "Cafe Variome is a flexible data discovery software. Cafe Variome + Beacon makes discovering genomic data easier."
-        },
-        "welcomeUrl": "https://www.cafevariome.org/",
-        "alternativeUrl": "https://le.ac.uk/health-data-research/activities/"
-    }
+    "updateDateTime": "2014-07-19",
+    "version": "v2.0.1",
+    "welcomeUrl": "https://example.org/wiki/Main_Page"
+  }
 }
+
 ```
+
 <h3 id="service-info-endpoint"> Service-info endpoint</h3>
 
 > **HTTP Request Method : GET**
@@ -1135,24 +1235,24 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "id": "BeaconAPI.cv2.epnd.org",
-    "name": "Cafe Variome Beacon",
-    "type": {
-        "artifact": "beacon",
-        "group": "BeaconAPI.cv2.epnd.org",
-        "version": "v2.0"
-    },
-    "organization": {
-        "name": "University of Leicester",
-        "url": "https://www.le.ac.uk"
-    },
-    "contactUrl": "mailto:admin@cafevariome.org?subject=Beacon Service Info",
-    "createdAt": "2021-02-03 15:07 BST",
-    "updatedAt": "2022-10-06 11:56 BST",
-    "description": "This service provides information about Beacon deployed by Cafe Variome Software.",
-    "documentationUrl": "https://cafe-variome.gitbook.io/cafe-variome-docs/features/beacon/beacon-api",
-    "environment": "dev",
-    "version": "v2.0"
+  "id": "org.ga4gh.myservice",
+  "name": "My project",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "beacon",
+    "version": "1.0.0"
+  },
+  "description": "This service provides...",
+  "organization": {
+    "name": "My organization",
+    "url": "https://example.com"
+  },
+  "contactUrl": "mailto:support@example.com",
+  "documentationUrl": "https://docs.myservice.example.com",
+  "createdAt": "2019-06-04T12:58:19Z",
+  "updatedAt": "2019-06-04T12:58:19Z",
+  "environment": "test",
+  "version": "1.0.0"
 }
 ```
 <h3 id="configuration-endpoint">Configuration</h3>
@@ -1167,57 +1267,37 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "meta": {
-        "beaconId": "BeaconAPI.cv2.epnd.org",
-        "apiVersion": "v2.0",
-        "returnedSchemas": [
-            {
-                "entityType": "individuals",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/individuals/defaultSchema.json"
-            },
-            {
-                "entityType": "biosamples",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-            }
-        ]
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "$schema": "string",
+    "entryTypes": {
+      "property1": {
+        "additionallySupportedSchemas": [],
+        "defaultSchema": {},
+        "ontologyTermForThisType": {}
+      },
+      "property2": {
+        "additionallySupportedSchemas": [],
+        "defaultSchema": {},
+        "ontologyTermForThisType": {}
+      }
     },
-    "response": {
-        "$schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/framework/json/configuration/beaconConfigurationSchema.json",
-        "entryTypes": {
-            "Individuals": {
-                "id": "Individuals",
-                "name": "Individuals",
-                "ontologyTermForThisType": {
-                    "id": "NCIT:C25190"
-                },
-                "partOfSpecification": "v2.0",
-                "defaultSchema": {
-                    "id": "beacon-v2-individual",
-                    "name": "Default Schema for Individuals",
-                    "referenceToSchemaDefinition": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/individuals/defaultSchema.json"
-                }
-            },
-            "Biosamples": {
-                "id": "Biosamples",
-                "name": "Biosamples",
-                "ontologyTermForThisType": {
-                    "id": "NCIT:C43412"
-                },
-                "partOfSpecification": "v2.0",
-                "defaultSchema": {
-                    "id": "beacon-v2-biosample",
-                    "name": "Default Schema for Biosamples",
-                    "referenceToSchemaDefinition": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-                }
-            }
-        },
-        "maturityAttributes": {
-            "productionStatus": "DEV"
-        },
-        "securityAttributes": {
-            "defaultGranularity": "count"
-        }
+    "maturityAttributes": {
+      "productionStatus": "DEV"
+    },
+    "securityAttributes": {
+      "defaultGranularity": "boolean",
+      "securityLevels": [
+        null
+      ]
     }
+  }
 }
 ```
 <h3 id="entry-types-endpoint">Entry-types</h3>
@@ -1234,50 +1314,27 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "meta": {
-        "beaconId": "BeaconAPI.cv2.epnd.org",
-        "apiVersion": "v2.0",
-        "returnedSchemas": [
-            {
-                "entityType": "individuals",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/individuals/defaultSchema.json"
-            },
-            {
-                "entityType": "biosamples",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-            }
-        ]
-    },
-    "response": {
-        "entryTypes": {
-            "Individuals": {
-                "id": "Individuals",
-                "name": "Individuals",
-                "ontologyTermForThisType": {
-                    "id": "NCIT:C25190"
-                },
-                "partOfSpecification": "v2.0",
-                "defaultSchema": {
-                    "id": "beacon-v2-individual",
-                    "name": "Default Schema for Individuals",
-                    "referenceToSchemaDefinition": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2-Models/main/BEACON-V2-draft4-Model/individuals/defaultSchema.json"
-                }
-            },
-            "Biosamples": {
-                "id": "Biosamples",
-                "name": "Biosamples",
-                "ontologyTermForThisType": {
-                    "id": "NCIT:C43412"
-                },
-                "partOfSpecification": "v2.0",
-                "defaultSchema": {
-                    "id": "beacon-v2-biosample",
-                    "name": "Default Schema for Biosamples",
-                    "referenceToSchemaDefinition": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-                }
-            }
-        }
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "entryTypes": {
+      "property1": {
+        "additionallySupportedSchemas": [],
+        "defaultSchema": {},
+        "ontologyTermForThisType": {}
+      },
+      "property2": {
+        "additionallySupportedSchemas": [],
+        "defaultSchema": {},
+        "ontologyTermForThisType": {}
+      }
     }
+  }
 }
 ```
 <h3 id="filtering_terms-endpoint">Filtering_terms</h3>
@@ -1291,64 +1348,21 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "meta": {
-        "beaconId": "BeaconAPI.cv2.epnd.org",
-        "apiVersion": "v2.0",
-        "returnedSchemas": [
-            {
-                "entityType": "individuals",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/individuals/defaultSchema.json"
-            },
-            {
-                "entityType": "biosamples",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-            }
-        ]
-    },
-    "response": {
-        "filteringTerms": [
-            {
-                "id": "NCIT_C28421",
-                "label": "Sex. Permitted values: NCIT_C16576, NCIT_C20197, NCIT_C124294, NCIT_C17998",
-                "type": "alphanumeric"
-            },
-            {
-                "id": "A single value or an array of orphanet terms.",
-                "label": "Disease or disorder",
-                "type": "ontology"
-            },
-            {
-                "id": "A single value or an array of HPO terms.",
-                "label": "Phenotype",
-                "type": "ontology"
-            },
-            {
-                "id": "data_2295",
-                "label": "Causative genes. Permitted values: any HGNC gene symbol",
-                "type": "alphanumeric"
-            },
-            {
-                "id": "NCIT_C83164",
-                "label": "Age this year",
-                "type": "numeric"
-            },
-            {
-                "id": "NCIT_C124353",
-                "label": "Symptom Onset",
-                "type": "numeric"
-            },
-            {
-                "id": "NCIT_C156420",
-                "label": "Age at diagnosis",
-                "type": "numeric"
-            },
-            {
-                "id": "Available Materials",
-                "label": "Available materials",
-                "type": "alphanumeric"
-            }
-        ]
-    }
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "filteringTerms": [
+      {}
+    ],
+    "resources": [
+      {}
+    ]
+  }
 }
 ``` 
 
@@ -1364,34 +1378,24 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "meta": {
-        "beaconId": "BeaconAPI.cv2.epnd.org",
-        "apiVersion": "v2.0",
-        "returnedSchemas": [
-            {
-                "entityType": "individuals",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/individuals/defaultSchema.json"
-            },
-            {
-                "entityType": "biosamples",
-                "schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/biosamples/defaultSchema.json"
-            }
-        ]
-    },
-    "response": {
-        "$schema": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/framework/json/configuration/beaconMapSchema.json",
-        "endpointSets": {
-            "Individuals": {
-                "entryType": "Individuals",
-                "rootUrl": "https://epnd.org/cv2/BeaconAPI/Individuals",
-                "filteringTermsUrl": "https://rdnexusdev.molgeniscloud.org/cv2/resources/beacon/filtering_terms.json"
-            },
-            "Biosamples": {
-                "entryType": "Biosamples",
-                "rootUrl": "https://epnd.org/cv2/BeaconAPI/Biosamples"
-            }
-        }
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "$schema": "string",
+    "endpointSets": {
+      "property1": {
+        "endpoints": {}
+      },
+      "property2": {
+        "endpoints": {}
+      }
     }
+  }
 }
 ```
 
