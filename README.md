@@ -641,19 +641,11 @@ In the meta section of the response, the `returnedSchemas` object must specify t
 ```JSON
 { 
  "meta":{
-      "apiVersion": "v2.0"
+      "apiVersion": "v2.0.1"
  },
  "query": {
       "filters": [
-        {
-          "id": "ordo:Orphanet_730"
-        },
-        {
-          "id": "rdf:type",
-          "operator": "=",
-          "value": "epnd:Biobank"
-
-        }
+        {}
       ],
       "requestedGranularity": "record"
     }
@@ -661,28 +653,22 @@ In the meta section of the response, the `returnedSchemas` object must specify t
 ```
 
 
+Requested granularity for the response. It do not have to respond with the requested granularity, e.g. may respond with count results although record level granularity had been requested but indicate the granularity of the response in the response's metadata. Allowed values -{ boolean,count,aggregated,record} with default boolean value.
+
 The following is an example response 
 
 **EXAMPLE /catalogs RESPONSE**
 ```JSON
 {
     "meta": {
-        "beaconId": "epnd.beacon.directory.bbmri-eric.eu",
-        "apiVersion": "v2.0.0",
+        "beaconId": "org.example.beacon.v2",
+        "apiVersion": "v2.0.1",
         "returnedGranularity": "record",
         "receivedRequestSummary": {
-            "apiVersion": "2.0",
+            "apiVersion": "v2.0.1",
             "requestedSchemas": [],
             "filters": [
-                {
-                    "id": "ordo:Orphanet_730"
-                },
-                {
-                "id": "rdf:type",
-                "operator": "=",
-                "value": "epnd:Biobank"
-
-                }
+                {}
             ],
             "requestParameters": {},
             "includeResultsetResponses": "HIT",
@@ -694,13 +680,7 @@ The following is an example response
             "testMode": false
         },
         "returnedSchemas": [
-            {
-                "entityType": "resources",
-                "schema": "epnd-resources-v1.0.0",
-                "name": "EPND schema for resources",
-                "url": "https://raw.githubusercontent",
-                "version": "v1.0.0"
-            }
+            {}
         ]
     },
     "responseSummary": {
@@ -712,28 +692,9 @@ The following is an example response
         "resultSets": [
             {
                 "resultsCount": 1,
-                "results": [{
-                    "@context": "https://raw.githubusercontent.com",
-                    "@id": "biobank-1:collection:collection-1",
-                    "@type": "ejprd:Biobank",
-                    "title": "Rare Disease Biobank",
-                    "logo": "http:/biobank.eu/logo.png",
-                    "description": "biobank with data about muscular distrophy",
-                    "populationCoverage": "European",
-                    "theme": "ordo:Orphanet_730",
-                    "vpConnection": "epnd:VPContentDiscovery",
-                    "landingPage": ["http://biobank.org"],
-                    "personalData": "true",
-                    "language": "EN",
-                    "publisher": {
-                        "@id": "biobank-1",
-                        "title": "Biobank hosting collection",
-                        "description": "The biobank that hosts the collection",
-                        "spatial": {
-                            "title": "Italy"
-                        }
-                    }
-                }]
+                "results": [
+                    {}
+                ]
             }
         ]
     }
