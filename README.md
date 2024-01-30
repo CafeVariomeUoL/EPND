@@ -1113,7 +1113,7 @@ This specification defines GET endpoints to request information about resources.
 
 > **HTTP Request Method : GET**
 
-/info returns the information about the Beacon.
+/info that MUST return information (metadata) about the Beacon service and the organization supporting it
 
 <h3 id="-example-request-and-response-for-info-"> Example response for info </h3>
 
@@ -1194,7 +1194,7 @@ This specification defines GET endpoints to request information about resources.
 
 > **HTTP Request Method : GET**
 
-/configuration returns Beacon configuration.
+/configuration returns configuration aspects and the definition of the entry types (e.g. genomic variants, biosamples, cohorts) implemented in that specific Beacon server or instance.
 
 <h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
 
@@ -1289,7 +1289,7 @@ This specification defines GET endpoints to request information about resources.
 
 **HTTP Request Method : GET**
 
-/filtering_terms returns information about available individual filters for this beacon's entry types.
+/filtering_terms returns returns a list of the filtering terms accepted by that Beacon instance.
 
 <h3 id="example-request-and-response-for-filtering_terms"> Example response for filtering_terms </h3>
 
