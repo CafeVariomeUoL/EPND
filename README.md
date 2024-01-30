@@ -46,9 +46,11 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/catalogs](#-catalogs-endpoint-).
+
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/catalogs](#-catalogs-endpoint-).
+
 <hr>
 
 <h2 id="-query-endpoints-"> Query Endpoints </h2>
@@ -524,22 +526,22 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 > Method: POST
 
-[/catalogs](#-catalogs-endpoint-) endpoint returns the **__metadata of EPND resources__**, using as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/catalogs](#-catalogs-endpoint-) endpoint returns the **__metadata of EPND resources__** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-catalogs-endpoint-"> List of filters and permitted values for the catalogs endpoint </h4>
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs**
 
 <table>
-<thead>
-        <th>Metadata Schema Concept</th>
-        <th>Metadata Schema Term</th>
-        <th>Beacon Filter Type</th>
-        <th>ID</th>
-        <th>Operator</th>
-        <th>Permitted Values</th>
+<thead style="background-color: #f2f2f2">
+    <th>Metadata Schema Concept</th>
+    <th>Metadata Schema Term</th>
+    <th>Beacon Filter Type</th>
+    <th>ID</th>
+    <th>Operator</th>
+    <th>Permitted Values</th>
 </thead>
-<tbody>
+<tbody style="background-color: #f2f2f2">
     <tr>
         <td><b>Disease or Disorder</b></td>
         <td>dcat:theme</td>
@@ -593,11 +595,14 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 </tbody>
 </table>
 
+
 [ ^ Back to the top](#top)
 
 <hr>
+<div style="background-color: #f2f2f2">
+<h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
 
-<h3 id="-catalogs-filters-description-"> Catalogs Filters Description </h3>
+
 
 **Disease or Disorder**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
 
@@ -612,6 +617,8 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 **Organisation**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
 
 **Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `epnd:PatientRegistry`, `epnd:Biobank`, `epnd:Guideline`, `dcat:Datasest` or an array of any of these values.
+
+</div>
 
 [ ^ Back to the top](#top)
 
@@ -1184,11 +1191,11 @@ This specification defines GET endpoints to request information about resources.
   "version": "1.0.0"
 }
 ```
-<h3 id="configuration-endpoint">Configuration</h3>
+<h3 id="configuration-endpoint">Configuration endpoint</h3>
 
 > **HTTP Request Method : GET**
 
-/configuration returns the information about the Beacon.
+/configuration returns Beacon configuration.
 
 <h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
 
@@ -1207,14 +1214,19 @@ This specification defines GET endpoints to request information about resources.
     "$schema": "string",
     "entryTypes": {
       "property1": {
-        "additionallySupportedSchemas": [],
-        "defaultSchema": {},
-        "ontologyTermForThisType": {}
+      "id": "string",
+      "name": "string",
+      "ontologyTermForThisType": {},
+      "partOfSpecification": "Beacon v2.0",
+      "defaultSchema": {},
       },
       "property2": {
-        "additionallySupportedSchemas": [],
-        "defaultSchema": {},
-        "ontologyTermForThisType": {}
+      "id": "string",
+      "name": "string",
+      "ontologyTermForThisType": {},
+      "partOfSpecification": "Beacon v2.0",
+      "defaultSchema": {},
+       
       }
     },
     "maturityAttributes": {
@@ -1229,11 +1241,11 @@ This specification defines GET endpoints to request information about resources.
   }
 }
 ```
-<h3 id="entry-types-endpoint">Entry-types</h3>
+<h3 id="entry-types-endpoint">Entry-types endpoint</h3>
 
 > **HTTP Request Method : GET**
 
-/entry-types returns the information about the Beacon.
+/entry-types returns list of entry types in this Beacon.
 
 <h3 id="example-request-and-response-for-entry-types"> Example response for entry-types </h3>
 
@@ -1253,24 +1265,32 @@ This specification defines GET endpoints to request information about resources.
   "response": {
     "entryTypes": {
       "property1": {
-        "additionallySupportedSchemas": [],
-        "defaultSchema": {},
-        "ontologyTermForThisType": {}
+        "id": "",
+        "name": "",
+        "ontologyTermForThisType": {
+                },
+                "partOfSpecification": "v2.0",
+                "defaultSchema": {
+                }
       },
       "property2": {
-        "additionallySupportedSchemas": [],
-        "defaultSchema": {},
-        "ontologyTermForThisType": {}
-      }
+        "id": "",
+        "name": "",
+        "ontologyTermForThisType": {
+                },
+                "partOfSpecification": "v2.0",
+                "defaultSchema": {
+                }
+      },
     }
   }
 }
 ```
-<h3 id="filtering_terms-endpoint">Filtering_terms</h3>
+<h3 id="filtering_terms-endpoint">Filtering_terms endpoint</h3>
 
 **HTTP Request Method : GET**
 
-/filtering_terms returns the information about the Beacon.
+/filtering_terms returns information about available individual filters for this beacon's entry types.
 
 <h3 id="example-request-and-response-for-filtering_terms"> Example response for filtering_terms </h3>
 
@@ -1295,11 +1315,11 @@ This specification defines GET endpoints to request information about resources.
 }
 ``` 
 
-<h3 id="map-endpoint">Map</h3>
+<h3 id="map-endpoint">Map endpoint</h3>
 
 > **HTTP Request Method : GET**
 
-/map returns the information related to the list of endpoints included in this Beacon instance.
+/map returns the Beacon map with information related to the list of endpoints included in this Beacon instance.
 
 <h3 id="example-request-and-response-for-map"> Example response for map </h3>
 
@@ -1318,10 +1338,14 @@ This specification defines GET endpoints to request information about resources.
     "$schema": "string",
     "endpointSets": {
       "property1": {
-        "endpoints": {}
+       "entryType": "",
+       "rootUrl": "",
+       "filteringTermsUrl": ""
       },
       "property2": {
-        "endpoints": {}
+       "entryType": "",
+       "rootUrl": "",
+       "filteringTermsUrl": ""
       }
     }
   }
