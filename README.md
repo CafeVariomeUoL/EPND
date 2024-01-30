@@ -532,9 +532,11 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs**
 
+
+** Awaiting Discussion**
 <table>
 <thead>
-        <th style="background-color: #f2f2f2;">Metadata Schema Concept</th>
+        <th>Metadata Schema Concept</th>
         <th>Metadata Schema Term</th>
         <th>Beacon Filter Type</th>
         <th>ID</th>
@@ -598,6 +600,8 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 [ ^ Back to the top](#top)
 
 <hr>
+
+** Awaiting Discussion**
 
 <h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
 
