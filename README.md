@@ -533,15 +533,15 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 > **Note**: Elements within arrays in **value** fields are treated as **ORs**
 
 <table>
-<thead style="background-color: #f2f2f2">
-    <th>Metadata Schema Concept</th>
-    <th>Metadata Schema Term</th>
-    <th>Beacon Filter Type</th>
-    <th>ID</th>
-    <th>Operator</th>
-    <th>Permitted Values</th>
+<thead>
+        <th style="background-color: #f2f2f2;">Metadata Schema Concept</th>
+        <th>Metadata Schema Term</th>
+        <th>Beacon Filter Type</th>
+        <th>ID</th>
+        <th>Operator</th>
+        <th>Permitted Values</th>
 </thead>
-<tbody style="background-color: #f2f2f2">
+<tbody>
     <tr>
         <td><b>Disease or Disorder</b></td>
         <td>dcat:theme</td>
@@ -595,14 +595,11 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 </tbody>
 </table>
 
-
 [ ^ Back to the top](#top)
 
 <hr>
-<div style="background-color: #f2f2f2">
+
 <h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
-
-
 
 **Disease or Disorder**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
 
@@ -617,8 +614,6 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 **Organisation**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
 
 **Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `epnd:PatientRegistry`, `epnd:Biobank`, `epnd:Guideline`, `dcat:Datasest` or an array of any of these values.
-
-</div>
 
 [ ^ Back to the top](#top)
 
