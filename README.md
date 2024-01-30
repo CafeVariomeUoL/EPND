@@ -534,7 +534,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 
 ** Awaiting Discussion**
-<table>
+<!-- <table>
 <thead>
         <th>Metadata Schema Concept</th>
         <th>Metadata Schema Term</th>
@@ -595,15 +595,15 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td>any String</td>
     </tr>
 </tbody>
-</table>
-
+</table> -->
+![Tabel!](/tab.png "Tabel")
 [ ^ Back to the top](#top)
 
 <hr>
 
 ** Awaiting Discussion**
 
-<h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
+<!-- <h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
 
 **Disease or Disorder**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
 
@@ -619,7 +619,9 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 **Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `epnd:PatientRegistry`, `epnd:Biobank`, `epnd:Guideline`, `dcat:Datasest` or an array of any of these values.
 
-[ ^ Back to the top](#top)
+[ ^ Back to the top](#top) -->
+
+![Tabel!](/des.png "Tabel")
 
 <hr>
 
