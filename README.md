@@ -21,7 +21,7 @@
       * [Example request & response](#-example-request-and-response-for-biosamples-) -->
     * [study endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
-      * [Filters description](#-study-filters-description-)
+      <!-- * [Filters description](#-study-filters-description-) -->
       * [Example request & response](#-example-request-and-response-for-study-)
 <!-- * [Authentication using Header(s)](#-authentication-using-header-)
 * [Understanding the query](#-understanding-the-query)
