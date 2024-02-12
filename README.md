@@ -19,10 +19,10 @@
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-biosamples-endpoint-)
       * [Filters description](#-biosamples-filters-description-)
       * [Example request & response](#-example-request-and-response-for-biosamples-) -->
-    * [Catalogs endpoint](#-catalogs-endpoint-)
-      * [List of filters](#-list-of-filters-and-permitted-values-for-the-catalogs-endpoint-)
-      * [Filters description](#-catalogs-filters-description-)
-      * [Example request & response](#-example-request-and-response-for-catalogs-)
+    * [study endpoint](#-s-endpoint-)
+      * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
+      * [Filters description](#-study-filters-description-)
+      * [Example request & response](#-example-request-and-response-for-study-)
 <!-- * [Authentication using Header(s)](#-authentication-using-header-)
 * [Understanding the query](#-understanding-the-query)
     * [Syntax & Usage of Beacon Query with Filters](#-syntax-and-usage)
@@ -46,7 +46,7 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/catalogs](#-catalogs-endpoint-).
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/study](#-study-endpoint-).
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
@@ -522,19 +522,19 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 [ ^ Back to the top](#top) -->
 
 <hr>
-<h3 id="-catalogs-endpoint-"> Catalogs endpoint </h3>
+<h3 id="-study-endpoint-"> Study endpoint </h3>
 
 > Method: POST
 
-[/catalogs](#-catalogs-endpoint-) endpoint returns the **__metadata of EPND resources__** as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/study](#-study-endpoint-) endpoint returns the **__metadata of EPND resources__** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
-<h4 id="-list-of-filters-and-permitted-values-for-the-catalogs-endpoint-"> List of filters and permitted values for the catalogs endpoint </h4>
+<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs**
 
 
 ** Awaiting Discussion**
-<!-- <table>
+<table>
 <thead>
         <th>Metadata Schema Concept</th>
         <th>Metadata Schema Term</th>
@@ -545,90 +545,133 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 </thead>
 <tbody>
     <tr>
-        <td><b>Disease or Disorder</b></td>
-        <td>dcat:theme</td>
-        <td>Ontology</td>
-        <td>A single value or an array of orphanet terms in CURIE syntax prefixed with `ordo:`<b>e.g. ordo:Orphanet_558 or [ordo:Orphanet_558, ordo:Orphanet_773]</b></td>
-        <td colspan="2">NA</td>
+        <td rowspan="13">
+            <b>Available Diseases</b>
+        </td>
+        <td rowspan="13">
+            NA
+        </td>
+        <td rowspan="13">
+            Alphanumerical
+        </td>
+        <td rowspan="13">
+            A single value or an array of diseases. <b>e.g. Cognitively normal , Alzhemir's disease
+        </td>
+        <td rowspan="13">
+            NA
+        </td>
+        <td>Cognitively normal (control group)</td>
+    </tr>
+    <tr><td>Cognitively normal (control group)</td></tr>
+    <tr><td>Alzheimer's disease (AD)</td></tr>
+    <tr><td>Parkinson's disease (PD)</td></tr>
+    <tr><td>Dementia with Lewy bodies (DLB)</td></tr>
+    <tr><td>Isolated REM sleep behavior disorder (iRBD)</td></tr>
+    <tr><td>Frontaltemporal dementia (FTD)</td></tr>
+    <tr><td>Amyotrophic lateral sclerosis (ALS)</td></tr>
+    <tr><td>Progressive supranuclear palsy (PSP)</td></tr>
+    <tr><td>Corticobasal degeneration (CBD)</td></tr>
+    <tr><td>Multiple system atrophy (MSA)</td></tr>
+    <tr><td>Huntington's disease (HD)</td></tr>
+    <tr><td>Ataxia</td></tr>
+    <tr>
+        <td rowspan="7"><b>Available Samples</b>
+        </td>
+        <td rowspan="7">NA</td>
+        <td rowspan="7">Alphanumerical</td>
+        <td rowspan="7">A single value or an array of bio sample .<b> CSF or Serum etc</b></td>
+        <td rowspan="7">NA</td>
+        <td>
+        Urine
+        </td>
+    </tr>
+    <tr><td>CSF</td></tr>
+    <tr><td>Serum</td></tr>
+    <tr><td>Plasma</td></tr>
+    <tr><td>DNA</td></tr>
+    <tr><td>Saliva</td></tr>
+    <tr><td>Faeces</td></tr>
+    <tr>
+        <td rowspan="4"><b>Available Imaging</b></td>
+        <td rowspan="4">NA</td>
+        <td rowspan="4">Alphanumerical</td>
+        <td rowspan="4">A single value or an array of bio samples<b>MRI or PET-Amyloid etc</b></td>
+        <td rowspan="4">NA</td>
+        <td>MRI</td>
+    </tr>
+    <tr><td>PET-Amyloid</td></tr>
+    <tr><td>PET-Tau</td></tr>
+    <tr><td>DaT Scan</td></tr>
+    <tr>
+        <td rowspan="2">
+            <b>Cohort Design</b>
+        </td>
+        <td rowspan="2">
+            NA
+        </td>
+        <td rowspan="2">
+            Alphanumerical
+        </td>
+        <td rowspan="2">
+            Cognitive Data
+        </td>
+        <td rowspan="2">
+            NA
+        </td>
+        <td>
+            Cross-sectional
+        </td>
     </tr>
     <tr>
-        <td><b>Phenotype</b></td>
-        <td>sio:SIO_010056</td>
-        <td>Ontology</td>
-        <td>A single value or an array of HPO terms prefixed with `HP:` <b>e.g. HP:0001251 or [HP:0001251, HP:0012250]</b></td>
-        <td colspan="2">NA</td>
+        <td>
+            Logitudinal
+        </td>
     </tr>
     <tr>
-        <td rowspan="5"><b>Resource Types</b></td>
-        <td rowspan="5">rdf:type</td>
-        <td rowspan="5">Alphanumerical</td>
-        <td rowspan="5">A single value or an array of values representing a resource type of the resource. It must be one of the types defined in EJP Resource Metadata Schema</td>
-        <td rowspan="5">=</td>
-        <td>epnd:PatientRegistry</td>
-    </tr>
-    <tr><td>epnd:Biobank</td></tr>
-    <tr><td>epnd:Guideline</td></tr>
-    <tr><td>dcat:Dataset</td></tr>
-    <tr><td>An array of any of the above</td></tr>
-    <tr>
-        <td><b>ID</b></td> 
+      <td><b>Number of Participants</b></td><td>NA</td>
+        <td>Numerical</td>
+        <td>count ranges?</td>
         <td>NA</td>
-        <td>Alphanumerical</td>
-        <td>id</td>
-        <td>=</td>
-        <td>any String</td>
+        <td></td>
     </tr>
     <tr>
-        <td><b>Name </b></td>
-        <td>dct:title</td>
+      <td><b>Country</b></td><td>NA</td>
         <td>Alphanumerical</td>
-        <td>The name of the resource</td>
-        <td>=</td>
-        <td>any String</td>
-    </tr>
-    <tr>
-        <td><b>Description </b> </td>
-        <td>dct:description</td>
-        <td>Alphanumerical</td>
-        <td>The description of the resource</td>
-        <td>=</td>
-        <td>any String</td>
+        <td>country codes?</td>
+        <td>NA</td>
+        <td></td>
     </tr>
 </tbody>
-</table> -->
-![Tabel!](/tab.png "Tabel")
+</table>
+<!-- ![Tabel!](/tab.png "Tabel") -->
+
 [ ^ Back to the top](#top)
+<!-- <hr> -->
 
-<hr>
+<!-- ** Awaiting Discussion**
 
-** Awaiting Discussion**
+<h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
 
-<!-- <h3 id="-catalogs-filters-description-"> Catalogs endpoint Filters Description </h3>
+**Available Diseases**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema.
 
-**Disease or Disorder**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema. The values follow CURIE syntax and use the `ordo:` prefix.
+**Available Samples**: HPO terms of all phenotypes observed **within a catalog** of rare disease resources. The values follow CURIE syntax and use the `HP:` prefix. 
 
-**Phenotype**: HPO terms of all phenotypes observed **within a catalog** of rare disease resources. The values follow CURIE syntax and use the `HP:` prefix. 
+**Available Imaging**: The resource identifier ID **within the catalog**. It corresponds to the identifier of the RDF resource
 
-**ID**: The resource identifier ID **within the catalog**. It corresponds to the identifier of the RDF resource
+**Cohort Design**: The name of the resource in the **catalog**. It corresponds to the `dct:title` of the Resource Metadata Schema
 
-**Name**: The name of the resource in the **catalog**. It corresponds to the `dct:title` of the Resource Metadata Schema
+**Number of Participants**: The description of the resource in the **catalog**. It corresponds to the `dct:description` property of the Resource Metadata Schema
 
-**Description**: The description of the resource in the **catalog**. It corresponds to the `dct:description` property of the Resource Metadata Schema
-
-**Organisation**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
-
-**Resource Types**: Types of resources **within the catalog**. Permitted values for this filter are the type of resources in the Resource Metadata Schema:  `epnd:PatientRegistry`, `epnd:Biobank`, `epnd:Guideline`, `dcat:Datasest` or an array of any of these values.
+**Country**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
 
 [ ^ Back to the top](#top) -->
 
-![Tabel!](/des.png "Tabel")
+<!-- ![Tabel!](/des.png "Tabel") -->
 
 <hr>
 
-<!-- <h3 id="catalogs-response">Catalogs Response</h3>
+<!-- <h3 id="study-response">Study Response</h3>
 
-The response is a Beacon Collection response that corresponds to a Resource described by the Resource Metadata Schema. Depending on the resource type, the properties may slighlty differ: for example some resource types can have properties that others don't have. Notice that an important field in all resources is the `@context` that specifies the semantics of the properties returned. It must be the [link](https://raw.githubusercontent.com/ejp-rd-vp/vp-api-specs/main/json-ld-contexts/ejprd-context.json) to the `json-ld-contexts/ejprd-context.json` file  in this repository. The schemas for each specific resource are in the `/schemas` directory.
-In the meta section of the response, the `returnedSchemas` object must specify the correct json schema for the resource. An example is:
 
 ```JSON
 "returnedSchemas": [
@@ -640,11 +683,11 @@ In the meta section of the response, the `returnedSchemas` object must specify t
         "version": "v1.0.0"
     }
 ]
-```
+``` -->
 
-<h3 id="-example-request-and-response-for-catalogs-"> Example request and response for catalogs </h3> -->
+<h3 id="-example-request-and-response-for-study-"> Example request and response for study </h3>
 
-**EXAMPLE /catalogs REQUEST**
+**EXAMPLE /study REQUEST**
 
 ```JSON
 { 
@@ -665,7 +708,7 @@ Requested granularity for the response. It do not have to respond with the reque
 
 The following is an example response 
 
-**EXAMPLE /catalogs RESPONSE**
+**EXAMPLE /study RESPONSE**
 ```JSON
 {
     "meta": {
@@ -1115,7 +1158,7 @@ This specification defines GET endpoints to request information about resources.
 
 > **HTTP Request Method : GET**
 
-/info that MUST return information (metadata) about the Beacon service and the organization supporting it
+/info MUST return information (metadata) about the Beacon service and the organization supporting it
 
 <h3 id="-example-request-and-response-for-info-"> Example response for info </h3>
 
@@ -1359,7 +1402,7 @@ This specification defines GET endpoints to request information about resources.
 
 <h2 id="swagger-auth"> Authentication using Header for Swagger </h2>
 
-In Swagger, to query using both the /individuals endpoint & /catalogs endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
+In Swagger, to query using both the /individuals endpoint & /study endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
 
 ![image](https://user-images.githubusercontent.com/24955128/203320000-a9cbc5a5-4c49-4a2b-8666-4e0cb17a5a62.png)
 
