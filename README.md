@@ -526,7 +526,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 > Method: POST
 
-[/study](#-study-endpoint-) endpoint returns the **__metadata of EPND resources__** as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/study](#-study-endpoint-) endpoint returns the **cohorts of EPND resources__** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
