@@ -633,7 +633,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td>Alphanumerical</td>
         <td>A single value or an array of country code</td>
         <td>=</td>
-        <td>AT (Austria), AU (Australia), BE (Belgium), BG (Bulgaria), CA (Canada), CH (Switzerland), CY (Cyprus), CZ (Czech Republic), DE (Germany), EE (Estonia), ES (Spain), EU (European Union), FI (Finland), FR (France), GR (Greece), HU (Hungary), IT (Italy), LT (Lithuania), LV (Latvia), MT (Malta), NL (Netherlands), NO (Norway), PL (Poland), PT (Portugal), QA (Qatar), RU (Russia), SE (Sweden), TR (Turkey), UG (Uganda), UK (United Kingdom), US (United States), VN (Vietnam).</td>
+        <td>AT,AU,BE,BG,CA,CH,CY,CZ,DE,EE,ES,EU,FI,FR,GR,HU,IT,LT,LV,MT,NL,NO,PL,PT,QA,RU,SE,TR,UG,UK,US,VN</td>
     </tr>
 </tbody>
 </table>
@@ -791,9 +791,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     "info": {
         "warnings": {
             "unsupportedFilters": [
-                "NCIT_C83164",
-                "NCIT_C124353",
-                "NCIT_C156420"
+                
             ]
         }
     },
