@@ -19,7 +19,7 @@
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-biosamples-endpoint-)
       * [Filters description](#-biosamples-filters-description-)
       * [Example request & response](#-example-request-and-response-for-biosamples-) -->
-    * [study endpoint](#-s-endpoint-)
+    * [Study endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
       <!-- * [Filters description](#-study-filters-description-) -->
       * [Example request & response](#-example-request-and-response-for-study-)
@@ -530,73 +530,63 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
-> **Note**: Elements within arrays in **value** fields are treated as **ORs**
+> **Note**: Elements within arrays in **value** fields are treated as **ANDs**
 
 
 ** Awaiting Discussion**
 <table>
-<thead>
-        <th>Metadata Schema Concept</th>
-        <th>Metadata Schema Term</th>
-        <th>Beacon Filter Type</th>
-        <th>ID</th>
-        <th>Operator</th>
-        <th>Permitted Values</th>
-</thead>
-<tbody>
-    <tr>
-        <td rowspan="13">
-            <b>Available Diseases</b>
-        </td>
-        <td rowspan="13">
-            NA
-        </td>
-        <td rowspan="13">
-            Alphanumerical
-        </td>
-        <td rowspan="13">
-            A single value or an array of diseases. <b>e.g. Cognitively normal , Alzhemir's disease
-        </td>
-        <td rowspan="13">
-            NA
-        </td>
-        <td>Cognitively normal (control group)</td>
-    </tr>
-    <tr><td>Cognitively normal (control group)</td></tr>
-    <tr><td>Alzheimer's disease (AD)</td></tr>
-    <tr><td>Parkinson's disease (PD)</td></tr>
-    <tr><td>Dementia with Lewy bodies (DLB)</td></tr>
-    <tr><td>Isolated REM sleep behavior disorder (iRBD)</td></tr>
-    <tr><td>Frontaltemporal dementia (FTD)</td></tr>
-    <tr><td>Amyotrophic lateral sclerosis (ALS)</td></tr>
-    <tr><td>Progressive supranuclear palsy (PSP)</td></tr>
-    <tr><td>Corticobasal degeneration (CBD)</td></tr>
-    <tr><td>Multiple system atrophy (MSA)</td></tr>
-    <tr><td>Huntington's disease (HD)</td></tr>
-    <tr><td>Ataxia</td></tr>
+    <thead>
+        <tr>
+            <th>Metadata Schema Concept</th>
+            <th>Beacon Filter Type</th>
+            <th>ID & Description</th>
+            <th>Operator</th>
+            <th>Query Values</th>
+            <th>Expansion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="13"><b>Available Diseases</b></td>
+            <td rowspan="13">Alphanumerical</td>
+            <td rowspan="13">A single value or an array of diseases. <b>e.g. CG, AD</td>
+            <td rowspan="13">=</td>
+            <td>CG</td>
+            <td>Cognitively normal</td>
+        </tr>
+        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
+        <tr><td>PD</td><td>Parkinson's disease</td></tr>
+        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
+        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
+        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
+        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
+        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
+        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
+        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
+        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
+        <tr><td>HD</td><td>Huntington's disease</td></tr>
+        <tr><td>AT</td><td>Ataxia</td></tr>
     <tr>
         <td rowspan="7"><b>Available Samples</b>
         </td>
-        <td rowspan="7">NA</td>
         <td rowspan="7">Alphanumerical</td>
         <td rowspan="7">A single value or an array of bio sample .<b> CSF or Serum etc</b></td>
-        <td rowspan="7">NA</td>
+        <td rowspan="7">=</td>
         <td>
-        Urine
+        CSF
         </td>
     </tr>
-    <tr><td>CSF</td></tr>
     <tr><td>Serum</td></tr>
     <tr><td>Plasma</td></tr>
     <tr><td>DNA</td></tr>
     <tr><td>Saliva</td></tr>
     <tr><td>Faeces</td></tr>
+     <tr><td>Urine</td></tr>
     <tr>
         <td rowspan="4"><b>Available Imaging</b></td>
-        <td rowspan="4">NA</td>
         <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">A single value or an array of bio samples<b>MRI or PET-Amyloid etc</b></td>
-        <td rowspan="4">NA</td>
+        <td rowspan="4">A single value or an array of imaging data type <b>MRI or PET-Amyloid etc</b></td>
+        <td rowspan="4">=</td>
         <td>MRI</td>
     </tr>
     <tr><td>PET-Amyloid</td></tr>
@@ -607,16 +597,13 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
             <b>Cohort Design</b>
         </td>
         <td rowspan="2">
-            NA
-        </td>
-        <td rowspan="2">
             Alphanumerical
         </td>
         <td rowspan="2">
-            Cognitive Data
+            A single value or an array of cognitive data
         </td>
         <td rowspan="2">
-            NA
+            =
         </td>
         <td>
             Cross-sectional
@@ -628,18 +615,25 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         </td>
     </tr>
     <tr>
-      <td><b>Number of Participants</b></td><td>NA</td>
+      <td><b>Minimum number of participants</b></td>
         <td>Numerical</td>
-        <td>count ranges?</td>
-        <td>NA</td>
-        <td></td>
+        <td>min_number_of_participants</td>
+        <td>=</td>
+        <td>any integer</td>
     </tr>
     <tr>
-      <td><b>Country</b></td><td>NA</td>
+      <td><b>Maximum number of participants</b></td>
+        <td>Numerical</td>
+        <td>max_number_of_participants</td>
+        <td>=</td>
+        <td>any integer</td>
+    </tr>
+    <tr>
+      <td><b>Country</b></td>
         <td>Alphanumerical</td>
-        <td>country codes?</td>
-        <td>NA</td>
-        <td></td>
+        <td>A single value or an array of country code</td>
+        <td>=</td>
+        <td>AT (Austria), AU (Australia), BE (Belgium), BG (Bulgaria), CA (Canada), CH (Switzerland), CY (Cyprus), CZ (Czech Republic), DE (Germany), EE (Estonia), ES (Spain), EU (European Union), FI (Finland), FR (France), GR (Greece), HU (Hungary), IT (Italy), LT (Lithuania), LV (Latvia), MT (Malta), NL (Netherlands), NO (Norway), PL (Poland), PT (Portugal), QA (Qatar), RU (Russia), SE (Sweden), TR (Turkey), UG (Uganda), UK (United Kingdom), US (United States), VN (Vietnam).</td>
     </tr>
 </tbody>
 </table>
