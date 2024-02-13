@@ -629,12 +629,45 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td>any integer</td>
     </tr>
     <tr>
-      <td><b>Country</b></td>
-        <td>Alphanumerical</td>
-        <td>A single value or an array of country code</td>
-        <td>=</td>
-        <td>AT,AU,BE,BG,CA,CH,CY,CZ,DE,EE,ES,EU,FI,FR,GR,HU,IT,LT,LV,MT,NL,NO,PL,PT,QA,RU,SE,TR,UG,UK,US,VN</td>
+      <td rowspan="32"><b>Country</b></td>
+        <td rowspan="32">Alphanumerical</td>
+        <td rowspan="32">A single value or an array of country code</td>
+        <td rowspan="32">=</td>
+        <td>AT (Austria)</td>
     </tr>
+    
+<tr><td>AU (Australia)</td></tr>
+<tr><td>BE (Belgium)</td></tr>
+<tr><td>BG (Bulgaria)</td></tr>
+<tr><td>CA (Canada)</td></tr>
+<tr><td>CH (Switzerland)</td></tr>
+<tr><td>CY (Cyprus)</td></tr>
+<tr><td>CZ (Czech Republic)</td></tr>
+<tr><td>DE (Germany)</td></tr>
+<tr><td>EE (Estonia)</td></tr>
+<tr><td>ES (Spain)</td></tr>
+<tr><td>EU (European Union)</td></tr>
+<tr><td>FI (Finland)</td></tr>
+<tr><td>FR (France)</td></tr>
+<tr><td>GR (Greece)</td></tr>
+<tr><td>HU (Hungary)</td></tr>
+<tr><td>IT (Italy)</td></tr>
+<tr><td>LT (Lithuania)</td></tr>
+<tr><td>LV (Latvia)</td></tr>
+<tr><td>MT (Malta)</td></tr>
+<tr><td>NL (Netherlands)</td></tr>
+<tr><td>NO (Norway)</td></tr>
+<tr><td>PL (Poland)</td></tr>
+<tr><td>PT (Portugal)</td></tr>
+<tr><td>QA (Qatar)</td></tr>
+<tr><td>RU (Russia)</td></tr>
+<tr><td>SE (Sweden)</td></tr>
+<tr><td>TR (Turkey)</td></tr>
+<tr><td>UG (Uganda)</td></tr>
+<tr><td>UK (United Kingdom)</td></tr>
+<tr><td>US (United States)</td></tr>
+<tr><td>VN (Vietnam)</td></tr>
+
 </tbody>
 </table>
 <!-- ![Tabel!](/tab.png "Tabel") -->
