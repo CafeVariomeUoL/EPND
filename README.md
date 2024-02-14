@@ -530,7 +530,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
-> **Note**: Elements within arrays in **value** fields are treated as **ANDs**
+> **Note**: Elements within arrays in **value** fields are treated as **ORs**
 
 
 ** Awaiting Discussion**
