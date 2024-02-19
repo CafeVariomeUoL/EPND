@@ -633,7 +633,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td >Alphanumerical</td>
         <td >A single value or an array of country code</td>
         <td>=</td>
-        <td>[Link to country code](https://www.digicert.com/kb/ssl-certificate-country-codes.htm)</td>
+        <td>https://www.digicert.com/kb/ssl-certificate-country-codes.htm</td>
     </tr>
   
 
