@@ -200,12 +200,12 @@ This specification defines POST endpoints to request information about resources
              {
                "id": "NCIT_C2991",
                "operator": "=",
-               "value": "[CG,AD]"
+               "value": ["CG","AD"]
              },
              {
                "id": "NCIT_C43412",
                "operator": "=",
-               "value": "[Serum,Plasma]"
+               "value": ["Serum","Plasma"]
              },
              {
                "id": "NCIT_C164234",
@@ -230,7 +230,7 @@ This specification defines POST endpoints to request information about resources
              {
                "id": "ISO 3166-1",
                "operator": "=",
-               "value": "[AT,BH]"
+               "value": ["AT","BH"]
              }
        ],
       "requestedGranularity": "record"
