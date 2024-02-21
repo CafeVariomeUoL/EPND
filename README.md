@@ -58,7 +58,7 @@ This specification defines POST endpoints to request information about resources
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
-> **Note**: Elements within arrays in **value** fields are treated as **ORs** and always omply logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
+> **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
 
 ** Awaiting Discussion**
