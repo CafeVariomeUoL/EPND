@@ -271,7 +271,7 @@ The following is an example response
     },
     "responseSummary": {
         "exists": true,
-        "numTotalResults": 1
+        "numTotalResults": 2
     },
     "response": {
         "resultSets": [
