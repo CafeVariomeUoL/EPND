@@ -340,7 +340,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "responseSummary": {
         "exists": true,
-        "numTotalResults": 1
+        "numTotalResults": 2
     },
     "info": {
         "warnings": {
