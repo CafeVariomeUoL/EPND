@@ -294,16 +294,6 @@ The following is an example response
                 }
             ],
             "resultsCount": 2,
-            // "resultsHandovers": [
-            //     {
-            //         "handoverType": {
-            //             "id": "EFO:0004157",
-            //             "label": "BAM format"
-            //         },
-            //         "note": "This handover link provides access to a summarized VCF.",
-            //         "url": "https://api.mygenomeservice.org/Handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0"
-            //     }
-            // ],
             "type": "dataset"
         }
     ]
@@ -380,16 +370,6 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                 }
             ],
             "resultsCount": 2,
-            // "resultsHandovers": [
-            //     {
-            //         "handoverType": {
-            //             "id": "EFO:0004157",
-            //             "label": "BAM format"
-            //         },
-            //         "note": "This handover link provides access to a summarized VCF.",
-            //         "url": "https://api.mygenomeservice.org/Handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0"
-            //     }
-            // ],
             "type": "dataset"
         }
     ]
