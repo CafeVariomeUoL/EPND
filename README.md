@@ -2,7 +2,6 @@
 
 > This API specification is defined in the context of the EPND project, complying with the latest [Beacon v2 Specification](https://github.com/ga4gh-beacon/beacon-v2).
 
-<!-- In this work, we present API specification for querying RD patient registries, biobanks and similar resources at the safe record level (i.e, resources whose available assets are described by RD patient data). Resources that implement this specification would ideally collect data based on the set of common data elements for rare diseases registration, as recommended by the European commission Joint Research Centre. In this specification, where possible, we also make use of ontological terms recommended by the CDE semantic data model group. -->
 
 <hr>
 
@@ -11,14 +10,6 @@
 <!-- * [Try out this API in Swagger](#-try-out-the-api-) -->
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
-    <!-- * [Individuals endpoint](#-individuals-endpoint)
-      * [List of filters](#-list-of-filters-and-permitted-values-for-the-individuals-endpoint-)
-      * [Filters description](#-individuals-filters-description-)
-      * [Example request & response](#-example-request-and-response-for-individuals-)
-    * [Biosamples endpoint](#-biosamples-endpoint)
-      * [List of filters](#-list-of-filters-and-permitted-values-for-the-biosamples-endpoint-)
-      * [Filters description](#-biosamples-filters-description-)
-      * [Example request & response](#-example-request-and-response-for-biosamples-) -->
     * [Study endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
       <!-- * [Filters description](#-study-filters-description-) -->
@@ -57,469 +48,6 @@ The request and response conforms to the [Beacon Reference Framework](https://gi
 
 This specification defines POST endpoints to request information about resources. Each endpoint makes use of the [Filters](http://docs.genomebeacons.org/filters/) capability of the Beacon API.
 
-<!-- <h3 id="-individuals-endpoint"> Individuals endpoint</h3>
-
-> **HTTP Request Method : POST** -->
-
-<!-- [/individuals](#-individuals-endpoint) endpoint returns the **__maximum value of individuals within a specified range__** from a RD resource. Filters are provided as a part of the body while using a HTTP POST request to query resources. 
-
-Please **do not use HTTP GET method** to query the individuals endpoint, as it is **not permitted** per this specification, and will result in a 403 error response.
-
-<h4 id="-list-of-filters-and-permitted-values-for-the-individuals-endpoint-"> List of filters and permitted values for the individuals endpoint </h4>
-
-> **Note**: Elements within arrays in **value** fields are treated as **ORs**
-
-<table>
-<thead>
-        <th>CDE Concept</th>
-        <th>CDE Term</th>
-        <th>Beacon Filter Type</th>
-        <th>ID</th>
-        <th>Operator</th>
-        <th>Permitted Values</th>
-</thead>
-<tbody>
-    <tr>
-        <td rowspan="5">
-            <b>Sex</b>
-        </td>
-        <td rowspan="5">
-            obo:NCIT_C28421
-        </td>
-        <td rowspan="5">
-            Alphanumerical
-        </td>
-        <td rowspan="5">
-            NCIT_C28421
-        </td>
-        <td rowspan="5">
-            =
-        </td>
-        <td>
-            NCIT_C16576
-        </td>
-    </tr>
-    <tr>
-        <td>
-            NCIT_C20197
-        </td>
-    </tr>
-    <tr>
-        <td>
-            NCIT_C124294
-        </td>
-    </tr>
-    <tr>
-        <td>
-            NCIT_C17998
-        </td>
-    </tr>
-    <tr>
-        <td>
-            An array of any of the above
-        </td>
-    </tr>
-    <tr>
-        <td><b>Disease or Disorder</b>
-        </td><td>obo:NCIT_C2991</td>
-        <td>Ontology</td>
-        <td>A single value or an array of orphanet terms. <b>e.g. Orphanet_558 or [Orphanet_558, Orphanet_773]</b></td>
-        <td colspan="2">NA</td>
-    </tr>
-    <tr>
-        <td><b>Phenotype</b></td>
-        <td>sio:SIO_010056</td>
-        <td>Ontology</td>
-        <td>A single value or an array of HPO terms. <b>e.g. HP_0001251 or [HP_0001251, HP_0012250]</b></td>
-        <td colspan="2">NA</td>
-    </tr>
-    <tr>
-        <td><b>Causative Genes</b></td>
-        <td>edam:data_2295</td>
-        <td>Alphanumerical</td>
-        <td>data_2295 </td>
-        <td>=</td>
-        <td>any HGNC gene symbol or array of HGNC symbols</td>
-    </tr>
-    <tr>
-      <td><b>Age this year</b></td><td>obo:NCIT_C83164</td>
-        <td>Numerical</td>
-        <td>NCIT_C83164 </td>
-        <td>=, &gt;=, &gt;, &lt;=, &lt;</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-      <td><b>Symptom Onset</b></td><td>obo:NCIT_C124353</td>
-        <td>Numerical</td>
-        <td>NCIT_C124353</td>
-        <td>=, &gt;=, &gt;, &lt;=, &lt;</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-      <td><b>Age at diagnosis</b></td><td>obo:NCIT_C156420</td>
-        <td>Numerical</td>
-        <td>NCIT_C156420</td>
-        <td>=, &gt;=, &gt;, &lt;=, &lt;</td>
-        <td>any integer</td>
-    </tr>
-</tbody>
-</table>
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-<h3 id="-individuals-filters-description-"> Individuals Filters Description </h3>
-
-**Sex**: The biological sex of an individual patient.
-
-**Disease or Disorder**: All rare diseases that have been diagnosed **within an individual**, to encompase, but not distinguish between all levels of diagnosis such as definitive, differential, provisional, etc.,
-
-**Phenotype**: HPO terms of all phenotypes observed **within an individual**.
-
-**Causative Genes**: All genes which have been deemed as causative of one or more of the diagnosed rare diseases **in an individual**, encompassing and not distinguishing between all certainty levels of casuality.
-
-**Age this year**: Age at the end of the current year. -/+ will be added to all age queries when executed by the query engine at the resource. 
-
-**Symptom Onset**: Age at the manifestation of a rare disease. For individuals with more than one rare disease, this filter will look at all age of manifestations independently. -/+ will be added to all age queries when executed by the query engine at the resource. 
-
-**Age at diagnosis**: Age at the diagnosis of a rare disease. For individuals with more than one rare disease, this filter will look at all age of manifestations independently. -/+ will be added to all age queries when executed by the query engine at the resource.
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-<h3 id="-example-request-and-response-for-individuals-"> Example request and response for individuals </h3>
-
-**EXAMPLE /individuals REQUEST**
-
-```JSON
-{
-    "meta": {
-        "apiVersion": "v2.0"
-    },
-    "query": {
-        "filters": [
-              {
-                "id": "Orphanet_34587"
-              },
-              {
-                "id": "data_2295",
-                "value": "LAMP2",
-                "operator": "="
-              },
-              {
-                "id": "NCIT_C28421",
-                "operator": "=",
-                "value": "NCIT_C16576"
-              }
-        ],
-        "requestedGranularity": "boolean"
-    }
-}
-```
-
-**EXAMPLE /individuals RESPONSE**
-
-
-```JSON
-{
-  "meta": {
-      "apiVersion": "v2.0",
-      "beaconId": "Responding unique Beacon ID in reverse domain name notation",
-      "returnedGranularity": "count"
-  },
-  "response": {
-     "resultSets": [
-      {
-         "id": "Vivify",
-         "type": "dataset", 
-         "exists": true,
-         "resultCount": 80,
-         "info": {
-            "resultCountDescription": {
-               "minRange": 71,
-               "maxRange": 80
-            },
-            "contactPoint": "admin",
-            "contactEmail": "admin@cafevariome.org", 
-            "contactURL": "rdnexusdev.molgeniscloud.org/cv2/"
-         }      
-      }
-    ]
-  },
-  "responseSummary":{
-    "exists": true,
-    "numTotalResults": 80
-  }
-}
-```
-
-The "resultCount" attribute in the above response is the **maximum value of whatever range that result** is within, rather than giving out the actual count of individuals. More information on responding using ranges can be found [here](#ranges). 
-
-The filter **SHOULD** be one of the terms from the [filters and permitted values table](#individuals). Please note that not all resources will support all of the filters. In such cases the response should include a [warning message in the 'info' part](#warning-response-example) indicating which requested filters are unsupported and these were not included in the query.
-
-**EXAMPLE warning when unsupported filters are requested**
-
-
-```JSON
- {
-    "meta": {
-        "beaconId": "org.rd-connect.beacon",
-        "apiVersion": "v2.0.0-draft.4",
-        "returnedGranularity": "count",
-        "receivedRequestSummary": {
-            "apiVersion": "v2.0",
-            "requestedSchemas": [
-                {
-                    "entityType": "individuals",
-                    "schema": "beacon-individual-v2.0.0-draft.4"
-                }
-            ],
-            "filters": [
-                [
-                    {
-                        "id": [
-                            "Orphanet_730",
-                            "Orphanet_2730"
-                        ]
-                    },
-                    {
-                        "id": "NCIT_C28421",
-                        "operator": "=",
-                        "value": "NCIT_C20197"
-                    },
-                    {
-                        "id": "data_2295",
-                        "operator": "=",
-                        "value": "100"
-                    },
-                    {
-                        "id": "NCIT_C83164",
-                        "operator": ">=",
-                        "value": "0"
-                    },
-                    {
-                        "id": "NCIT_C124353",
-                        "operator": ">=",
-                        "value": "0"
-                    },
-                    {
-                        "id": "NCIT_C156420",
-                        "operator": ">=",
-                        "value": "0"
-                    }
-                ]
-            ]
-        },
-        "returnedSchemas": [
-            {
-                "entityType": "individuals",
-                "schema": "beacon-individual-v2.0.0-draft.4"
-            }
-        ]
-    },
-    "responseSummary": {
-        "exists": false,
-        "numTotalResults": 0
-    },
-    "info": {
-        "warnings": {
-            "unsupportedFilters": [
-                "NCIT_C83164",
-                "NCIT_C124353",
-                "NCIT_C156420"
-            ]
-        }
-    },
-    "response": {
-        "resultSets": [
-            {
-                "id": "datasetBeacon",
-                "type": "individuals",
-                "exists": false,
-                "resultCount": 0
-            }
-        ]
-    }
-}
-```
-
-<h3 id="-biosamples-endpoint"> Biosamples endpoint</h3>
-
-> **HTTP Request Method : POST**
-
-Similarly to the `/individuals` endpoint, `/biosamples` endpoint returns the **__maximum value of biosamples within a specified range__** from an RD resource (usually the resource is a Biobank). Queries are performed in the same way as for `/individuals` endpoint, adding filters in the body of the request.
-
-Please **do not use HTTP GET method** to query the biosamples endpoint, as it is **not permitted** per this specification, and will result in a 403 error response.
-
-<h4 id="-list-of-filters-and-permitted-values-for-the-biosamples-endpoint-"> List of filters and permitted values for the biosamples endpoint </h4>
-
-> **Note**: Elements within arrays in **value** fields are treated as **ORs**
-
-<table>
-<thead>
-        <th>Concept</th>
-        <th>Ontological Term</th>
-        <th>Beacon Filter Type</th>
-        <th>ID</th>
-        <th>Operator</th>
-        <th>Permitted Values</th>
-</thead>
-<tbody>
-    <tr>
-        <td rowspan="5"><b>Sex</b></td>
-        <td rowspan="5">obo:NCIT_C28421</td>
-        <td rowspan="5">Alphanumerical</td>
-        <td rowspan="5">NCIT_C28421</td>
-        <td rowspan="5">=</td>
-        <td>NCIT_C16576</td>
-    </tr>
-    <tr><td>NCIT_C20197</td></tr>
-    <tr><td>NCIT_C124294</td></tr>
-    <tr><td>NCIT_C17998</td></tr>
-    <tr><td>An array of any of the above</td></tr>
-    <tr>
-        <td><b>Disease or Disorder</b></td>
-        <td>obo:NCIT_C2991</td>
-        <td>Ontology</td>
-        <td>A single value or an array of orphanet terms. <b>e.g. Orphanet_558 or [Orphanet_558, Orphanet_773]</b></td>
-        <td colspan="2">NA</td>
-    </tr>
-    <tr>
-        <td><b>Year of birth</b></td>
-        <td>obo:NCIT_C83164</td>
-        <td>Numerical</td>
-        <td>NCIT_C83164 </td>
-        <td>=, &gt;=, &gt;, &lt;=, &lt;</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-        <td><b>Age at diagnosis</b></td>
-        <td>obo:NCIT_C156420</td>
-        <td>Numerical</td>
-        <td>NCIT_C156420</td>
-        <td>=, &gt;=, &gt;, &lt;=, &lt;</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-        <td rowspan="20"><b>Biospecimen Type</b></td>
-        <td rowspan="20">obo:NCIT_C70713</td>
-        <td rowspan="20">Alphanumerical</td>
-        <td rowspan="20">NCIT_C70713</td>
-        <td rowspan="20">=</td>
-        <td>OBI_0000655 (blood specimen)</td>
-    </tr>
-    <tr><td>OBI_0002512 (bone marrow)</td></tr>
-    <tr><td>OBIB_0000036 (buffy coat)</td></tr>
-    <tr><td>CL_2000001 (peripheral blood mononuclear cell)</td></tr>
-    <tr><td>OBI_0100016 (blood plasma specime)</td></tr>
-    <tr><td>OBI_0100017 (blood serum)</td></tr>
-    <tr><td>UBERON_0007795 (ascites fluid)</td></tr>
-    <tr><td>OBI_0002502 (cerebrospinal fluid)</td></tr>
-    <tr><td>OBI_0002507 (saliva)</td></tr>
-    <tr><td>OBI_0002503 (feces)</td></tr>
-    <tr><td>OBI_0000651 (urine)</td></tr>
-    <tr><td>OBI_0002599 (swab)</td></tr>
-    <tr><td>OBI_2000009 (bodily fluid specimen)</td></tr>
-    <tr><td>OBI_1200000 (FFPE specimen)</td></tr>
-    <tr><td>OBI_0000922 (frozen specimen)</td></tr>
-    <tr><td>OBI_0001472 (specimen with known storage state)</td></tr>
-    <tr><td>OBI_0001051 (DNA extract)</td></tr>
-    <tr><td>OBI_0000880 (RNA extract)</td></tr>
-    <tr><td>OBI_0001479 (specimen from organism)</td></tr>
-    <tr><td>An array of any of the above</td></tr>    
-</tbody>
-</table>
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-<h3 id="-biosamples-filters-description-"> Biosamples Filters Description </h3>
-
-**Sex**: The biological sex of the person the biosample belongs to.
-
-**Disease or Disorder**: All rare diseases that have been diagnosed **from the biosample**, to encompase, but not distinguish between all levels of diagnosis such as definitive, differential, provisional, etc.,
-
-**Year of birth**: The year of birth of the person who the biosample belongs to
-
-**Age at diagnosis**: Age at the diagnosis of a rare disease. For biosamples with more than one rare disease, this filter will look at all age of manifestations independently. -/+ will be added to all age queries when executed by the query engine at the resource.
-
-**Biospecimen Type**: One or more biospecimen type. The list is a list of ontology terms taken from MIABIS
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-<h3 id="-example-request-and-response-for-biosamples-"> Example request and response for biosamples </h3>
-
-**EXAMPLE /biosamples REQUEST**
-
-```JSON
-{
-    "meta": {
-        "apiVersion": "v2.0"
-    },
-    "query": {
-        "filters": [
-              {
-                "id": "Orphanet_34587"
-              },
-              {
-                "id": "obo:NCIT_C70713",
-                "operator": "=",
-                "value": "OBI_0000655"
-              }
-        ],
-        "requestedGranularity": "count"
-    }
-}
-```
-
-**EXAMPLE /biosamples RESPONSE**
-
-
-```JSON
-{
-    "meta": {
-        "beaconId": "biobank beacon",
-        "apiVersion": "v2.0.0",
-        "returnedGranularity": "count",
-        "receivedRequestSummary": {
-            "apiVersion": "2.0",
-            "filters": [
-                {
-                    "id": "Orphanet_34587"
-                },
-                {
-                    "id": "obo:NCIT_C70713",
-                    "operator": "=",
-                    "value": "OBI_0000655"
-                }
-            ],
-            "requestedGranularity": "count",
-            "testMode": false
-        },
-        "returnedSchemas": [
-            {
-                "entityType": "biosample",
-                "schema": "beacon-biosample-v2.0.0",
-                "name": "Default schema for a biological sample",
-                "url": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2-Models/main/BEACON-V2-Model/biosamples/defaultSchema.json",
-                "version": "v2.0.0"
-            }
-        ]
-    },
-    "responseSummary": {
-        "exists": true,
-        "numTotalResults": 100
-    },
-}
-```
-Notes about the `resultCount` and the filters for the `/individuals` endpoint apply also for `biospecimens`
-
-[ ^ Back to the top](#top) -->
 
 <hr>
 <h3 id="-study-endpoint-"> Study endpoint </h3>
@@ -530,7 +58,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
-> **Note**: Elements within arrays in **value** fields are treated as **ORs**
+> **Note**: Elements within arrays in **value** fields are treated as **ORs** and always omply logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
 
 ** Awaiting Discussion**
@@ -539,7 +67,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <tr>
             <th>Metadata Schema Concept</th>
             <th>Beacon Filter Type</th>
-            <th>ID & Description</th>
+            <th>ID</th>
             <th>Operator</th>
             <th>Query Values</th>
             <th>Expansion</th>
@@ -549,7 +77,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <tr>
             <td rowspan="13"><b>Available Diseases</b></td>
             <td rowspan="13">Alphanumerical</td>
-            <td rowspan="13">A single value or an array of diseases. <b>e.g. CG, AD</td>
+            <td rowspan="13">NCIT_C2991</td>
             <td rowspan="13">=</td>
             <td>CG</td>
             <td>Cognitively normal</td>
@@ -570,7 +98,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         <td rowspan="7"><b>Available Samples</b>
         </td>
         <td rowspan="7">Alphanumerical</td>
-        <td rowspan="7">A single value or an array of bio sample .<b> CSF or Serum etc</b></td>
+        <td rowspan="7">NCIT_C43412</td>
         <td rowspan="7">=</td>
         <td>
         CSF
@@ -585,7 +113,7 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
     <tr>
         <td rowspan="4"><b>Available Imaging</b></td>
         <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">A single value or an array of imaging data type <b>MRI or PET-Amyloid etc</b></td>
+        <td rowspan="4">NCIT_C164232</td>
         <td rowspan="4">=</td>
         <td>MRI</td>
     </tr>
@@ -597,10 +125,10 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
             <b>Cohort Design</b>
         </td>
         <td rowspan="2">
-            Alphanumerical
+            Custom
         </td>
         <td rowspan="2">
-            A single value or an array of cognitive data
+            cognitive_data
         </td>
         <td rowspan="2">
             =
@@ -615,23 +143,16 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
         </td>
     </tr>
     <tr>
-      <td><b>Minimum number of participants</b></td>
-        <td>Numerical</td>
-        <td>min_number_of_participants</td>
-        <td>=</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-      <td><b>Maximum number of participants</b></td>
-        <td>Numerical</td>
-        <td>max_number_of_participants</td>
-        <td>=</td>
+      <td><b>Number of participants</b></td>
+        <td>Custom</td>
+        <td>number_of_participants</td>
+        <td>>,<,=</td>
         <td>any integer</td>
     </tr>
     <tr>
       <td><b>Country</b></td>
-        <td >Alphanumerical</td>
-        <td >A single value or an array of country code</td>
+        <td>Alphanumerical</td>
+        <td>ISO 3166-1</td>
         <td>=</td>
         <td>https://www.iso.org/obp/ui/#search</td>
     </tr>
@@ -639,47 +160,30 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
 
 </tbody>
 </table>
-<!-- ![Tabel!](/tab.png "Tabel") -->
+
 
 [ ^ Back to the top](#top)
-<!-- <hr> -->
+<hr>
 
-<!-- ** Awaiting Discussion**
+** Awaiting Discussion**
 
 <h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
 
-**Available Diseases**: All  diseases that are associated **within a catalog**. It corresponds to the `dcat:theme` property of the Resource Metadata Schema.
+**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD] .
 
-**Available Samples**: HPO terms of all phenotypes observed **within a catalog** of rare disease resources. The values follow CURIE syntax and use the `HP:` prefix. 
+**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma] .
 
-**Available Imaging**: The resource identifier ID **within the catalog**. It corresponds to the identifier of the RDF resource
+**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid] .
 
-**Cohort Design**: The name of the resource in the **catalog**. It corresponds to the `dct:title` of the Resource Metadata Schema
+**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal] .
 
-**Number of Participants**: The description of the resource in the **catalog**. It corresponds to the `dct:description` property of the Resource Metadata Schema
+**Number of Participants**: The number of participants in the cohort . eg : >10 ,<20 or =100.
 
-**Country**: The organisation that owns the resouce. It corresponds to the dct:publisher property. 
+**Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
-[ ^ Back to the top](#top) -->
-
-<!-- ![Tabel!](/des.png "Tabel") -->
+[ ^ Back to the top](#top)
 
 <hr>
-
-<!-- <h3 id="study-response">Study Response</h3>
-
-
-```JSON
-"returnedSchemas": [
-    {
-        "entityType": "resources",
-        "schema": "ejprd-biobank-registry-v1.0.0",
-        "name": "EJPRD schema for biobank and patient registry",
-        "url": "https://raw.githubusercontent.com/ejp-rd-vp/vp-api-specs/main/schemas/biobank-registry-schema.json",
-        "version": "v1.0.0"
-    }
-]
-``` -->
 
 <h3 id="-example-request-and-response-for-study-"> Example request and response for study </h3>
 
@@ -691,9 +195,44 @@ Notes about the `resultCount` and the filters for the `/individuals` endpoint ap
       "apiVersion": "v2.0.1"
  },
  "query": {
-      "filters": [
-        {}
-      ],
+      
+"filters": [
+             {
+               "id": "NCIT_C2991",
+               "operator": "=",
+               "value": "[CG,AD]"
+             },
+             {
+               "id": "NCIT_C43412",
+               "operator": "=",
+               "value": "[Serum,Plasma]"
+             },
+             {
+               "id": "NCIT_C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
+             {
+               "id": "cognitive_data",
+               "operator": "=",
+               "value": "Cross-sectional"
+             },
+             {
+               "id": "number_of_participants",
+               "operator": ">",
+               "value": "100"
+             },
+             {
+               "id": "number_of_participants",
+               "operator": "<",
+               "value": "1000"
+             },
+             {
+               "id": "ISO 3166-1",
+               "operator": "=",
+               "value": "[AT,BH]"
+             }
+       ],
       "requestedGranularity": "record"
     }
 }
@@ -736,13 +275,38 @@ The following is an example response
     },
     "response": {
         "resultSets": [
-            {
-                "resultsCount": 1,
-                "results": [
-                    {}
-                ]
-            }
-        ]
+        {
+            "exists": false,
+            "id": "datasetA",
+            "type": "dataset"
+        },
+        {
+            "exists": true,
+            "id": "datasetB",
+            "results": [
+                {
+                    "id": "BEex3",
+                    "name": "Basic Element example three"
+                },
+                {
+                    "id": "BEex4",
+                    "name": "Basic Element example four"
+                }
+            ],
+            "resultsCount": 2,
+            "resultsHandovers": [
+                {
+                    "handoverType": {
+                        "id": "EFO:0004157",
+                        "label": "BAM format"
+                    },
+                    "note": "This handover link provides access to a summarized VCF.",
+                    "url": "https://api.mygenomeservice.org/Handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0"
+                }
+            ],
+            "type": "dataset"
+        }
+    ]
     }
 }
 ```
@@ -797,13 +361,38 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "response": {
         "resultSets": [
-            {
-                "resultsCount": 1,
-                "results": [
-                    {}
-                ]
-            }
-        ]
+        {
+            "exists": false,
+            "id": "datasetA",
+            "type": "dataset"
+        },
+        {
+            "exists": true,
+            "id": "datasetB",
+            "results": [
+                {
+                    "id": "BEex3",
+                    "name": "Basic Element example three"
+                },
+                {
+                    "id": "BEex4",
+                    "name": "Basic Element example four"
+                }
+            ],
+            "resultsCount": 2,
+            "resultsHandovers": [
+                {
+                    "handoverType": {
+                        "id": "EFO:0004157",
+                        "label": "BAM format"
+                    },
+                    "note": "This handover link provides access to a summarized VCF.",
+                    "url": "https://api.mygenomeservice.org/Handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0"
+                }
+            ],
+            "type": "dataset"
+        }
+    ]
     }
 }
 ```
