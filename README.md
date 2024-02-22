@@ -151,7 +151,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
       <td><b>Country</b></td>
         <td>Alphanumerical</td>
-        <td>ISO 3166-1</td>
+        <td>ISO_3166-1</td>
         <td>=</td>
         <td>https://www.iso.org/obp/ui/#search</td>
     </tr>
@@ -227,7 +227,7 @@ This specification defines POST endpoints to request information about resources
                "value": "1000"
              },
              {
-               "id": "ISO 3166-1",
+               "id": "ISO_3166-1",
                "operator": "=",
                "value": ["AT","BH"]
              }
