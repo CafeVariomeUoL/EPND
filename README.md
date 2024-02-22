@@ -61,7 +61,6 @@ This specification defines POST endpoints to request information about resources
 > **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
 
-** Awaiting Discussion**
 <table>
     <thead>
         <tr>
@@ -165,7 +164,7 @@ This specification defines POST endpoints to request information about resources
 [ ^ Back to the top](#top)
 <hr>
 
-** Awaiting Discussion**
+
 
 <h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
 
