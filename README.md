@@ -219,12 +219,12 @@ This specification defines POST endpoints to request information about resources
              {
                "id": "number_of_participants",
                "operator": ">",
-               "value": "100"
+               "value": 100
              },
              {
                "id": "number_of_participants",
                "operator": "<",
-               "value": "1000"
+               "value": 1000
              },
              {
                "id": "ISO_3166-1",
@@ -238,7 +238,7 @@ This specification defines POST endpoints to request information about resources
 ```
 
 
-Requested granularity for the response. It do not have to respond with the requested granularity, e.g. may respond with count results although record level granularity had been requested but indicate the granularity of the response in the response's metadata. Allowed values -{ boolean,count,aggregated,record} with default boolean value.
+Requested granularity for the response. It do not have to respond with the requested granularity, e.g. may respond with count results although record level granularity had been requested but indicate the granularity of the response in the response's metadata. Allowed values -{ boolean,count,aggregated,record} with default record value.
 
 The following is an example response 
 
