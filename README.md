@@ -145,7 +145,7 @@ This specification defines POST endpoints to request information about resources
       <td><b>Number of participants</b></td>
         <td>Custom</td>
         <td>number_of_participants</td>
-        <td>>,<,=</td>
+        <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
     <tr>
