@@ -7,7 +7,7 @@
 
 <h2 id="top"> Contents </h2>
 
-<!-- * [Try out this API in Swagger](#-try-out-the-api-) -->
+* [Try out this API in Swagger](#-try-out-the-api-)
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
     * [Study endpoint](#-s-endpoint-)
@@ -27,11 +27,11 @@
 
 <hr>
  
-<!-- <h2 id="#-try-out-the-api-"> Try out the API </h2>
+<h2 id="#-try-out-the-api-"> Try out the API </h2>
 
-Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/DVS6_1/virtual-platform_beacon_api/v2.0#/ 
+Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v2.0#/Query%20Endpoints/study_request
 
-<hr> -->
+<hr>
 
 <h2 id="-specification-"> Specification </h2>
 
