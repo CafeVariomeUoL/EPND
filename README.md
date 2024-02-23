@@ -167,15 +167,15 @@ This specification defines POST endpoints to request information about resources
 
 <h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
 
-**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD] .
+**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD]
 
-**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma] .
+**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
 
-**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid] .
+**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid]
 
-**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal] .
+**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal]
 
-**Number of Participants**: The number of participants in the cohort . eg : >10 ,<20 or =100.
+**Number of Participants**: The number of participants in the cohort . eg : >10 ,<20 or =100
 
 **Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
@@ -315,11 +315,35 @@ The following is an example response
             "results": [
                 {
                     "id": "BEex3",
-                    "name": "Basic Element example three"
+                    "name": "Basic Element example three",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        },
                 },
                 {
                     "id": "BEex4",
-                    "name": "Basic Element example four"
+                    "name": "Basic Element example four",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        },
                 }
             ],
             "resultsCount": 2,
