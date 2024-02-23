@@ -78,21 +78,20 @@ This specification defines POST endpoints to request information about resources
             <td rowspan="13">Alphanumerical</td>
             <td rowspan="13">NCIT_C2991</td>
             <td rowspan="13">=</td>
-            <td>CG</td>
-            <td>Cognitively normal</td>
+            <td>CG</td>    
         </tr>
-        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
-        <tr><td>PD</td><td>Parkinson's disease</td></tr>
-        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
-        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
-        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
-        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
-        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
-        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
-        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
-        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
-        <tr><td>HD</td><td>Huntington's disease</td></tr>
-        <tr><td>AT</td><td>Ataxia</td></tr>
+        <tr><td>AD</td></tr>
+        <tr><td>PD</td></tr>
+        <tr><td>DLB</td></tr>
+        <tr><td>iRBD</td></tr>
+        <tr><td>CAA</td></tr>
+        <tr><td>FTD</td></tr>
+        <tr><td>ALS</td></tr>
+        <tr><td>PSP</td></tr>
+        <tr><td>CBD</td></tr>
+        <tr><td>MSA</td></tr>
+        <tr><td>HD</td></tr>
+        <tr><td>AT</td></tr>
     <tr>
         <td rowspan="7"><b>Available Samples</b>
         </td>
@@ -181,6 +180,37 @@ This specification defines POST endpoints to request information about resources
 **Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
 [ ^ Back to the top](#top)
+
+<hr>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Abbreviation</th>
+            <th>Definiton</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CG</td>
+            <td>Cognitively normal</td>
+        </tr>
+        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
+        <tr><td>PD</td><td>Parkinson's disease</td></tr>
+        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
+        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
+        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
+        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
+        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
+        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
+        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
+        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
+        <tr><td>HD</td><td>Huntington's disease</td></tr>
+        <tr><td>AT</td><td>Ataxia</td></tr>
+    
+</tbody>
+</table>
 
 <hr>
 
