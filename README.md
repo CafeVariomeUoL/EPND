@@ -69,7 +69,6 @@ This specification defines POST endpoints to request information about resources
             <th>ID</th>
             <th>Operator</th>
             <th>Query Values</th>
-            <th>Expansion</th>
         </tr>
     </thead>
     <tbody>
@@ -268,7 +267,7 @@ This specification defines POST endpoints to request information about resources
 ```
 
 
-Requested granularity for the response. It do not have to respond with the requested granularity, e.g. may respond with count results although record level granularity had been requested but indicate the granularity of the response in the response's metadata. Allowed values -{ boolean,count,aggregated,record} with default record value.
+It is not mandatory to respond with the requested granularity, but the response granularity must be stated in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
 
 The following is an example response 
 
@@ -304,11 +303,6 @@ The following is an example response
     },
     "response": {
         "resultSets": [
-        {
-            "exists": false,
-            "id": "datasetA",
-            "type": "dataset"
-        },
         {
             "exists": true,
             "id": "datasetB",
@@ -358,9 +352,8 @@ The following is an example response
 
 <hr>
 
-The "resultCount" attribute in the above response is the **maximum value of whatever range that result** is within, rather than giving out the actual count of individuals. More information on responding using ranges can be found [here](#ranges). 
 
-The filter **SHOULD** be one of the terms from the [filters and permitted values table](#individuals). Please note that not all resources will support all of the filters. In such cases the response should include a [warning message in the 'info' part](#warning-response-example) indicating which requested filters are unsupported and these were not included in the query.
+The filter **SHOULD** be one of the terms from the [filters and permitted values table](#-list-of-filters-and-permitted-values-for-the-study-endpoint-). Please note that not all resources will support all of the filters. In such cases the response **MUST** include a [warning message in the 'info' part](#warning-response-example) indicating which requested filters are unsupported and these were not included in the query.
 
 **EXAMPLE warning when unsupported filters are requested**
 
@@ -404,11 +397,6 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "response": {
         "resultSets": [
-        {
-            "exists": false,
-            "id": "datasetA",
-            "type": "dataset"
-        },
         {
             "exists": true,
             "id": "datasetB",
