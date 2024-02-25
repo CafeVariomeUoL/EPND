@@ -267,7 +267,7 @@ This specification defines POST endpoints to request information about resources
 ```
 
 
-It is not mandatory to respond with the requested granularity, but the response granularity must be stated in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
+**requestedGranularity**: It is not mandatory to respond with the requested granularity, but the response granularity must be stated in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
 
 The following is an example response 
 
@@ -282,8 +282,42 @@ The following is an example response
             "apiVersion": "v2.0.1",
             "requestedSchemas": [],
             "filters": [
-                {}
-            ],
+             {
+               "id": "NCIT_C2991",
+               "operator": "=",
+               "value": ["CG","AD"]
+             },
+             {
+               "id": "NCIT_C43412",
+               "operator": "=",
+               "value": ["Serum","Plasma"]
+             },
+             {
+               "id": "NCIT_C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
+             {
+               "id": "cognitive_data",
+               "operator": "=",
+               "value": "Cross-sectional"
+             },
+             {
+               "id": "number_of_participants",
+               "operator": ">",
+               "value": 100
+             },
+             {
+               "id": "number_of_participants",
+               "operator": "<",
+               "value": 1000
+             },
+             {
+               "id": "ISO_3166-1",
+               "operator": "=",
+               "value": ["AT","BH"]
+             }
+       ],
             "requestParameters": {},
             "includeResultsetResponses": "HIT",
             "pagination": {
@@ -294,7 +328,10 @@ The following is an example response
             "testMode": false
         },
         "returnedSchemas": [
-            {}
+            {
+               "entityType": "study",
+               "schema": "beacon-cohort-v2.0.0",
+            }
         ]
     },
     "responseSummary": {
@@ -305,11 +342,12 @@ The following is an example response
         "resultSets": [
         {
             "exists": true,
-            "id": "datasetB",
+            "resultsCount": 2,
             "results": [
                 {
                     "id": "BEex3",
                     "name": "Basic Element example three",
+                    "type": "dataset",
                     "url": "string",
                     "description": "string",
                     "releaseLicense": "license URL",
@@ -326,6 +364,7 @@ The following is an example response
                 {
                     "id": "BEex4",
                     "name": "Basic Element example four",
+                    "type": "dataset",
                     "url": "string",
                     "description": "string",
                     "releaseLicense": "license URL",
@@ -340,8 +379,8 @@ The following is an example response
                         },
                 }
             ],
-            "resultsCount": 2,
-            "type": "dataset"
+            
+            
         }
     ]
     }
@@ -386,7 +425,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "responseSummary": {
         "exists": true,
-        "numTotalResults": 2
+        "numTotalResults": 1
     },
     "info": {
         "warnings": {
@@ -399,19 +438,28 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
         "resultSets": [
         {
             "exists": true,
-            "id": "datasetB",
+            "resultsCount": 1,
             "results": [
                 {
                     "id": "BEex3",
-                    "name": "Basic Element example three"
-                },
-                {
-                    "id": "BEex4",
-                    "name": "Basic Element example four"
+                    "name": "Basic Element example three",
+                    "type": "dataset",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        },
                 }
             ],
-            "resultsCount": 2,
-            "type": "dataset"
+            
+            
         }
     ]
     }
