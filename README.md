@@ -12,16 +12,15 @@
 * [Query Endpoints](#-query-endpoints-)
     * [Study endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
-      <!-- * [Filters description](#-study-filters-description-) -->
+      * [Filters description](#-study-filters-description-)
       * [Example request & response](#-example-request-and-response-for-study-)
-<!-- * [Authentication using Header(s)](#-authentication-using-header-)
-* [Understanding the query](#-understanding-the-query)
-    * [Syntax & Usage of Beacon Query with Filters](#-syntax-and-usage)
+* [Understanding the query](#-understanding-the-query-)
+    * [Syntax & Usage of Beacon Query with Filters](#-syntax-and-usage-)
         * [Multi-Filter (AND) query](#beacon-queries-using-multiples-of-the-same-type-of-filter-and-logical-operator-between-filters)
         * [Same Filter (AND) query](#beacon-queries-using-multiple-values-as-in-phenotype-or-disease-filters-or-logical-operator-between-filter-values)
         * [Multi-Filter (OR) query using **Arrays**](#beacon-queries-using-multiples-of-the-same-type-of-filter-or-logical-operator-between-filters)
-    * [Partial query matches with warning messages](#partial-query-matches-with-warning-messages)
-* [Understanding the response with ranges (for /individuals and /biospecimens)](#-understanding-the-response-with-ranges-for-individuals-and-biospecimens) -->
+    <!-- * [Partial query matches with warning messages](#partial-query-matches-with-warning-messages) -->
+<!-- * [Understanding the response with ranges (for /individuals and /biospecimens)](#-understanding-the-response-with-ranges-for-individuals-and-biospecimens) -->
 * [Informational Endpoints](#-informational-endpoints-)
 
 
@@ -502,23 +501,22 @@ To see this live in action in Swagger UI, see [Authentication in Swagger](#-auth
 
 [ ^ Back to the top](#top) -->
 
-<!-- <hr> -->
+<hr>
 
-<!-- <h2 id="-understanding-the-query-"> Understanding the query </h2>
+<h2 id="-understanding-the-query-"> Understanding the query </h2>
 
 <h3 id="-syntax-and-usage-"> Syntax and Usage: </h3>
 
 > Method: POST
 
-There are 3 types of Beacon queries that this specification currently supports: 
-1. [Alphanumerical Query](http://docs.genomebeacons.org/filters/#exact-value-query)
-2. [Numerical Query](http://docs.genomebeacons.org/filters/#numerical-value-query)
-3. [Ontology Query](http://docs.genomebeacons.org/filters/#simple-curie-based-filters-query)
+There are 2 types of Beacon queries that this specification currently supports: 
+1. [Alphanumerical Query](http://docs.genomebeacons.org/filters/)
+2. [Custom Query](http://docs.genomebeacons.org/filters/)
+
 
 The following JSON body depicts the typical usage of filters to query resources. 
    * Alphanumeric filters **require** the use of id, operator(=) and value properties. 
-   * Ontology filters only require the 'id' property to query resources.
-   * Numeric filters also require id, operator and value properties. These filters differ from the alphanumeric filters as it is also possible to use comparison operators (>=,>,<=,<) along with '='.
+   * Custom filters are intended for non-bio-ontology terms and **require** the use of id, operator and value properties and it is also possible to use comparison operators (>=,>,<=,<) along with '='. 
 
 These usage rules are illustrated using a general syntax as below:
 
@@ -536,15 +534,12 @@ These usage rules are illustrated using a general syntax as below:
         
       },
       {
-        "id": "AlphanumericFilter_id",
+        "id": "CustomFilter_id",
         "operator": "=",
-        "value":"AlphanumericFilter_value"
-      },
-      { 
-        "id": "OntologyFilter_value"
+        "value":"CustomFilter_value"
       }
     ],
-     "requestedGranularity": "boolean"
+     "requestedGranularity": "record"
   }
 }
 ```
@@ -561,20 +556,23 @@ As shown above, different types of filters can be sent in a single query. These 
 {
 "query": {
       "filters": [
+        
         {
-          "id": "Orphanet_34587" 
-        },
-        {
-          "id": "data_2295",
-          "operator": "=",
-          "value": "LAMP2"
-        }
+               "id": "NCIT_C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
+             {
+               "id": "cognitive_data",
+               "operator": "=",
+               "value": "Cross-sectional"
+             },
       ]
     }
 }
 ```
 
-This filter is asking for individuals that have been diagnosed with Danon disease (Orphanet_34587) **and** where LAMP2 gene has been identified as causative. These filters are handled independently, this means that individuals with Danon disease where LAMP2 has been identified as a causative gene, specifically for Danon disease, will match the query. It also means that individuals with Danon disease and where LAMP2 has been identified as a causative gene for a second rare disease, other than Danon disease, will also match this query.
+This filter is asking for cohorts that have Imaging as MRI  **and** cognitive_data as Cross-sectional .
 
 
 [ ^ Back to the top](#top)
@@ -583,28 +581,9 @@ This filter is asking for individuals that have been diagnosed with Danon diseas
 
 <h4 id="beacon-queries-using-multiple-values-as-in-phenotype-or-disease-filters-and-logical-operator-between-filter-values">Beacon queries using multiples of the same type of filter (AND logical operator between filters):</h4>
 
-To query for individuals with more than one instance of any of the filters you can send multiple of the same filter, such as in the below example:
+To query for records with more than one instance of any of the filters you can send multiple of the same filter, such as in the below example:
 
-> Ontology Filter Example:
-
-```JSON
-{
-"query": 
-    {
-      "filters": [
-        {
-          "id": "Orphanet_34587"
-        },
-        {
-          "id": "Orphanet_1653"
-        }
-      ]
-   }
-}
-```
-This query is looking for individuals with Danon disease ("Orphanet_34587") AND Dentin dysplasia ("Orphanet_1653").
-
-> Alphanumeric Filter example: 
+> Alphanumeric Filter example:
 
 ```JSON
 {
@@ -612,20 +591,21 @@ This query is looking for individuals with Danon disease ("Orphanet_34587") AND 
     {
       "filters": [
         {
-          "id": "Available Materials",
-          "operator": "=",
-          "value": "RNA sequence"          
-        },
-        {
-          "id": "Available Materials",
-          "operator": "=",
-          "value": "Whole Genome Sequence"
-        }
+               "id": "NCIT_C43412",
+               "operator": "=",
+               "value": "Serum"
+             }, 
+             {
+               "id": "NCIT_C43412",
+               "operator": "=",
+               "value": "Saliva"
+             },
       ]
    }
 }
 ```
-This query is looking if there are any individuals with RNA sequence information AND Whole Genome Sequence information available.
+This query is looking for cohorts with biosample Serum AND Saliva biosample.
+
 
 [ ^ Back to the top](#top)
 
@@ -633,21 +613,23 @@ This query is looking if there are any individuals with RNA sequence information
 
 <h4 id="beacon-queries-using-multiples-of-the-same-type-of-filter-or-logical-operator-between-filters">Beacon queries using multiples of the same type of filter (OR logical operator between filters):</h4>
 
-> Ontology Filter using Array Example:
+> Alaphanumeric Filter using Array Example:
 
 ```JSON
 {
 "query": 
     {
       "filters": [
-        {
-          "id": ["Orphanet_34587","Orphanet_1653"]
-        }
+         {
+               "id": "NCIT_C2991",
+               "operator": "=",
+               "value": ["CG","AD"]
+             },
       ]
    }
 }
 ```
-This query is looking for individuals either with Danon disease (Orphanet_34587) OR Dentin dysplasia (Orphanet_1653).
+This query is looking for cohorts either with Cognitively normal disease OR Alzheimer's disease.
 
 > **Note**: There are no OR operators available **between** filters with beacon queries.
 
@@ -655,154 +637,9 @@ All of the defined filters are optional, the user can provide as many or as few 
 
 If a user sends a query with a filter not supported by a resource, then the resource should complete the query but ignore the unsupported filter(s) and respond as usual, but with a warning noting that certain filters were ignored as they are unsupported.
 
-The warning messages will be provided within the [`info`](#partial-query-matches-with-warning-messages)  section of the Beacon.
-
-[ ^ Back to the top](#top) -->
-
-<!-- <hr> -->
-
-<!-- <h2 id="partial-query-matches-with-warning-messages"> Partial Request & Response with warning message Example </h2>
-
-**EXAMPLE REQUEST**
-
-```JSON
-{
-  "meta":{
-      "apiVersion": "v2.0"
-  },
-  "query":{
-    "filters": [
-        {
-          "id": "Orphanet_34587"
-        },
-        {
-          "id": "data_2295",
-          "value": "LAMP2",
-          "operator": "="
-        },
-        {
-          "id": "NCIT_C28421",
-          "operator": "=",
-          "value": "NCIT_C16576"
-        }
-    ],
-     "requestedGranularity": "boolean"
-  }
-}
-```
-
-This request is asking for females with Danon disease with LAMP2 being identified as a causative gene.
-
-This request is sent to a resource which does not hold information about causative genes but does hold information about diagnoses and sex, an example response which could be returned is outlined below:
-
-**EXAMPLE WARNING RESPONSE**
-
-```JSON
-{
-  "meta": {
-      "apiVersion": "v2.0",
-      "beaconId": "Responding unique Beacon ID in reverse domain name notation",
-      "returnedGranularity":"count"
-  },
-  "response": {
-     "resultSets": [
-      {
-         "id": "Vivify",
-         "type": "dataset",
-         "exists": true,
-         "resultCount": 20,
-         "info": {
-            "resultCountDescription": {
-               "minRange": 11,
-               "maxRange": 20
-            },
-            "contactPoint": "admin",
-            "contactEmail": "admin@cafevariome.org",
-            "contactURL": "rdnexusdev.molgeniscloud.org/cv2/"
-         }   
-      }
-     ]
-  },
-  "responseSummary":{
-    "exists": "true",
-    "numTotalResults": 20
-  },
-  "info": { 
-    "warnings":{
-      "unsupportedFilters": [
-        "data_2295"
-      ]
-    }
-  }
-}
-```
-
-This response provides a warning message within the info section advising of unsupported filters which were ignored when the query was processed by the resources query engine. Please see the info part of the [IndividualResponse](https://app.swaggerhub.com/apis/DVS6_1/virtual-platform_beacon_api/v2.0#/IndividualResponse) schema on swagger. 
-
+The warning messages will be provided within the **info**  section of the Beacon.
 
 [ ^ Back to the top](#top)
-
-<hr>
-
-<h2 id="-understanding-the-response-with-ranges-for-individuals-and-biospecimens"> Understanding the response with ranges (for /individuals and /biospecimens)</h2>
-
-In the examples of the response for the `/individuals` and `/biosamples` endpoints, information of the resultant dataset matching the query is provided within the **`resultSets`** attribute. 
-
-To provide flexibility for implementers between using a range, the `info` section of each resultant dataset in `resultSets` need to conform to the following standardised structure:
-
-```JSON
-"info": {
-   "resultCountDescription": {
-      "minRange": N,
-      "maxRange": N
-   },
-   "contactPoint": "Person/point of contact",
-   "contactEmail": "Email for contact regarding this dataset/resource", 
-   "contactURL": "URL of the implementer"
-}
-```
-
-> **Note**: Here, N is an integer where the implementer can respond with **"minRange" & "maxRange"** (if employing a range) - the maximum value of whatever range that result is within, whereupon the "maxRange" value should match the "resultCount" value and the "numTotalResults" value.
-
-**Example response employing a range:**
-
-```JSON
-{
-  "meta": {
-      "apiVersion": "v2.0",
-      "beaconId": "Responding unique Beacon ID in reverse domain name notation",
-      "returnedGranularity": "count"
-  },
-  "response": {
-     "resultSets": [
-      {
-         "id": "Vivify",
-         "type": "dataset", 
-         "exists": true,
-         "resultCount": 80,
-         "info": {
-            "resultCountDescription": {
-               "minRange": 71,
-               "maxRange": 80
-            },
-            "contactPoint": "admin",
-            "contactEmail": "admin@cafevariome.org", 
-            "contactURL": "rdnexusdev.molgeniscloud.org/cv2/"
-         }      
-      }
-    ]
-  },
-  "responseSummary":{
-    "exists": true,
-    "numTotalResults": 80
-  }
-}
-```
-
-In this example, the result could be a count of individuals between 71 to 80 (the resource only responds with ranges of size 10).
-
-
-[ ^ Back to the top](#top) -->
 
 <hr>
 
