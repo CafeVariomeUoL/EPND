@@ -267,7 +267,9 @@ This specification defines POST endpoints to request information about resources
 ```
 
 
-**requestedGranularity**: It is not mandatory to respond with the requested granularity, but the response granularity must be stated in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
+**requestedGranularity**: It is not mandatory to respond with the exact requested granularity, but the response granularity must specify the actual granularity level of the response in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
+
+> **Note**:If the Beacon service supports record-level granularity but the client requests count-level granularity, the service should aggregate the matching records and provide the count of those records as the response.
 
 The following is an example response 
 
@@ -347,6 +349,7 @@ The following is an example response
                 {
                     "id": "BEex3",
                     "name": "Basic Element example three",
+                    "info":{
                     "type": "dataset",
                     "url": "string",
                     "description": "string",
@@ -359,11 +362,13 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        },
+                        }
+                    }
                 },
                 {
                     "id": "BEex4",
                     "name": "Basic Element example four",
+                    "info":{
                     "type": "dataset",
                     "url": "string",
                     "description": "string",
@@ -376,7 +381,8 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        },
+                        }
+                    }
                 }
             ],
             
@@ -443,6 +449,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                 {
                     "id": "BEex3",
                     "name": "Basic Element example three",
+                    "info":{
                     "type": "dataset",
                     "url": "string",
                     "description": "string",
@@ -455,7 +462,8 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        },
+                        }
+                    }
                 }
             ],
             
