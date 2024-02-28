@@ -17,7 +17,7 @@
 * [Understanding the query](#-understanding-the-query-)
     * [Syntax & Usage of Beacon Query with Filters](#-syntax-and-usage-)
         * [Multi-Filter (AND) query](#beacon-queries-using-multiples-of-the-same-type-of-filter-and-logical-operator-between-filters)
-        * [Same Filter (AND) query](#beacon-queries-using-multiple-values-as-in-phenotype-or-disease-filters-or-logical-operator-between-filter-values)
+        * [Same Filter (AND) query](#beacon-queries-using-multiple-values-as-in-phenotype-or-disease-filters-and-logical-operator-between-filter-values)
         * [Multi-Filter (OR) query using **Arrays**](#beacon-queries-using-multiples-of-the-same-type-of-filter-or-logical-operator-between-filters)
     <!-- * [Partial query matches with warning messages](#partial-query-matches-with-warning-messages) -->
 <!-- * [Understanding the response with ranges (for /individuals and /biospecimens)](#-understanding-the-response-with-ranges-for-individuals-and-biospecimens) -->
@@ -633,7 +633,7 @@ This query is looking for cohorts either with Cognitively normal disease OR Alzh
 
 > **Note**: There are no OR operators available **between** filters with beacon queries.
 
-All of the defined filters are optional, the user can provide as many or as few as wanted and the resource does not have to implement all filters.
+All of the defined filters are optional, the user can provide as many or as few as wanted and the resource does not have to implement all filters.And if the user does not provide any filters all the list of entities will be returned.
 
 If a user sends a query with a filter not supported by a resource, then the resource should complete the query but ignore the unsupported filter(s) and respond as usual, but with a warning noting that certain filters were ignored as they are unsupported.
 
