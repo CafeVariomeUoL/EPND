@@ -124,7 +124,7 @@ This specification defines POST endpoints to request information about resources
             Custom
         </td>
         <td rowspan="2">
-            cognitive_data
+            CD:cognitive_data
         </td>
         <td rowspan="2">
             =
@@ -141,7 +141,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
       <td><b>Number of participants</b></td>
         <td>Custom</td>
-        <td>number_of_participants</td>
+        <td>NoP:number_of_participants</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
@@ -240,17 +240,17 @@ This specification defines POST endpoints to request information about resources
                "value": "MRI"
              }, 
              {
-               "id": "cognitive_data",
+               "id": "CD:cognitive_data",
                "operator": "=",
                "value": "Cross-sectional"
              },
              {
-               "id": "number_of_participants",
+               "id": "NoP:number_of_participants",
                "operator": ">",
                "value": 100
              },
              {
-               "id": "number_of_participants",
+               "id": "NoP:number_of_participants",
                "operator": "<",
                "value": 1000
              },
@@ -299,17 +299,17 @@ The following is an example response
                "value": "MRI"
              }, 
              {
-               "id": "cognitive_data",
+               "id": "CD:cognitive_data",
                "operator": "=",
                "value": "Cross-sectional"
              },
              {
-               "id": "number_of_participants",
+               "id": "NoP:number_of_participants",
                "operator": ">",
                "value": 100
              },
              {
-               "id": "number_of_participants",
+               "id": "NoP:number_of_participants",
                "operator": "<",
                "value": 1000
              },
