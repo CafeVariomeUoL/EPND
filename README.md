@@ -74,7 +74,7 @@ This specification defines POST endpoints to request information about resources
         <tr>
             <td rowspan="13"><b>Available Diseases</b></td>
             <td rowspan="13">Alphanumerical</td>
-            <td rowspan="13">NCIT_C2991</td>
+            <td rowspan="13">NCIT:C2991</td>
             <td rowspan="13">=</td>
             <td>CG</td>    
         </tr>
@@ -94,7 +94,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="7"><b>Available Samples</b>
         </td>
         <td rowspan="7">Alphanumerical</td>
-        <td rowspan="7">NCIT_C43412</td>
+        <td rowspan="7">NCIT:C43412</td>
         <td rowspan="7">=</td>
         <td>
         CSF
@@ -109,7 +109,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
         <td rowspan="4"><b>Available Imaging</b></td>
         <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT_C164232</td>
+        <td rowspan="4">NCIT:C164232</td>
         <td rowspan="4">=</td>
         <td>MRI</td>
     </tr>
@@ -148,7 +148,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
       <td><b>Country</b></td>
         <td>Alphanumerical</td>
-        <td>ISO_3166-1</td>
+        <td>ISO:3166-1</td>
         <td>=</td>
         <td>https://www.iso.org/obp/ui/#search</td>
     </tr>
@@ -225,17 +225,17 @@ This specification defines POST endpoints to request information about resources
       
 "filters": [
              {
-               "id": "NCIT_C2991",
+               "id": "NCIT:C2991",
                "operator": "=",
                "value": ["CG","AD"]
              },
              {
-               "id": "NCIT_C43412",
+               "id": "NCIT:C43412",
                "operator": "=",
                "value": ["Serum","Plasma"]
              },
              {
-               "id": "NCIT_C164234",
+               "id": "NCIT:C164234",
                "operator": "=",
                "value": "MRI"
              }, 
@@ -255,7 +255,7 @@ This specification defines POST endpoints to request information about resources
                "value": 1000
              },
              {
-               "id": "ISO_3166-1",
+               "id": "ISO:3166-1",
                "operator": "=",
                "value": ["AT","BH"]
              }
@@ -284,17 +284,17 @@ The following is an example response
             "requestedSchemas": [],
             "filters": [
              {
-               "id": "NCIT_C2991",
+               "id": "NCIT:C2991",
                "operator": "=",
                "value": ["CG","AD"]
              },
              {
-               "id": "NCIT_C43412",
+               "id": "NCIT:C43412",
                "operator": "=",
                "value": ["Serum","Plasma"]
              },
              {
-               "id": "NCIT_C164234",
+               "id": "NCIT:C164234",
                "operator": "=",
                "value": "MRI"
              }, 
@@ -314,7 +314,7 @@ The following is an example response
                "value": 1000
              },
              {
-               "id": "ISO_3166-1",
+               "id": "ISO:3166-1",
                "operator": "=",
                "value": ["AT","BH"]
              }
@@ -558,7 +558,7 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "NCIT_C164234",
+               "id": "NCIT:C164234",
                "operator": "=",
                "value": "MRI"
              }, 
@@ -591,12 +591,12 @@ To query for records with more than one instance of any of the filters you can s
     {
       "filters": [
         {
-               "id": "NCIT_C43412",
+               "id": "NCIT:C43412",
                "operator": "=",
                "value": "Serum"
              }, 
              {
-               "id": "NCIT_C43412",
+               "id": "NCIT:C43412",
                "operator": "=",
                "value": "Saliva"
              },
@@ -621,7 +621,7 @@ This query is looking for cohorts with biosample Serum AND Saliva biosample.
     {
       "filters": [
          {
-               "id": "NCIT_C2991",
+               "id": "NCIT:C2991",
                "operator": "=",
                "value": ["CG","AD"]
              },
