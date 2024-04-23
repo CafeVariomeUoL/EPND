@@ -28,7 +28,7 @@
  
 <h2 id="#-try-out-the-api-"> Try out the API </h2>
 
-Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v2.0#/Query%20Endpoints/study_request
+Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v1.0
 
 <hr>
 
