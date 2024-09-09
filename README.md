@@ -36,7 +36,7 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/study](#-study-endpoint-).
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/dataset](#-study-endpoint-).
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
@@ -53,7 +53,7 @@ This specification defines POST endpoints to request information about resources
 
 > Method: POST
 
-[/study](#-study-endpoint-) endpoint returns the **cohorts of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/dataset](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
@@ -72,7 +72,7 @@ This specification defines POST endpoints to request information about resources
     </thead>
     <tbody>
         <tr>
-            <td rowspan="13"><b>Available Diseases</b></td>
+            <td rowspan="13"><b>Available Diseases or Disorders</b></td>
             <td rowspan="13">Alphanumerical</td>
             <td rowspan="13">NCIT:C2991</td>
             <td rowspan="13">=</td>
@@ -91,21 +91,79 @@ This specification defines POST endpoints to request information about resources
         <tr><td>HD</td></tr>
         <tr><td>AT</td></tr>
     <tr>
-        <td rowspan="7"><b>Available Samples</b>
+        <td rowspan="5"><b>Sex</b>
         </td>
-        <td rowspan="7">Alphanumerical</td>
-        <td rowspan="7">NCIT:C43412</td>
-        <td rowspan="7">=</td>
+        <td rowspan="5">Alphanumerical</td>
+        <td rowspan="5">NCIT:C28421 </td>
+        <td rowspan="5">=</td>
         <td>
-        CSF
+        Unknown
         </td>
     </tr>
-    <tr><td>Serum</td></tr>
-    <tr><td>Plasma</td></tr>
-    <tr><td>DNA</td></tr>
-    <tr><td>Saliva</td></tr>
-    <tr><td>Faeces</td></tr>
-     <tr><td>Urine</td></tr>
+    <tr><td>Female</td></tr>
+    <tr><td>Male</td></tr>
+    <tr><td>Undifferential</td></tr>
+    <tr><td>Other</td></tr>
+    <tr>
+    <tr>
+        <td rowspan="6"><b>Monitoring</b>
+        </td>
+        <td rowspan="6">Alphanumerical</td>
+        <td rowspan="6">NCIT:C115576 </td>
+        <td rowspan="6">=</td>
+        <td>
+        Lifesytle Information
+        </td>
+    </tr>
+    <tr><td>Comorbidities</td></tr>
+    <tr><td>Clinical Diagnosis</td></tr>
+    <tr><td>Exposure</td></tr>
+    <tr><td>Age of Symptom Onset</td></tr>
+    <tr><td>Medication Use</td></tr>
+    <tr>
+    <tr>
+        <td rowspan="5"><b>Markers</b>
+        </td>
+        <td rowspan="5">Alphanumerical</td>
+        <td rowspan="5">NCIT:C16342 </td>
+        <td rowspan="5">=</td>
+        <td>
+        Digital Marker
+        </td>
+    </tr>
+    <tr><td>Tau</td></tr>
+    <tr><td>Neurofliament Light Chain</td></tr>
+    <tr><td>Amyloid</td></tr>
+    <tr><td>Alpha Synuclein</td></tr>
+    <tr>
+    <tr>
+        <td rowspan="3"><b>Electrophysiology</b>
+        </td>
+        <td rowspan="3">Alphanumerical</td>
+        <td rowspan="3">NCIT:C16540</td>
+        <td rowspan="3">=</td>
+        <td>
+        MEG
+        </td>
+    </tr>
+    <tr><td>EEG</td></tr>
+    <tr><td>ERP</td></tr>
+    <tr>
+    <tr>
+        <td rowspan="6"><b>Dataset Types</b>
+        </td>
+        <td rowspan="6">Alphanumerical</td>
+        <td rowspan="6">NCIT:C43412</td>
+        <td rowspan="6">=</td>
+        <td>
+        Lifestyle
+        </td>
+    </tr>
+    <tr><td>Neuropathology</td></tr>
+    <tr><td>Neuropsychiatric</td></tr>
+    <tr><td>Quality of Life </td></tr>
+    <tr><td>Neuropsychological</td></tr>
+    <tr><td>Electrophysiology</td></tr>
     <tr>
         <td rowspan="4"><b>Available Imaging</b></td>
         <td rowspan="4">Alphanumerical</td>
@@ -117,31 +175,16 @@ This specification defines POST endpoints to request information about resources
     <tr><td>PET-Tau</td></tr>
     <tr><td>DaT Scan</td></tr>
     <tr>
-        <td rowspan="2">
-            <b>Cohort Design</b>
-        </td>
-        <td rowspan="2">
-            Custom
-        </td>
-        <td rowspan="2">
-            CD:cognitive_data
-        </td>
-        <td rowspan="2">
-            =
-        </td>
-        <td>
-            Cross-sectional
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Logitudinal
-        </td>
-    </tr>
-    <tr>
-      <td><b>Number of participants</b></td>
+      <td><b>Number of Subjects</b></td>
         <td>Custom</td>
-        <td>NoP:number_of_participants</td>
+        <td>nop:number_of_subjects</td>
+        <td>>,<,=,>=,<=</td>
+        <td>any integer</td>
+    </tr>
+    <tr>
+      <td><b>Age</b></td>
+        <td>Numerical</td>
+        <td>NCIT:C69260</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
@@ -163,17 +206,23 @@ This specification defines POST endpoints to request information about resources
 
 
 
-<h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
+<h3 id="-study-filters-description-"> Dataset endpoint Filters Description </h3>
 
 **Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD]
 
-**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
+**Sex**: A single value or an array of biological sex of an individual, eg : Male or [Male,Female]
+
+**Monitoring**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
+
+**Markers**: A single value or an array, eg : MRI or [MRI,PET-Amyloid]
+
+**Electrophysiology**: A single value or an array of imaging technique, eg : Digital Marker or [Digital Marker,Tau]
+
+**Dataset Types**: A single value or an array of imaging technique, eg : Lifestyle or [Lifestyle,Quality of Life]
 
 **Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid]
 
-**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal]
-
-**Number of Participants**: The number of participants in the cohort . eg : >10 ,<20 or =100
+**Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
 **Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
@@ -212,9 +261,9 @@ This specification defines POST endpoints to request information about resources
 
 <hr>
 
-<h3 id="-example-request-and-response-for-study-"> Example request and response for study </h3>
+<h3 id="-example-request-and-response-for-study-"> Example request and response for datasets </h3>
 
-**EXAMPLE /study REQUEST**
+**EXAMPLE /dataset REQUEST**
 
 ```JSON
 { 
@@ -245,7 +294,7 @@ This specification defines POST endpoints to request information about resources
                "value": "Cross-sectional"
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": ":number_of_participants",
                "operator": ">",
                "value": 100
              },
@@ -272,7 +321,7 @@ This specification defines POST endpoints to request information about resources
 
 The following is an example response 
 
-**EXAMPLE /study RESPONSE**
+**EXAMPLE /dataset RESPONSE**
 ```JSON
 {
     "meta": {
@@ -897,7 +946,7 @@ This specification defines GET endpoints to request information about resources.
 
 <h2 id="swagger-auth"> Authentication using Header for Swagger </h2>
 
-In Swagger, to query using both the /individuals endpoint & /study endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
+In Swagger, to query using both the /individuals endpoint & /dataset endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
 
 ![image](https://user-images.githubusercontent.com/24955128/203320000-a9cbc5a5-4c49-4a2b-8666-4e0cb17a5a62.png)
 
