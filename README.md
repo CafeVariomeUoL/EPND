@@ -7,7 +7,7 @@
 
 <h2 id="top"> Contents </h2>
 
-* [Try out this API in Swagger](#-try-out-the-api-)
+<!-- * [Try out this API in Swagger](#-try-out-the-api-) -->
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
     * [Study endpoint](#-s-endpoint-)
@@ -26,9 +26,9 @@
 
 <hr>
  
-<h2 id="#-try-out-the-api-"> Try out the API </h2>
+<!-- <h2 id="#-try-out-the-api-"> Try out the API </h2>
 
-Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v1.0
+Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v1.0 -->
 
 <hr>
 
@@ -279,29 +279,39 @@ This specification defines POST endpoints to request information about resources
                "value": ["CG","AD"]
              },
              {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": ["Serum","Plasma"]
+               "value": ["Female","Male"]
              },
              {
-               "id": "NCIT:C164234",
+               "id": "NCIT:C115576",
                "operator": "=",
-               "value": "MRI"
+               "value": "Exposure"
              }, 
              {
-               "id": "CD:cognitive_data",
+               "id": "NCIT:C16342",
                "operator": "=",
-               "value": "Cross-sectional"
+               "value": "Amyloid"
              },
              {
-               "id": ":number_of_participants",
-               "operator": ">",
-               "value": 100
+               "id": "NCIT:C16540",
+               "operator": "=",
+               "value": "EEG"
+             },
+              {
+               "id": "NCIT:C43412",
+               "operator": "=",
+               "value": "Lifestyle"
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nop:number_of_subjects",
                "operator": "<",
                "value": 1000
+             },
+             {
+               "id": "NCIT:C69260",
+               "operator": ">",
+               "value": 10
              },
              {
                "id": "ISO:3166-1",
@@ -338,29 +348,39 @@ The following is an example response
                "value": ["CG","AD"]
              },
              {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": ["Serum","Plasma"]
+               "value": ["Female","Male"]
              },
              {
-               "id": "NCIT:C164234",
+               "id": "NCIT:C115576",
                "operator": "=",
-               "value": "MRI"
+               "value": "Exposure"
              }, 
              {
-               "id": "CD:cognitive_data",
+               "id": "NCIT:C16342",
                "operator": "=",
-               "value": "Cross-sectional"
+               "value": "Amyloid"
              },
              {
-               "id": "NoP:number_of_participants",
-               "operator": ">",
-               "value": 100
+               "id": "NCIT:C16540",
+               "operator": "=",
+               "value": "EEG"
+             },
+              {
+               "id": "NCIT:C43412",
+               "operator": "=",
+               "value": "Lifestyle"
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nop:number_of_subjects",
                "operator": "<",
                "value": 1000
+             },
+             {
+               "id": "NCIT:C69260",
+               "operator": ">",
+               "value": 10
              },
              {
                "id": "ISO:3166-1",
@@ -379,8 +399,8 @@ The following is an example response
         },
         "returnedSchemas": [
             {
-               "entityType": "study",
-               "schema": "beacon-cohort-v2.0.0",
+               "entityType": "datasets",
+               "schema": "ga4gh-beacon-dataset-v2.0.0",
             }
         ]
     },
@@ -389,55 +409,31 @@ The following is an example response
         "numTotalResults": 2
     },
     "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 2,
-            "results": [
+      "datasets": {
+        "createDateTime": "2017-01-17T20:33:40Z",
+        "dataUseConditions": {
+            "duoDataUse": [
                 {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
+                    "id": "DUO:0000007",
+                    "label": "disease specific research",
+                    "modifiers": [
+                        {
+                            "id": "EFO:0001645",
+                            "label": "coronary artery disease"
                         }
-                    }
-                },
-                {
-                    "id": "BEex4",
-                    "name": "Basic Element example four",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        }
-                    }
+                    ],
+                    "version": "17-07-2016"
                 }
-            ],
-            
-            
-        }
-    ]
-    }
+            ]
+        },
+        "description": "This dataset provides examples of the actual data in this Beacon instance.",
+        "externalUrl": "https://example.org/wiki/Main_Page",
+        "datasetId": "ds01010101",
+        "name": "Dataset with synthetic data",
+        "updateDateTime": "2017-01-17T20:33:40Z",
+        "version": "v1.1"
+  }
+    
 }
 ```
 
@@ -612,9 +608,9 @@ As shown above, different types of filters can be sent in a single query. These 
                "value": "MRI"
              }, 
              {
-               "id": "cognitive_data",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": "Cross-sectional"
+               "value": "Female"
              },
       ]
     }
@@ -640,14 +636,14 @@ To query for records with more than one instance of any of the filters you can s
     {
       "filters": [
         {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": "Serum"
+               "value": "Female"
              }, 
              {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": "Saliva"
+               "value": "Male"
              },
       ]
    }
