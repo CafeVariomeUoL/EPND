@@ -485,36 +485,31 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
         }
     },
     "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 1,
-            "results": [
+      "datasets": {
+        "createDateTime": "2017-01-17T20:33:40Z",
+        "dataUseConditions": {
+            "duoDataUse": [
                 {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
+                    "id": "DUO:0000007",
+                    "label": "disease specific research",
+                    "modifiers": [
+                        {
+                            "id": "EFO:0001645",
+                            "label": "coronary artery disease"
                         }
-                    }
+                    ],
+                    "version": "17-07-2016"
                 }
-            ],
-            
-            
-        }
-    ]
-    }
+            ]
+        },
+        "description": "This dataset provides examples of the actual data in this Beacon instance.",
+        "externalUrl": "https://example.org/wiki/Main_Page",
+        "datasetId": "ds01010101",
+        "name": "Dataset with synthetic data",
+        "updateDateTime": "2017-01-17T20:33:40Z",
+        "version": "v1.1"
+  }
+    
 }
 ```
 
