@@ -36,7 +36,7 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/dataset](#-study-endpoint-).
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/datasets](#-study-endpoint-).
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
@@ -53,7 +53,7 @@ This specification defines POST endpoints to request information about resources
 
 > Method: POST
 
-[/dataset](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/datasets](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
 <h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
@@ -91,33 +91,34 @@ This specification defines POST endpoints to request information about resources
         <tr><td>HD</td></tr>
         <tr><td>AT</td></tr>
     <tr>
-        <td rowspan="5"><b>Sex</b>
+        <td rowspan="4"><b>Sex</b>
         </td>
-        <td rowspan="5">Alphanumerical</td>
-        <td rowspan="5">NCIT:C28421 </td>
-        <td rowspan="5">=</td>
+        <td rowspan="4">Alphanumerical</td>
+        <td rowspan="4">NCIT:C28421 </td>
+        <td rowspan="4">=</td>
         <td>
         Unknown
         </td>
     </tr>
     <tr><td>Female</td></tr>
     <tr><td>Male</td></tr>
-    <tr><td>Undifferential</td></tr>
     <tr><td>Other</td></tr>
     <tr>
     <tr>
-        <td rowspan="6"><b>Monitoring</b>
+        <td rowspan="8"><b>Clinical Data</b>
         </td>
-        <td rowspan="6">Alphanumerical</td>
-        <td rowspan="6">NCIT:C115576 </td>
-        <td rowspan="6">=</td>
+        <td rowspan="8">Alphanumerical</td>
+        <td rowspan="8">NCIT:C115576 </td>
+        <td rowspan="8">=</td>
         <td>
         Lifesytle Information
         </td>
     </tr>
     <tr><td>Comorbidities</td></tr>
-    <tr><td>Clinical Diagnosis</td></tr>
-    <tr><td>Exposure</td></tr>
+    <tr><td>Clinical diagnosis</td></tr>
+    <tr><td>Vital Signs</td></tr>
+    <tr><td>Family history of neurodegenerative disorders</td></tr>
+    <tr><td>Exposure data</td></tr>
     <tr><td>Age of Symptom Onset</td></tr>
     <tr><td>Medication Use</td></tr>
     <tr>
@@ -128,7 +129,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="5">NCIT:C16342 </td>
         <td rowspan="5">=</td>
         <td>
-        Digital Marker
+        dat
         </td>
     </tr>
     <tr><td>Tau</td></tr>
@@ -263,7 +264,7 @@ This specification defines POST endpoints to request information about resources
 
 <h3 id="-example-request-and-response-for-study-"> Example request and response for datasets </h3>
 
-**EXAMPLE /dataset REQUEST**
+**EXAMPLE /datasets REQUEST**
 
 ```JSON
 { 
@@ -331,7 +332,7 @@ This specification defines POST endpoints to request information about resources
 
 The following is an example response 
 
-**EXAMPLE /dataset RESPONSE**
+**EXAMPLE /datasets RESPONSE**
 ```JSON
 {
     "meta": {
@@ -937,7 +938,7 @@ This specification defines GET endpoints to request information about resources.
 
 <h2 id="swagger-auth"> Authentication using Header for Swagger </h2>
 
-In Swagger, to query using both the /individuals endpoint & /dataset endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
+In Swagger, to query using both the /individuals endpoint & /datasets endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
 
 ![image](https://user-images.githubusercontent.com/24955128/203320000-a9cbc5a5-4c49-4a2b-8666-4e0cb17a5a62.png)
 
