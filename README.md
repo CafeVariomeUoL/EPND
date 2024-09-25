@@ -10,7 +10,7 @@
 <!-- * [Try out this API in Swagger](#-try-out-the-api-) -->
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
-    * [Study endpoint](#-s-endpoint-)
+    * [Datasets endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
       * [Filters description](#-study-filters-description-)
       * [Example request & response](#-example-request-and-response-for-study-)
@@ -49,13 +49,13 @@ This specification defines POST endpoints to request information about resources
 
 
 <hr>
-<h3 id="-study-endpoint-"> Study endpoint </h3>
+<h3 id="-study-endpoint-"> Datsets endpoint </h3>
 
 > Method: POST
 
 [/datasets](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
-<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
+<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the datests endpoint </h4>
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
@@ -350,21 +350,6 @@ The following is an example response
     "response": {
       "datasets": {
         "createDateTime": "2017-01-17T20:33:40Z",
-        "dataUseConditions": {
-            "duoDataUse": [
-                {
-                    "id": "DUO:0000007",
-                    "label": "disease specific research",
-                    "modifiers": [
-                        {
-                            "id": "EFO:0001645",
-                            "label": "coronary artery disease"
-                        }
-                    ],
-                    "version": "17-07-2016"
-                }
-            ]
-        },
         "description": "This dataset provides examples of the actual data in this Beacon instance.",
         "externalUrl": "https://example.org/wiki/Main_Page",
         "datasetId": "ds01010101",
@@ -426,21 +411,6 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     "response": {
       "datasets": {
         "createDateTime": "2017-01-17T20:33:40Z",
-        "dataUseConditions": {
-            "duoDataUse": [
-                {
-                    "id": "DUO:0000007",
-                    "label": "disease specific research",
-                    "modifiers": [
-                        {
-                            "id": "EFO:0001645",
-                            "label": "coronary artery disease"
-                        }
-                    ],
-                    "version": "17-07-2016"
-                }
-            ]
-        },
         "description": "This dataset provides examples of the actual data in this Beacon instance.",
         "externalUrl": "https://example.org/wiki/Main_Page",
         "datasetId": "ds01010101",
