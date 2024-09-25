@@ -71,110 +71,19 @@ This specification defines POST endpoints to request information about resources
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td rowspan="13"><b>Available Diseases or Disorders</b></td>
-            <td rowspan="13">Alphanumerical</td>
-            <td rowspan="13">NCIT:C2991</td>
-            <td rowspan="13">=</td>
-            <td>CG</td>    
-        </tr>
-        <tr><td>AD</td></tr>
-        <tr><td>PD</td></tr>
-        <tr><td>DLB</td></tr>
-        <tr><td>iRBD</td></tr>
-        <tr><td>CAA</td></tr>
-        <tr><td>FTD</td></tr>
-        <tr><td>ALS</td></tr>
-        <tr><td>PSP</td></tr>
-        <tr><td>CBD</td></tr>
-        <tr><td>MSA</td></tr>
-        <tr><td>HD</td></tr>
-        <tr><td>AT</td></tr>
-    <tr>
         <td rowspan="4"><b>Sex</b>
         </td>
         <td rowspan="4">Alphanumerical</td>
         <td rowspan="4">NCIT:C28421 </td>
         <td rowspan="4">=</td>
         <td>
-        Unknown
+        Male
         </td>
     </tr>
     <tr><td>Female</td></tr>
-    <tr><td>Male</td></tr>
+    <tr><td>Unknown</td></tr>
     <tr><td>Other</td></tr>
     <tr>
-    <tr>
-        <td rowspan="8"><b>Clinical Data</b>
-        </td>
-        <td rowspan="8">Alphanumerical</td>
-        <td rowspan="8">NCIT:C115576 </td>
-        <td rowspan="8">=</td>
-        <td>
-        Lifesytle Information
-        </td>
-    </tr>
-    <tr><td>Comorbidities</td></tr>
-    <tr><td>Clinical diagnosis</td></tr>
-    <tr><td>Vital Signs</td></tr>
-    <tr><td>Family history of neurodegenerative disorders</td></tr>
-    <tr><td>Exposure data</td></tr>
-    <tr><td>Age of Symptom Onset</td></tr>
-    <tr><td>Medication Use</td></tr>
-    <tr>
-    <tr>
-        <td rowspan="5"><b>Markers</b>
-        </td>
-        <td rowspan="5">Alphanumerical</td>
-        <td rowspan="5">NCIT:C16342 </td>
-        <td rowspan="5">=</td>
-        <td>
-        dat
-        </td>
-    </tr>
-    <tr><td>Tau</td></tr>
-    <tr><td>Neurofliament Light Chain</td></tr>
-    <tr><td>Amyloid</td></tr>
-    <tr><td>Alpha Synuclein</td></tr>
-    <tr>
-    <tr>
-        <td rowspan="3"><b>Electrophysiology</b>
-        </td>
-        <td rowspan="3">Alphanumerical</td>
-        <td rowspan="3">NCIT:C16540</td>
-        <td rowspan="3">=</td>
-        <td>
-        MEG
-        </td>
-    </tr>
-    <tr><td>EEG</td></tr>
-    <tr><td>ERP</td></tr>
-    <tr>
-    <tr>
-        <td rowspan="6"><b>Dataset Types</b>
-        </td>
-        <td rowspan="6">Alphanumerical</td>
-        <td rowspan="6">NCIT:C43412</td>
-        <td rowspan="6">=</td>
-        <td>
-        Lifestyle
-        </td>
-    </tr>
-    <tr><td>Neuropathology</td></tr>
-    <tr><td>Neuropsychiatric</td></tr>
-    <tr><td>Quality of Life </td></tr>
-    <tr><td>Neuropsychological</td></tr>
-    <tr><td>Electrophysiology</td></tr>
-    <tr>
-        <td rowspan="4"><b>Available Imaging</b></td>
-        <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT:C164232</td>
-        <td rowspan="4">=</td>
-        <td>MRI</td>
-    </tr>
-    <tr><td>PET-Amyloid</td></tr>
-    <tr><td>PET-Tau</td></tr>
-    <tr><td>DaT Scan</td></tr>
     <tr>
       <td><b>Number of Subjects</b></td>
         <td>Custom</td>
@@ -183,21 +92,134 @@ This specification defines POST endpoints to request information about resources
         <td>any integer</td>
     </tr>
     <tr>
-      <td><b>Age</b></td>
-        <td>Numerical</td>
-        <td>NCIT:C69260</td>
-        <td>>,<,=,>=,<=</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-      <td><b>Country</b></td>
-        <td>Alphanumerical</td>
-        <td>ISO:3166-1</td>
+        <td><b>Description </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:description</td>
         <td>=</td>
-        <td>https://www.iso.org/obp/ui/#search</td>
-    </tr>
-  
-
+        <td>any string</td>
+    <tr>
+    <tr>
+        <td><b>Keyword </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:keyword</td>
+        <td>=</td>
+        <td>any string</td>
+    <tr>
+    <tr>
+        <td><b>Clinical Information</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsClincalInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+     <tr>
+        <td><b>Diagnostic markers</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsDiagonsticInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Imaging</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsImagingInfo</td>
+      <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Electrophysiology</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsElectrophsiology</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Demographics</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsDemographicsInfo</td>
+<td>=</td>
+        <td>true or false</td>
+    <tr>
+     <tr>
+        <td><b>Functional Ratings</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsFunctionalRationgsInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+     <tr>
+        <td><b>Motor</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsMotorInfo</td>
+       <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Neuropsychiatric Assessment</b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsNeuropsychiatricInfo</td>
+       <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Neuropsychological Assessment </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsNeuropsychologicalInfo</td>
+       <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>QualityofLife </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsQualityofLifelInfo</td>
+       <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Sleepscales </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsSleepscalesInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Sensors </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsSensorsInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Neuropathology </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsNeuropathologyInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
+    <tr>
+        <td><b>Ethnicity Coverage </b>
+        </td>
+        <td >Custom</td>
+        <td >epnd:containsEthnicityInfo</td>
+        <td>=</td>
+        <td>true or false</td>
+    <tr>
 </tbody>
 </table>
 
@@ -209,56 +231,18 @@ This specification defines POST endpoints to request information about resources
 
 <h3 id="-study-filters-description-"> Dataset endpoint Filters Description </h3>
 
-**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD]
+
 
 **Sex**: A single value or an array of biological sex of an individual, eg : Male or [Male,Female]
 
-**Monitoring**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
-
-**Markers**: A single value or an array, eg : MRI or [MRI,PET-Amyloid]
-
-**Electrophysiology**: A single value or an array of imaging technique, eg : Digital Marker or [Digital Marker,Tau]
-
-**Dataset Types**: A single value or an array of imaging technique, eg : Lifestyle or [Lifestyle,Quality of Life]
-
-**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid]
-
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
-**Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
+
+
+
 
 [ ^ Back to the top](#top)
 
-<hr>
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Abbreviation</th>
-            <th>Definiton</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>CG</td>
-            <td>Cognitively normal</td>
-        </tr>
-        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
-        <tr><td>PD</td><td>Parkinson's disease</td></tr>
-        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
-        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
-        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
-        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
-        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
-        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
-        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
-        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
-        <tr><td>HD</td><td>Huntington's disease</td></tr>
-        <tr><td>AT</td><td>Ataxia</td></tr>
-    
-</tbody>
-</table>
 
 <hr>
 
@@ -274,51 +258,28 @@ This specification defines POST endpoints to request information about resources
  "query": {
       
 "filters": [
-             {
-               "id": "NCIT:C2991",
-               "operator": "=",
-               "value": ["CG","AD"]
-             },
+             
              {
                "id": "NCIT:C28421",
                "operator": "=",
                "value": ["Female","Male"]
              },
              {
-               "id": "NCIT:C115576",
-               "operator": "=",
-               "value": "Exposure"
-             }, 
-             {
-               "id": "NCIT:C16342",
-               "operator": "=",
-               "value": "Amyloid"
-             },
-             {
-               "id": "NCIT:C16540",
-               "operator": "=",
-               "value": "EEG"
-             },
-              {
-               "id": "NCIT:C43412",
-               "operator": "=",
-               "value": "Lifestyle"
-             },
-             {
                "id": "nop:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
-             {
-               "id": "NCIT:C69260",
-               "operator": ">",
-               "value": 10
-             },
-             {
-               "id": "ISO:3166-1",
+            {
+              "id": "epnd:containsImagingInfo",
+              "operator": "=",
+              "value": true
+            },
+            {
+               "id": "epnd:keyword",
                "operator": "=",
-               "value": ["AT","BH"]
+               "value": "%cancer%"
              }
+
        ],
       "requestedGranularity": "record"
     }
@@ -343,51 +304,28 @@ The following is an example response
             "apiVersion": "v2.0.1",
             "requestedSchemas": [],
             "filters": [
-             {
-               "id": "NCIT:C2991",
-               "operator": "=",
-               "value": ["CG","AD"]
-             },
-             {
+            {
                "id": "NCIT:C28421",
                "operator": "=",
                "value": ["Female","Male"]
-             },
-             {
-               "id": "NCIT:C115576",
-               "operator": "=",
-               "value": "Exposure"
-             }, 
-             {
-               "id": "NCIT:C16342",
-               "operator": "=",
-               "value": "Amyloid"
-             },
-             {
-               "id": "NCIT:C16540",
-               "operator": "=",
-               "value": "EEG"
-             },
-              {
-               "id": "NCIT:C43412",
-               "operator": "=",
-               "value": "Lifestyle"
              },
              {
                "id": "nop:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
-             {
-               "id": "NCIT:C69260",
-               "operator": ">",
-               "value": 10
-             },
-             {
-               "id": "ISO:3166-1",
+            {
+              "id": "epnd:containsImagingInfo",
+              "operator": "=",
+              "value": true
+            },
+            {
+               "id": "epnd:keyword",
                "operator": "=",
-               "value": ["AT","BH"]
+               "value": "%cancer%"
              }
+
+             
        ],
             "requestParameters": {},
             "includeResultsetResponses": "HIT",
@@ -599,10 +537,10 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "NCIT:C164234",
-               "operator": "=",
-               "value": "MRI"
-             }, 
+               "id": "nop:number_of_subjects",
+               "operator": "<",
+               "value": 1000
+             },
              {
                "id": "NCIT:C28421",
                "operator": "=",
@@ -661,11 +599,11 @@ This query is looking for cohorts with biosample Serum AND Saliva biosample.
 "query": 
     {
       "filters": [
-         {
-               "id": "NCIT:C2991",
+        {
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": ["CG","AD"]
-             },
+               "value": ["Female","Male"]
+             }, 
       ]
    }
 }
