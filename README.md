@@ -87,138 +87,122 @@ This specification defines POST endpoints to request information about resources
     <tr>
       <td><b>Number of Subjects</b></td>
         <td>Custom</td>
-        <td>nop:number_of_subjects</td>
+        <td>nos:number_of_subjects</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
     <tr>
-        <td><b>Description </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:description</td>
-        <td>=</td>
-        <td>any string</td>
-    <tr>
-    <tr>
-        <td><b>Keyword </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:keyword</td>
-        <td>=</td>
-        <td>any string</td>
-    <tr>
-    <tr>
         <td><b>Clinical Information</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsClincalInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:clincalInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
      <tr>
         <td><b>Diagnostic markers</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsDiagonsticInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:diagonsticInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Imaging</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsImagingInfo</td>
-      <td>=</td>
-        <td>true or false</td>
+        <td >epnd:imagingInfoExists</td>
+      <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Electrophysiology</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsElectrophsiology</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:electrophsiologyExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Demographics</b>
         </td>
-        <td >Custom</td>
-        <td >epnd:containsDemographicsInfo</td>
-<td>=</td>
-        <td>true or false</td>
+        <td>Custom</td>
+        <td>epnd:demographicsInfoExists</td>
+<td></td>
+        <td></td>
     <tr>
      <tr>
         <td><b>Functional Ratings</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsFunctionalRationgsInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:functionalRationgsInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
      <tr>
         <td><b>Motor</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsMotorInfo</td>
-       <td>=</td>
-        <td>true or false</td>
+        <td >epnd:motorInfoExists</td>
+       <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Neuropsychiatric Assessment</b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsNeuropsychiatricInfo</td>
-       <td>=</td>
-        <td>true or false</td>
+        <td >epnd:neuropsychiatricInfoExists</td>
+       <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Neuropsychological Assessment </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsNeuropsychologicalInfo</td>
-       <td>=</td>
-        <td>true or false</td>
+        <td >epnd:neuropsychologicalInfoExists</td>
+       <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>QualityofLife </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsQualityofLifelInfo</td>
-       <td>=</td>
-        <td>true or false</td>
+        <td >epnd:qualityofLifelInfoExists</td>
+       <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Sleepscales </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsSleepscalesInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:sleepscalesInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Sensors </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsSensorsInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:sensorsInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Neuropathology </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsNeuropathologyInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:neuropathologyInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
     <tr>
         <td><b>Ethnicity Coverage </b>
         </td>
         <td >Custom</td>
-        <td >epnd:containsEthnicityInfo</td>
-        <td>=</td>
-        <td>true or false</td>
+        <td >epnd:ethnicityInfoExists</td>
+        <td></td>
+        <td></td>
     <tr>
 </tbody>
 </table>
@@ -237,8 +221,33 @@ This specification defines POST endpoints to request information about resources
 
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
+**Clinical Information**: Will return the datasets that have any clinical information present.
 
+**Diagnostic markers**: Will return the datasets that have any diagonostic markers information present.
 
+**Imaging**: Will return the datasets that have any imaging information present.
+
+**Electrophysiology**: Will return the datasets that have any electrophysiology information present.
+
+**Demographics**:Will return the datasets that have any dempgraphics information present.
+
+**Functional Ratings**:Will return the datasets that have any functional ratings information present.
+
+**Motor**:Will return the datasets that have any motor information present.
+
+**Neuropsychiatric Assessment**:Will return the datasets that have any neuropsychiatric assessment information present.
+
+**Neuropsychological Assessment**:Will return the datasets that have any neuropsychological assessment information present.
+
+**QualityofLife**Will return the datasets that have any qualityoflife information present
+
+**Sleepscales**:Will return the datasets that have any sleepscales information present
+
+**Sensors**:Will return the datasets that have any sensors information present
+
+**Neuropathology**:Will return the datasets that have any neuropathology inforamtion present.
+
+**Ethnicity Coverage**:Will return the datasets that have any ethnicity information present.
 
 
 [ ^ Back to the top](#top)
@@ -265,23 +274,16 @@ This specification defines POST endpoints to request information about resources
                "value": ["Female","Male"]
              },
              {
-               "id": "nop:number_of_subjects",
+               "id": "nos:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
             {
-              "id": "epnd:containsImagingInfo",
-              "operator": "=",
-              "value": true
-            },
-            {
-               "id": "epnd:keyword",
-               "operator": "=",
-               "value": "%cancer%"
-             }
+              "id": "epnd:imagingInfoExists"
+            }
 
        ],
-      "requestedGranularity": "record"
+      "requestedGranularity": "count"
     }
 }
 ```
@@ -310,7 +312,7 @@ The following is an example response
                "value": ["Female","Male"]
              },
              {
-               "id": "nop:number_of_subjects",
+               "id": "nos:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
@@ -318,12 +320,7 @@ The following is an example response
               "id": "epnd:containsImagingInfo",
               "operator": "=",
               "value": true
-            },
-            {
-               "id": "epnd:keyword",
-               "operator": "=",
-               "value": "%cancer%"
-             }
+            }
 
              
        ],
@@ -333,7 +330,7 @@ The following is an example response
                 "skip": 0,
                 "limit": 50
             },
-            "requestedGranularity": "record",
+            "requestedGranularity": "count",
             "testMode": false
         },
         "returnedSchemas": [
@@ -346,17 +343,7 @@ The following is an example response
     "responseSummary": {
         "exists": true,
         "numTotalResults": 2
-    },
-    "response": {
-      "datasets": {
-        "createDateTime": "2017-01-17T20:33:40Z",
-        "description": "This dataset provides examples of the actual data in this Beacon instance.",
-        "externalUrl": "https://example.org/wiki/Main_Page",
-        "datasetId": "ds01010101",
-        "name": "Dataset with synthetic data",
-        "updateDateTime": "2017-01-17T20:33:40Z",
-        "version": "v1.1"
-  }
+    }
     
 }
 ```
@@ -399,7 +386,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "responseSummary": {
         "exists": true,
-        "numTotalResults": 1
+        "numTotalResults": 2
     },
     "info": {
         "warnings": {
@@ -407,18 +394,8 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                 
             ]
         }
-    },
-    "response": {
-      "datasets": {
-        "createDateTime": "2017-01-17T20:33:40Z",
-        "description": "This dataset provides examples of the actual data in this Beacon instance.",
-        "externalUrl": "https://example.org/wiki/Main_Page",
-        "datasetId": "ds01010101",
-        "name": "Dataset with synthetic data",
-        "updateDateTime": "2017-01-17T20:33:40Z",
-        "version": "v1.1"
-  }
-    
+    }
+  
 }
 ```
 
@@ -507,7 +484,7 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "nop:number_of_subjects",
+               "id": "nos:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
