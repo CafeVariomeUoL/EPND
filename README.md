@@ -135,7 +135,7 @@ This specification defines POST endpoints to request information about resources
         <td><b>Functional Ratings</b>
         </td>
         <td >Custom</td>
-        <td >epnd:functionalRationgsInfoExists</td>
+        <td >epnd:functionalRatingsInfoExists</td>
         <td></td>
         <td></td>
     <tr>
