@@ -132,7 +132,7 @@ This specification defines POST endpoints to request information about resources
 
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
-**Dataset Types**: A single value or an array of imaging technique, eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369]
+**Dataset Types**: A single value or an array of datsets types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369]
 
 
 
@@ -227,29 +227,56 @@ The following is an example response
         "exists": true,
         "numTotalResults": 2
     },
-    "response": {
-      "datasets": [
+   "response": {
+        "resultSets": [
         {
-        "description": "This dataset provides examples of the actual data in this Beacon instance.",
-        "externalUrl": "https://example.org/wiki/Main_Page",
-        "datasetId": "ds01010101",
-        "name": "Dataset with synthetic data",
-        "updateDateTime": "2017-01-17T20:33:40Z",
-        "version": "v1.1"
-       },
-       {
-        "createDateTime": "2017-01-17T20:33:40Z",
-        "description": "This dataset provides examples of the actual data in this Beacon instance.",
-        "externalUrl": "https://example.org/wiki/Main_Page",
-        "datasetId": "ds01010102",
-        "name": "Dataset with synthetic data",
-        "updateDateTime": "2017-01-17T20:33:40Z",
-        "version": "v1.1"
-       },
-
-  ]
-    
-}
+            "exists": true,
+            "resultsCount": 2,
+            "results": [
+                {
+                    "id": "BEex3",
+                    "name": "Basic Element example three",
+                    "info":{
+                    "type": "dataset",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        }
+                    }
+                },
+                {
+                    "id": "BEex4",
+                    "name": "Basic Element example four",
+                    "info":{
+                    "type": "dataset",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        }
+                    }
+                }
+            ],
+            
+            
+        }
+    ]
+    }
 }
 ```
 
@@ -300,20 +327,37 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
             ]
         }
     },
-    "response": {
-      "datasets": [
+      "response": {
+        "resultSets": [
         {
-        "createDateTime": "2017-01-17T20:33:40Z",
-        "description": "This dataset provides examples of the actual data in this Beacon instance.",
-        "externalUrl": "https://example.org/wiki/Main_Page",
-        "datasetId": "ds01010101",
-        "name": "Dataset with synthetic data",
-        "updateDateTime": "2017-01-17T20:33:40Z",
-        "version": "v1.1"
-  }
-  ]
-    
-}
+            "exists": true,
+            "resultsCount": 1,
+            "results": [
+                {
+                    "id": "BEex3",
+                    "name": "Basic Element example three",
+                    "info":{
+                    "type": "dataset",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        }
+                    }
+                }
+            ],
+            
+            
+        }
+    ]
+    }
 }
 ```
 
