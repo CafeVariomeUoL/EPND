@@ -49,13 +49,13 @@ This specification defines POST endpoints to request information about resources
 
 
 <hr>
-<h3 id="-study-endpoint-"> Datsets endpoint </h3>
+<h3 id="-study-endpoint-"> Datasets endpoint </h3>
 
 > Method: POST
 
 [/datasets](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
-<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the datests endpoint </h4>
+<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the datasets endpoint </h4>
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
@@ -77,14 +77,15 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="4">NCIT:C28421 </td>
         <td rowspan="4">=</td>
         <td>
-        Male
+        Unknown
         </td>
     </tr>
     <tr><td>Female</td></tr>
-    <tr><td>Unknown</td></tr>
+    <tr><td>Male</td></tr>
     <tr><td>Other</td></tr>
     <tr>
     <tr>
+     <tr>
       <td><b>Number of Subjects</b></td>
         <td>Custom</td>
         <td>nos:number_of_subjects</td>
@@ -92,118 +93,30 @@ This specification defines POST endpoints to request information about resources
         <td>any integer</td>
     </tr>
     <tr>
-        <td><b>Clinical Information</b>
+        <td rowspan="14"><b>Dataset Types</b>
         </td>
-        <td >Custom</td>
-        <td >epnd:clincalInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-     <tr>
-        <td><b>Diagnostic markers</b>
+        <td rowspan="14">Alphanumerical</td>
+        <td rowspan="14">NCIT:C47824</td>
+        <td rowspan="14">=</td>
+        <td>
+        NCIT:C142447(Clinical Information)
         </td>
-        <td >Custom</td>
-        <td >epnd:diagonsticInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Imaging</b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:imagingInfoExists</td>
-      <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Electrophysiology</b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:electrophsiologyExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Demographics</b>
-        </td>
-        <td>Custom</td>
-        <td>epnd:demographicsInfoExists</td>
-<td></td>
-        <td></td>
-    <tr>
-     <tr>
-        <td><b>Functional Ratings</b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:functionalRatingsInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-     <tr>
-        <td><b>Motor</b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:motorInfoExists</td>
-       <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Neuropsychiatric Assessment</b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:neuropsychiatricInfoExists</td>
-       <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Neuropsychological Assessment </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:neuropsychologicalInfoExists</td>
-       <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>QualityofLife </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:qualityofLifelInfoExists</td>
-       <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Sleepscales </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:sleepscalesInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Sensors </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:sensorsInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Neuropathology </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:neuropathologyInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
-    <tr>
-        <td><b>Ethnicity Coverage </b>
-        </td>
-        <td >Custom</td>
-        <td >epnd:ethnicityInfoExists</td>
-        <td></td>
-        <td></td>
-    <tr>
+    </tr>
+    <tr><td>NCIT:C19591(Diagnostic marker)</td></tr>
+    <tr><td>NCIT:C17369(Imaging)</td></tr>
+    <tr><td>NCIT:C16540(Electrophysiology)</td></tr>
+    <tr><td>NCIT:C16495(Demographics)</td></tr>
+    <tr><td>NCIT:C20641(Functional Ratings)</td></tr>
+    <tr><td>NCIT:C28367(Motor)</td></tr>
+    <tr><td>NCIT:C100772(Neuropsychiatric)</td></tr>
+    <tr><td>NCIT:C165543(Neuropsychological Assessment)</td></tr>
+    <tr><td>NCIT:C17047(Quality of Life)</td></tr>
+    <tr><td>NCIT:C121705(Sleepscales)</td></tr>
+    <tr><td>NCIT:C28220(Sensor)</td></tr>
+    <tr><td>NCIT:C18479(Neuropathology)</td></tr>
+    <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
+  
+
 </tbody>
 </table>
 
@@ -215,43 +128,15 @@ This specification defines POST endpoints to request information about resources
 
 <h3 id="-study-filters-description-"> Dataset endpoint Filters Description </h3>
 
-
-
 **Sex**: A single value or an array of biological sex of an individual, eg : Male or [Male,Female]
 
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
-**Clinical Information**: Will return the datasets that have any clinical information present.
+**Dataset Types**: A single value or an array of imaging technique, eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369]
 
-**Diagnostic markers**: Will return the datasets that have any diagonostic markers information present.
-
-**Imaging**: Will return the datasets that have any imaging information present.
-
-**Electrophysiology**: Will return the datasets that have any electrophysiology information present.
-
-**Demographics**:Will return the datasets that have any dempgraphics information present.
-
-**Functional Ratings**:Will return the datasets that have any functional ratings information present.
-
-**Motor**:Will return the datasets that have any motor information present.
-
-**Neuropsychiatric Assessment**:Will return the datasets that have any neuropsychiatric assessment information present.
-
-**Neuropsychological Assessment**:Will return the datasets that have any neuropsychological assessment information present.
-
-**QualityofLife**Will return the datasets that have any qualityoflife information present
-
-**Sleepscales**:Will return the datasets that have any sleepscales information present
-
-**Sensors**:Will return the datasets that have any sensors information present
-
-**Neuropathology**:Will return the datasets that have any neuropathology inforamtion present.
-
-**Ethnicity Coverage**:Will return the datasets that have any ethnicity information present.
 
 
 [ ^ Back to the top](#top)
-
 
 <hr>
 
@@ -267,7 +152,6 @@ This specification defines POST endpoints to request information about resources
  "query": {
       
 "filters": [
-             
              {
                "id": "NCIT:C28421",
                "operator": "=",
@@ -278,12 +162,13 @@ This specification defines POST endpoints to request information about resources
                "operator": "<",
                "value": 1000
              },
-            {
-              "id": "epnd:imagingInfoExists"
-            }
-
+             {
+               "id": "NCIT:C47824",
+               "operator": "=",
+               "value": "NCIT:C19591"
+             }
        ],
-      "requestedGranularity": "count"
+      "requestedGranularity": "record"
     }
 }
 ```
@@ -306,7 +191,7 @@ The following is an example response
             "apiVersion": "v2.0.1",
             "requestedSchemas": [],
             "filters": [
-            {
+             {
                "id": "NCIT:C28421",
                "operator": "=",
                "value": ["Female","Male"]
@@ -316,13 +201,11 @@ The following is an example response
                "operator": "<",
                "value": 1000
              },
-            {
-              "id": "epnd:containsImagingInfo",
-              "operator": "=",
-              "value": true
-            }
-
-             
+             {
+               "id": "NCIT:C47824",
+               "operator": "=",
+               "value": "NCIT:C19591"
+             }
        ],
             "requestParameters": {},
             "includeResultsetResponses": "HIT",
@@ -330,7 +213,7 @@ The following is an example response
                 "skip": 0,
                 "limit": 50
             },
-            "requestedGranularity": "count",
+            "requestedGranularity": "record",
             "testMode": false
         },
         "returnedSchemas": [
@@ -343,8 +226,30 @@ The following is an example response
     "responseSummary": {
         "exists": true,
         "numTotalResults": 2
-    }
+    },
+    "response": {
+      "datasets": [
+        {
+        "description": "This dataset provides examples of the actual data in this Beacon instance.",
+        "externalUrl": "https://example.org/wiki/Main_Page",
+        "datasetId": "ds01010101",
+        "name": "Dataset with synthetic data",
+        "updateDateTime": "2017-01-17T20:33:40Z",
+        "version": "v1.1"
+       },
+       {
+        "createDateTime": "2017-01-17T20:33:40Z",
+        "description": "This dataset provides examples of the actual data in this Beacon instance.",
+        "externalUrl": "https://example.org/wiki/Main_Page",
+        "datasetId": "ds01010102",
+        "name": "Dataset with synthetic data",
+        "updateDateTime": "2017-01-17T20:33:40Z",
+        "version": "v1.1"
+       },
+
+  ]
     
+}
 }
 ```
 
@@ -386,7 +291,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     },
     "responseSummary": {
         "exists": true,
-        "numTotalResults": 2
+        "numTotalResults": 1
     },
     "info": {
         "warnings": {
@@ -394,8 +299,21 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                 
             ]
         }
-    }
-  
+    },
+    "response": {
+      "datasets": [
+        {
+        "createDateTime": "2017-01-17T20:33:40Z",
+        "description": "This dataset provides examples of the actual data in this Beacon instance.",
+        "externalUrl": "https://example.org/wiki/Main_Page",
+        "datasetId": "ds01010101",
+        "name": "Dataset with synthetic data",
+        "updateDateTime": "2017-01-17T20:33:40Z",
+        "version": "v1.1"
+  }
+  ]
+    
+}
 }
 ```
 
@@ -484,10 +402,10 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "nos:number_of_subjects",
-               "operator": "<",
-               "value": 1000
-             },
+               "id": "NCIT:C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
              {
                "id": "NCIT:C28421",
                "operator": "=",
@@ -546,11 +464,11 @@ This query is looking for cohorts with biosample Serum AND Saliva biosample.
 "query": 
     {
       "filters": [
-        {
-               "id": "NCIT:C28421",
+         {
+               "id": "NCIT:C2991",
                "operator": "=",
-               "value": ["Female","Male"]
-             }, 
+               "value": ["CG","AD"]
+             },
       ]
    }
 }
