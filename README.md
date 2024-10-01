@@ -141,7 +141,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
       <td><b>Number of participants</b></td>
         <td>Custom</td>
-        <td>NoP:number_of_participants</td>
+        <td>nos:number_of_subjects</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
@@ -173,7 +173,7 @@ This specification defines POST endpoints to request information about resources
 
 **Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal]
 
-**Number of Participants**: The number of participants in the cohort . eg : >10 ,<20 or =100
+**Number of Subjects**: The number of subjects in the cohort . eg : >10 ,<20 or =100
 
 **Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
@@ -245,12 +245,12 @@ This specification defines POST endpoints to request information about resources
                "value": "Cross-sectional"
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nos:number_of_subjects",
                "operator": ">",
                "value": 100
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nos:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
@@ -304,12 +304,12 @@ The following is an example response
                "value": "Cross-sectional"
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nos:number_of_subjects",
                "operator": ">",
                "value": 100
              },
              {
-               "id": "NoP:number_of_participants",
+               "id": "nos:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
