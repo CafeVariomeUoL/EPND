@@ -1,0 +1,912 @@
+openapi: 3.0.1
+info:
+  title: Virtual platform Beacon API
+  x-beaconVersion: v2.0
+  description: EJPRD virtual platform data record APIs
+  contact:
+    email: admin@cafevariome.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: datasetsv1.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/deepthivs/EPND/datasetsv1.0
+paths:
+  /info:
+    get:
+      summary: "Get information regarding this beacon."
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoResponse"
+  /filtering_terms:
+    get:
+      summary: "Get the valid filtering terms to be used in querying/handled by this beacon."
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FilteringTermsResponse"
+  /map:
+    get:
+      summary: "Information about the response that could be relevant for the Beacon client in order to interpret the results"
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapResponse"
+  /service-info:
+    get:
+      summary: "Get information about the beacon using GA4GH ServiceInfo format."
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+  /configuration:
+    get:
+      summary: "Get the configuration of this beacon."
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigurationResponse"
+  /entry_types:
+    get:
+      summary: "Get the list of beacon entry types."
+      tags:
+        - Informational Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
+  /datasets:
+    post:
+      summary: "Request to get datasets."
+      tags:
+        - Query Endpoints
+      operationId: datasets_request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatasetsRequest"
+        required: true
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/DatasetsResponse"
+        "400":
+          description: "Input data malformed"
+          content: {}
+        "403":
+          description: "The data source does not allow this API call"
+          content: {}
+components:
+  schemas:
+    DatasetsRequest:
+      required:
+        - meta
+        - query
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        query:
+          $ref: "#/components/schemas/DatasetsRequestQuery"
+      description: "Request to return datasets"
+    DatasetsRequestQuery:
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/DatasetsRequestFilter"
+        requestedGranularity:
+          type: string
+          description: |
+            Granularity 
+          example: record
+      description: "Input of the query"
+    DatasetsRequestFilter:
+      type: array
+      items:
+        anyOf:
+          - $ref: "#/components/schemas/DatasetsAlphanumericRequestFilter"
+          - $ref: "#/components/schemas/DatasetsCustomRequestFilter"
+    DatasetsAlphanumericRequestFilter:
+      required:
+        - id
+        - operator
+        - value
+      type: object
+      properties:
+        id:
+          type: string
+          description: >
+            Concept ID of CDEs. 
+              Allowed terms:
+               * `NCIT:C28421` - Sex
+               * `NCIT:C47824` - Dataset Types
+          example: "NCIT:C28421"
+        operator:
+          type: string
+          description: |
+            This is an advance filter option to include comparison operators in the query. 
+              * For `alphanumeric filter`, only `'='` is allowed. 
+              * For `numeric filter`, `'=,>,>=,<,<='` are allowed.
+          example: "="
+        value:
+          anyOf:
+            - $ref: "#/components/schemas/DatasetsStringValue"
+            - $ref: "#/components/schemas/DatasetsArrayValues"
+      description: "Query parameters to filter individuals based on CDEs."
+    DatasetsStringValue:
+      type: string
+      example: " Female "
+      description: |
+        The actual value of the CDE in string format. Allowed values:
+          * For `NCIT_C2991`(Available Diseases): 
+            * `Unknown`
+            * `Female`
+            * `Male`
+            * `Other`
+              * Ex: \"Female\"
+          * For `NCIT:C47824`(Dataset Types): 
+            * `NCIT:C142447`
+            * `NCIT:C19591`
+            * `NCIT:C17369`
+            * `NCIT:C16540`
+            * `NCIT:C16495`
+            * `NCIT:C20641`
+            * `NCIT:C28367`
+            * `NCIT:C100772`
+            * `NCIT:C165543`
+            * `NCIT:C17047`
+            * `NCIT:C121705`
+            * `NCIT:C28220`
+            * `NCIT:C18479`
+            * `NCIT:C16564`
+              * Ex: \"NCIT:C16564\"
+    DatasetsArrayValues:
+      type: array
+      items:
+        type: string
+      example: '["NCIT:C16564","PlNCIT:C18479asma"]'
+      description: |
+        An array of allowed value(s) in string format.
+    DatasetsCustomRequestFilter:
+      required:
+        - id
+        - operator
+        - value
+      type: object
+      properties:
+        id:
+          type: string
+          description: >
+            Concept ID. 
+              Allowed terms:
+               * `nos:number_of_subjects` - Number of subjects
+          example: "nos:number_of_subjects"
+        operator:
+          type: string
+          description: |
+            This is an advance filter option to include comparison operators in the query. 
+              * For `alphanumeric filter`, only `'='` is allowed. 
+              * For `numeric filter`, `'=,>,>=,<,<='` are allowed.
+          example: ">"
+        value:
+          anyOf:
+            - $ref: "#/components/schemas/DatasetsCustomDatasetsValue"
+      description: "Query parameters to filter individuals based on CDEs."
+    DatasetsCustomDatasetsValue:
+      type: string
+      example: "1"
+      description: |
+        Any Interger valur:
+          * For `nos:number_of_subjects`(Number of Subjects):
+              * Ex: \"100\"
+    InfoResponse:
+      required:
+        - meta
+        - response
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/InfoResponseContent"
+      description: |
+        Respond with information regarding this Beacon.
+    FilteringTermsResponse:
+      required:
+        - meta
+        - response
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/FilterTermsResponseContent"
+    FilterTermsResponseContent:
+      required:
+        - filteringTerms
+      properties:
+        filteringTerms:
+          $ref: "#/components/schemas/FilterTermsResponse"
+        resources:
+           $ref: "#/components/schemas/FilterTermsResourceResponse"
+    FilterTermsResponse:
+      type : array
+      description: |
+        List of filtering terms for querying this Beacon.
+      required:
+        - id
+        - type
+      items:
+        type : object
+        properties:
+          id:
+            type: string
+            description: |
+              The field id in the case of numeric or alphanumeric fields, or the term id in the case of ontology or custom terms. CURIE syntax in the case of an ontology term.
+            example: NCIT:C28421 
+          type:
+            type: string
+            description: |
+              Either "custom", "alphanumeric" or ontology/terminology full name.
+            example: alphanumeric or ontology or custom
+          label:
+            type: string
+            description: |
+              This would be the "preferred Label" in the case of an ontology term.
+            example: Symptom Onset
+    FilterTermsResourceResponse:
+      type: array
+      description: |
+        Description of an ontology resource defined externally to this beacon implementation, such as MeSH or EFO, based on the phenopackets resource object (https://phenopacket-schema.readthedocs.io/en/latest/resource.html)
+      items:
+        type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            description: |
+              Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
+          name:
+            type: string
+            description: |
+              The name of the ontology referred to by the id element
+          url:
+            type: string
+            description: |
+              Uniform Resource Locator of the resource
+            example: 'http://example.com/ontology'
+          version:
+            type: string
+            description: |
+              The version of the resource or ontology used to make the annotation
+          nameSpacePrefix:
+            type: string
+            description: |
+              The prefix used in the CURIE of an OntologyClass
+          iriPrefix:
+            type: string
+            description: |
+              The full Internationalized Resource Identifier (IRI) prefix
+    Service:
+      description: 'GA4GH service'
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - organization
+        - version
+      properties:
+        id:
+          type: string
+          description: 'Unique ID of this service. Reverse domain name notation is recommended, though not required. The identifier should attempt to be globally unique so it can be used in downstream aggregator services e.g. Service Registry.'
+          example: 'org.ga4gh.myservice'
+        name:
+          type: string
+          description: 'Name of this service. Should be human readable.'
+          example: 'My project'
+        type:
+          $ref: '#/components/schemas/ServiceType'
+        description:
+          type: string
+          description: 'Description of the service. Should be human readable and provide information about the service.'
+          example: 'This service provides...'
+        organization:
+          type: object
+          description: 'Organization providing the service'
+          required:
+            - name
+            - url
+          properties:
+            name:
+              type: string
+              description: 'Name of the organization responsible for the service'
+              example: 'My organization'
+            url:
+              type: string
+              format: uri
+              description: 'URL of the website of the organization (RFC 3986 format)'
+              example: 'https://example.com'
+        contactUrl:
+          type: string
+          format: uri
+          description: 'URL of the contact for the provider of this service, e.g. a link to a contact form (RFC 3986 format), or an email (RFC 2368 format).'
+          example: 'mailto:support@example.com'
+        documentationUrl:
+          type: string
+          format: uri
+          description: 'URL of the documentation of this service (RFC 3986 format). This should help someone learn how to use your service, including any specifics required to access data, e.g. authentication.'
+          example: 'https://docs.myservice.example.com'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Timestamp describing when the service was first deployed and available (RFC 3339 format)'
+          example: '2019-06-04T12:58:19Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'Timestamp describing when the service was last updated (RFC 3339 format)'
+          example: '2019-06-04T12:58:19Z'
+        environment:
+          type: string
+          description: 'Environment the service is running in. Use this to distinguish between production, development and testing/staging deployments. Suggested values are prod, test, dev, staging. However this is advised and not enforced.'
+          example: 'test'
+        version:
+          type: string
+          description: 'Version of the service being described. Semantic versioning is recommended, but other identifiers, such as dates or commit hashes, are also allowed. The version should be changed whenever the service is updated.'
+          example: '1.0.0'
+    ServiceType:
+      description: 'Type of a GA4GH service'
+      type: object
+      required:
+        - group
+        - artifact
+        - version
+      properties:
+        group:
+          type: string
+          description: 'Namespace in reverse domain name format. Use `org.ga4gh` for implementations compliant with official GA4GH specifications. For services with custom APIs not standardized by GA4GH, or implementations diverging from official GA4GH specifications, use a different namespace (e.g. your organization''s reverse domain name).'
+          example: 'org.ga4gh'
+        artifact:
+          type: string
+          description: 'Name of the API or GA4GH specification implemented. Official GA4GH types should be assigned as part of standards approval process. Custom artifacts are supported.'
+          example: 'beacon'
+        version:
+          type: string
+          description: 'Version of the API or specification. GA4GH specifications use semantic versioning.'
+          example: '1.0.0'
+    MapResponse:
+      required:
+        - meta
+        - response
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/MapResponseContent"
+    MapResponseContent:
+      description: |
+        Returning the Beacon Map.
+      required:
+        - $schema
+        - endpointSets
+      properties:
+        $schema:
+          type : string
+        endpointSets:
+           $ref: "#/components/schemas/MapEndpointsSetsResponse"
+    MapEndpointsSetsResponse:
+      type: object
+      description: |
+        List of filtering terms for querying this Beacon.
+      required:
+        - entryType
+        - rootUrl
+      properties:
+        entryType:
+          type: string
+          description: "Specifies the type of entries this Beacon handles."
+        openAPIEndpointsDefinition:
+          type: string
+          description: |
+            Reference to the file that includes the OpenAPI definition of the endpoints implemented in this Beacon instance. The referenced file MUST BE a valid OpenAPI definition file, as it is expected that the Beacon clients (e.g. a Beacon Network) should be able to parse it to discover additional details on the supported verbs, parameters, etc.
+        rootUrl:
+          type: string
+          description: "The base URL for the Beacon endpoints."
+        singleEntryUrl:
+          type: string
+          description: "URL to access a single entry in this Beacon."
+        filteringTermsUrl:
+          type: string
+          description: "URL to access filtering terms supported by this Beacon."
+        endpoints:
+          type: object
+          additionalProperties: 
+            type: object
+            required:
+              - url
+              - returnedEntryType
+            properties:
+              url:
+                type: string
+                description: "The URL of a specific endpoint."
+              returnedEntryType:
+                type: string
+                description: "The type of entry returned by the endpoint."
+    MaturityAttributesResponse:
+      type: object
+      description: |
+       Declares the level of maturity of the Beacon instance.
+      properties:
+        productionStatus:
+          type: string
+    SecurityAttributesResponse:
+      type: object
+      properties:
+        defaultGranularity:
+          type: string
+        securityLevels:
+          type: array
+          items:
+            type: string
+    ConfigurationEntryTypesResponse:
+      type: object
+      description: Returning the Beacon Entry Types.
+      required:
+        - id
+        - name
+        - ontologyTermForThisType
+        - partOfSpecification
+        - defaultSchema
+      properties:
+        $schema:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        ontologyTermForThisType:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: "Unique identifier for the ontology term, preferably an OBO Foundry compliant ID."
+            label:
+              type: string
+              description: "Human-readable label for the ontology term."
+        partOfSpecification:
+          type: string
+        defaultSchema:
+          type: object
+          required:
+              - referenceToSchemaDefinition
+              - id
+              - name
+          properties:
+              referenceToSchemaDefinition:
+                type: string
+              schemaVersion:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string  
+        additionallySupportedSchemas:
+          type: array
+          items:
+            type: object
+            required:
+              - referenceToSchemaDefinition
+              - id
+              - name
+            properties:
+              referenceToSchemaDefinition:
+                type: string
+              schemaVersion:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+        aCollectionOf:
+          type: string
+        filteringTerms:
+          type: string
+        nonFilteredQueriesAllowed:
+          type: boolean
+    DefaultSchema:
+      type : object
+      required:
+        - referenceToSchemaDefinition
+        - id 
+        - name
+      items:
+        type : object
+        properties:
+          referenceToSchemaDefinition:
+            type: string
+          schemaVersion:
+            type: string
+          id:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+    AdditionallySupportedSchemas:
+      type : array
+      required:
+        - referenceToSchemaDefinition
+        - id 
+        - name
+      items:
+        type : object
+        properties:
+          referenceToSchemaDefinition:
+            type: string
+          schemaVersion:
+            type: string
+          id:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+    ConfigurationResponseContent:
+      description: |
+        Returning the Beacon Map.
+      required:
+        - $schema
+        - maturityAttributes
+        - entryTypes
+      properties:
+        $schema:
+          type : string
+        maturityAttributes:
+           $ref: "#/components/schemas/MaturityAttributesResponse"
+        securityAttributes:
+           $ref: "#/components/schemas/SecurityAttributesResponse"
+        entryTypes:
+           $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
+    ConfigurationResponse:
+      required:
+        - meta
+        - response
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/ConfigurationResponseContent"
+      description: |
+        Information about the Beacon. Aimed to Beacon clients like web pages or Beacon networks.
+    MetaContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - beaconId
+        - returnedSchemas
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0
+        beaconId:
+          type: string
+          description: |
+            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
+          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
+        returnedSchemas:
+          type: array
+          description: |
+            Set of schemas used in the response to a request.
+          items:
+            type: object
+            properties:
+              entityType:
+                type: string
+              schema:
+                type: string
+    InfoResponseContent:
+      description: |
+        Metadata describing a Beacon instance.
+      required:
+        - apiVersion
+        - environment
+        - id
+        - name
+        - organisation
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API provided by the Beacon.
+          example: v2.0
+        environment:
+          type: string
+          description: |
+            Environment the service is running in. Use this to distinguish between production, development and testing/staging deployments. Allowed: prod, test, dev, staging
+          example: dev
+        id:
+          type: string
+          description: |
+            Unique identifier of the Beacon. Use reverse domain name notation.
+        name:
+          type: string
+          description: |
+            Name of the Beacon.
+        organisation:
+          type: object
+          description: |
+            Organization owning the Beacon.
+          required:
+            - id
+            - name
+          properties:
+            id:
+              type: string
+              description: |
+                Unique identifier of the organization.
+            name:
+              type: string
+              description: |
+                Name of the organization.
+        description:
+          type: string
+          description: |
+            Description of the Beacon.
+        version:
+          type: string
+          description: |
+            TODO: This is a legacy use / duplication?
+          example: v2.01
+        welcomeUrl:
+          type: string
+          description: |
+            URL to the welcome page for this Beacon (RFC 3986 format).
+        alternativeUrl:
+          type: string
+          description: |
+            Alternative URL to the API, e.g. a restricted version of this Beacon (RFC 3986 format).
+        createDateTime:
+          type: string
+          description: |
+            The date/time the Beacon was created (ISO 8601 format).
+        updateDateTime:
+          type: string
+          description: |
+           The time the Beacon was updated in (ISO 8601 format).
+        info:
+          type: object
+          description: |
+            Additional unspecified metadata about the Beacon service.
+    DatasetsMetaResponseContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - beaconId
+        - returnedGranularity
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0
+        beaconId:
+          type: string
+          description: |
+            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
+          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
+        receivedRequestSummary:
+          required:
+            - apiVersion
+            - requestedGranularity
+            - requestedSchemas
+          type: object
+          description: |
+            Section of the response that summarize the request with the following fields received as its been interpreted by the Beacon server. This could also just return the complete Beacon request made by the user.
+          properties:
+            apiVersion:
+              type: string
+            filters:
+              type: object
+              description: |
+                Filters as submitted in the request.
+              $ref: "#/components/schemas/DatasetsRequestFilter"
+            requestedGranularity:
+              type: string
+              example: boolean, count, aggregated, record
+              default: record
+            requestedSchemas:
+              type: object
+              description: |
+                Set of schemas to be used in the response to a request.
+              properties:
+                entityType:
+                  type: string
+                schema:
+                  type: string
+        returnedGranularity:
+          type: string
+          example: boolean, count, aggregated, record
+          default: record
+        returnedSchemas:
+          type: object
+          description: |
+            Set of schemas to be used in the response to a request.
+          properties:
+            entityType:
+              type: string
+            schema:
+              type: string
+    DatasetsResponse:
+      required:
+        - meta
+        - response
+        - responseSummary
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/DatasetsMetaResponseContent"
+        response:
+          required:
+            - resultSets
+          properties:
+            resultSets:
+              $ref: "#/components/schemas/DatasetsResults"
+        responseSummary:
+          $ref: "#/components/schemas/DatasetsResponseContent"
+        info:
+          description: |
+            Beacon only responds with this info object if there are any unsupported filters in the query.
+          $ref: "#/components/schemas/WarningResponse"
+    WarningResponse:
+      description: |
+        When an implementation is responding with a partial query match, this section lets the requestor know if any filter(s)/value(s) are not applied to the query.
+      required:
+        - warnings
+      type: object
+      properties:
+        warnings:
+          required:
+            - unsupportedFilters
+          type: object
+          properties:
+            unsupportedFilters:
+              type: array
+              items:
+                type: string
+                description: |
+                  In an array of strings, any filter(s) that are unsupported by an implementation go here.
+                example: '"data_2295"'
+            unsupportedFilterValues:
+              type: array
+              items:
+                type: string
+                description: |
+                  If an implementation does not support a filter value, let's say, for example, 'NCIT_C124294'(Undetermined) Sex, this unsupported value goes here as a string, and will be ignored while a partial query is performed with other supported filter(s) from the request body (if any).
+                example: '"NCIT_C124294","NCIT_C179980"'
+          description: |
+            Respond with a list of (comma-separated) unsupported filter(s).
+          example: |
+            {
+            unsupportedFilters: ["NCIT_C156420"], 
+
+            unsupportedFilterValues:["NCIT_C124294"]
+            }
+    DatasetsResponseContent:
+      required:
+        - exists
+        - numTotalResults
+      type: object
+      properties:
+        exists:
+          type: boolean
+          description: |
+            Indicator of whether any individual was observed in the
+            data source for the given query with CDEs parameter. This should be non-null, unless there was an error, in which case `error` has to be non-null.
+        numTotalResults:
+          type: integer
+          description: |
+            Response of the query indicating if the query yield any results. If the query is successful then the list records will be returned as a response.
+    DatasetsResults:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - type
+          - exists
+          - resultCount
+          - results
+        properties:
+          id:
+            type: string
+            description: |
+              id of the result
+            example: "result0123"
+          type:
+            type: string
+            description: |
+              Type of result
+            example: "Dataset"
+          exists:
+            type: boolean
+            description: |
+              Whether the results exists or not.
+          resultCount:
+            type: integer
+            description: |
+              Number of results in this Resultset.
+          results:
+            description: |
+              Array set of the records matching with the query.
+            type: array
+            items:
+              $ref: "#/components/schemas/DatasetsResultSetsResult"
+          resultsHandover:
+            description: |
+              Handover to the resultant record page, if any.
+    DatasetsResultSetsResult:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: |
+            id of the result
+        
+        name:
+          type: string
+          description: |
+            Name
