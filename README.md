@@ -132,7 +132,7 @@ This specification defines POST endpoints to request information about resources
 
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
-**Dataset Types**: A single value or an array of datsets types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369]
+**Dataset Types**: A single value of dataset types , eg :NCIT:C19591.
 
 
 
@@ -446,9 +446,9 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "NCIT:C164234",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "MRI"
+               "value": "NCIT:C19591"
              }, 
              {
                "id": "NCIT:C28421",
@@ -460,7 +460,7 @@ As shown above, different types of filters can be sent in a single query. These 
 }
 ```
 
-This filter is asking for cohorts that have Imaging as MRI  **and** cognitive_data as Cross-sectional .
+This filter is asking for datsets that have datatset types  as MDiagnostic marker **AND** sex  as Female .
 
 
 [ ^ Back to the top](#top)
@@ -479,20 +479,20 @@ To query for records with more than one instance of any of the filters you can s
     {
       "filters": [
         {
-               "id": "NCIT:C28421",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "Female"
+               "value": "NCIT:C19591"
              }, 
              {
-               "id": "NCIT:C28421",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "Male"
+               "value": "NCIT:C17369"
              },
       ]
    }
 }
 ```
-This query is looking for cohorts with biosample Serum AND Saliva biosample.
+This query is looking for datsets with dataset types  Diagnostic marker AND Imaging.
 
 
 [ ^ Back to the top](#top)
@@ -509,15 +509,15 @@ This query is looking for cohorts with biosample Serum AND Saliva biosample.
     {
       "filters": [
          {
-               "id": "NCIT:C2991",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": ["CG","AD"]
+               "value": ["Male","Female"]
              },
       ]
    }
 }
 ```
-This query is looking for cohorts either with Cognitively normal disease OR Alzheimer's disease.
+This query is looking for datasets either with Male OR Female.
 
 > **Note**: There are no OR operators available **between** filters with beacon queries.
 
