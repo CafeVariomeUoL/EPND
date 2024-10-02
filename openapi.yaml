@@ -139,9 +139,10 @@ components:
       type: array
       items:
         anyOf:
-          - $ref: "#/components/schemas/DatasetsAlphanumericRequestFilter"
+         - $ref: "#/components/schemas/DatasetsSexFilter"
+          - $ref: "#/components/schemas/DatasetsDatasetTypesFilter"
           - $ref: "#/components/schemas/DatasetsCustomRequestFilter"
-    DatasetsAlphanumericRequestFilter:
+    DatasetsSexFilter:
       required:
         - id
         - operator
@@ -151,10 +152,9 @@ components:
         id:
           type: string
           description: >
-            Concept ID of CDEs. 
+            Concept ID of CDEs for Sex.
               Allowed terms:
                * `NCIT:C28421` - Sex
-               * `NCIT:C47824` - Dataset Types
           example: "NCIT:C28421"
         operator:
           type: string
@@ -164,44 +164,56 @@ components:
               * For `numeric filter`, `'=,>,>=,<,<='` are allowed.
           example: "="
         value:
-          anyOf:
-            - $ref: "#/components/schemas/DatasetsStringValue"
-            - $ref: "#/components/schemas/DatasetsArrayValues"
-      description: "Query parameters to filter individuals based on CDEs."
-    DatasetsStringValue:
-      type: string
-      example: " Female "
-      description: |
-        The actual value of the CDE in string format. Allowed values:
-          * For `NCIT_C2991`(Available Diseases): 
-            * `Unknown`
-            * `Female`
-            * `Male`
-            * `Other`
-              * Ex: \"Female\"
-          * For `NCIT:C47824`(Dataset Types): 
-            * `NCIT:C142447`
-            * `NCIT:C19591`
-            * `NCIT:C17369`
-            * `NCIT:C16540`
-            * `NCIT:C16495`
-            * `NCIT:C20641`
-            * `NCIT:C28367`
-            * `NCIT:C100772`
-            * `NCIT:C165543`
-            * `NCIT:C17047`
-            * `NCIT:C121705`
-            * `NCIT:C28220`
-            * `NCIT:C18479`
-            * `NCIT:C16564`
-              * Ex: \"NCIT:C16564\"
-    DatasetsArrayValues:
-      type: array
-      items:
-        type: string
-      example: '["NCIT:C16564","PlNCIT:C18479asma"]'
-      description: |
-        An array of allowed value(s) in string format.
+          type: array
+          items:
+            type: string
+          description: |
+            An array of allowed value(s) in string format. Examples include:
+              * `Unknown`
+              * `Female`
+              * `Male`
+              * `Other`
+          example: ["Female", "Male"]
+
+    DatasetsDatasetTypesFilter:
+      required:
+        - id
+        - operator
+        - value
+      type: object
+      properties:
+        id:
+          type: string
+          description: >
+            Concept ID of CDEs for Dataset Types.
+              Allowed terms:
+               * `NCIT:C47824` - Dataset Types
+          example: "NCIT:C47824"
+        operator:
+          type: string
+          description: |
+            This is an advance filter option to include comparison operators in the query. 
+              * For `alphanumeric filter`, only `'='` is allowed. 
+          example: "="
+        value:
+          type: string
+          description: |
+            The actual value of the CDE in string format. Allowed values include:
+              * `NCIT:C142447`
+              * `NCIT:C19591`
+              * `NCIT:C17369`
+              * `NCIT:C16540`
+              * `NCIT:C16495`
+              * `NCIT:C20641`
+              * `NCIT:C28367`
+              * `NCIT:C100772`
+              * `NCIT:C165543`
+              * `NCIT:C17047`
+              * `NCIT:C121705`
+              * `NCIT:C28220`
+              * `NCIT:C18479`
+              * `NCIT:C16564`
+          example: "NCIT:C16564"
     DatasetsCustomRequestFilter:
       required:
         - id
