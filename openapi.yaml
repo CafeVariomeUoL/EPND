@@ -641,7 +641,7 @@ components:
           type: string
           description: |
             Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
+          example: BeaconAPI.cv3.epndd.org
         returnedSchemas:
           type: array
           description: |
@@ -744,7 +744,7 @@ components:
           type: string
           description: |
             Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
+          example: BeaconAPI.cv3.epnd.org
         receivedRequestSummary:
           required:
             - apiVersion
