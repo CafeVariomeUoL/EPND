@@ -132,7 +132,7 @@ This specification defines POST endpoints to request information about resources
 
 **Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
 
-**Dataset Types**: A single value of dataset types , eg :NCIT:C19591.
+**Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
 
 
 
@@ -321,12 +321,15 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
         "numTotalResults": 1
     },
     "info": {
-        "warnings": {
-            "unsupportedFilters": [
-                
-            ]
-        }
-    },
+    "warnings": {
+      "unsupportedFilters": [
+        "NCIT:C47824"
+      ],
+      "unsupportedFilterValues": [
+        "NCIT:C19591"
+      ]
+    }
+  },
       "response": {
         "resultSets": [
         {
