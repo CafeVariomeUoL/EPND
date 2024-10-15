@@ -109,7 +109,7 @@ This specification defines POST endpoints to request information about resources
     <tr>
         <td rowspan="4"><b>Available Imaging</b></td>
         <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT:C164232</td>
+        <td rowspan="4">NCIT:C17369</td>
         <td rowspan="4">=</td>
         <td>MRI</td>
     </tr>
