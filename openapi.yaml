@@ -857,6 +857,7 @@ components:
           type: integer
           description: |
             Response of the query indicating if the query yield any results. If the query is successful then the list records will be returned as a response.
+          example: 1
     DatasetsResults:
       type: array
       items:
@@ -874,7 +875,7 @@ components:
             type: integer
             description: |
               Number of results in this Resultset.
-            example: "1"
+            example: 1
           results:
             description: |
               Array set of the records matching with the query.
