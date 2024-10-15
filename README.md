@@ -112,7 +112,7 @@ This specification defines POST endpoints to request information about resources
     <tr><td>NCIT:C165543(Neuropsychological Assessment)</td></tr>
     <tr><td>NCIT:C17047(Quality of Life)</td></tr>
     <tr><td>NCIT:C121705(Sleepscales)</td></tr>
-    <tr><td>NCIT:C28220(Sensor)</td></tr>
+    <tr><td>NCIT:C114457(Digital Data)</td></tr>
     <tr><td>NCIT:C18479(Neuropathology)</td></tr>
     <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
   
@@ -238,7 +238,7 @@ The following is an example response
                     "name": "Basic Element example three",
                     "info":{
                     "type": "dataset",
-                    "url": "string",
+                    "resourceURLs": ["https://www.example.com"],
                     "description": "string",
                     "releaseLicense": "license URL",
                     "language": "language code",
@@ -249,7 +249,12 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        }
+                        },
+                      "datasetVersions": [
+                          {
+                            "versionName": "v1.0.0",
+                            "numberOfSubjects": 100
+                          }]
                     }
                 },
                 {
@@ -257,7 +262,7 @@ The following is an example response
                     "name": "Basic Element example four",
                     "info":{
                     "type": "dataset",
-                    "url": "string",
+                    "resourceURLs": ["https://www.example.com"],
                     "description": "string",
                     "releaseLicense": "license URL",
                     "language": "language code",
@@ -268,7 +273,12 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        }
+                        },
+                      "datasetVersions": [
+                          {
+                            "versionName": "v1.0.0",
+                            "numberOfSubjects": 100
+                          }]
                     }
                 }
             ],
@@ -340,19 +350,24 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                     "id": "BEex3",
                     "name": "Basic Element example three",
                     "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        }
+                      "type": "dataset",
+                      "resourceURLs": ["https://www.example.com"],
+                      "description": "string",
+                      "releaseLicense": "license URL",
+                      "language": "language code",
+                      "publisher": {
+                        "publisherType": "",
+                        "name": "epnd.org",
+                        "contactEmail": "epnd@gmail.com",
+                        "contactName": "epnd",
+                        "url": "string",
+                        "location": "Italy"
+                          },
+                        "datasetVersions": [
+                          {
+                            "versionName": "v1.0.0",
+                            "numberOfSubjects": 100
+                          }]
                     }
                 }
             ],

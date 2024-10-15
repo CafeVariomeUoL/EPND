@@ -862,22 +862,10 @@ components:
       items:
         type: object
         required:
-          - id
-          - type
           - exists
           - resultCount
           - results
         properties:
-          id:
-            type: string
-            description: |
-              id of the result
-            example: "result0123"
-          type:
-            type: string
-            description: |
-              Type of result
-            example: "Dataset"
           exists:
             type: boolean
             description: |
@@ -886,6 +874,7 @@ components:
             type: integer
             description: |
               Number of results in this Resultset.
+            example: "1"
           results:
             description: |
               Array set of the records matching with the query.
@@ -905,8 +894,82 @@ components:
           type: string
           description: |
             id of the result
-        
+          example: "BEex3"
         name:
           type: string
           description: |
             Name
+          example: "Basic Element example three"
+        info:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfo"
+    DatasetsResultSetsResultInfo:
+      type: object
+      required:
+        - type
+        - resourceURLs
+        - publisher
+        - datasetVersions
+      properties:
+        type:
+          type: string
+          example: "dataset"
+        resourceURLs:
+          type: array
+          items:
+            type: string
+            example: "www.example.com"
+        description:
+          type: string
+          example: "string"
+        releaseLicense:
+          type: string
+          example: "license URL"
+        language:
+          type: string
+          example: "language code"
+        publisher:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
+        datasetVersions:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
+    DatasetsResultSetsResultInfoPublisher:
+      type: object
+      required:
+        - publisherType
+        - name
+        - contactEmail
+      properties:
+        publisherType:
+          type: string
+          example: ""
+        name:
+          type: string
+          example: "epnd.org"
+        contactEmail:
+          type: string
+          example: "epnd@gmail.com"
+        contactName:
+          type: string
+          example: "epnd"
+        url:
+          type: string
+          example: "string"
+        location:
+          type: string
+          example: "Italy"
+    DatasetsResultSetsResultInfoDatasetVersions:
+      type: array
+      items:
+        type : object
+        required:
+          - versionName
+          - numberOfSubjects
+        properties:
+          versionName:
+            type: string
+            example: "v1.0.0"
+          numberOfSubjects:
+            type: integer
+            example: 100
+
+    
+      
