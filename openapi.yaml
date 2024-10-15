@@ -194,6 +194,7 @@ components:
             * `NCIT:C28220`
             * `NCIT:C18479`
             * `NCIT:C16564`
+            * `Other`
               * Ex: \"NCIT:C16564\"
     DatasetsArrayValues:
       type: array
