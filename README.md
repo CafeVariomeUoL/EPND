@@ -93,11 +93,11 @@ This specification defines POST endpoints to request information about resources
         <td>any integer</td>
     </tr>
     <tr>
-        <td rowspan="14"><b>Dataset Types</b>
+        <td rowspan="15"><b>Dataset Types</b>
         </td>
-        <td rowspan="14">Alphanumerical</td>
-        <td rowspan="14">NCIT:C47824</td>
-        <td rowspan="14">=</td>
+        <td rowspan="15">Alphanumerical</td>
+        <td rowspan="15">NCIT:C47824</td>
+        <td rowspan="15">=</td>
         <td>
         NCIT:C142447(Clinical Information)
         </td>
@@ -115,6 +115,7 @@ This specification defines POST endpoints to request information about resources
     <tr><td>NCIT:C114457(Digital Data)</td></tr>
     <tr><td>NCIT:C18479(Neuropathology)</td></tr>
     <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
+    <tr><td>Other</td></tr>
   
 
 </tbody>
