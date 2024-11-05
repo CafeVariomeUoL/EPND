@@ -283,12 +283,17 @@ components:
             type: string
             description: |
               Either "custom", "alphanumeric" or ontology/terminology full name.
-            example: alphanumeric or ontology or custom
+            example: alphanumeric
           label:
             type: string
             description: |
               This would be the "preferred Label" in the case of an ontology term.
-            example: Symptom Onset
+            example : sex
+          scopes:
+           type: array
+           items:
+              type: string
+              example: '["datasets","study"]'
     FilterTermsResourceResponse:
       type: array
       description: |
