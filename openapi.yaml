@@ -111,8 +111,164 @@ paths:
         "403":
           description: "The data source does not allow this API call"
           content: {}
+  /datasets/{id}:
+    get:
+      summary: "Get details about one dataset, identified by its (unique) 'id'."
+      tags:
+        -  GET Endpoints
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+           type: string
+      description: "The unique identifier of the dataset."
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOneDataset"   
+  /datasets/filtering_terms:
+    get:
+      summary: "Get the list of filtering terms that could be used with datasets."
+      tags:
+        - GET Endpoints
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DatasetsFilteringTerms"
+
 components:
   schemas:
+    DatasetsFilteringTerms:
+      required:
+        - meta
+        - response
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/DatasetsFilteringTermsResponse"
+      description: |
+        Get details about one dataset, identified by its (unique) 'id'.
+
+    DatasetsFilteringTermsResponse:
+      required:
+        - meta
+        - response
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/DatasetsFilterTermsResponseContent"
+    DatasetsFilterTermsResponseContent:
+      required:
+        - filteringTerms
+      properties:
+        filteringTerms:
+          $ref: "#/components/schemas/DatasetsFilterTermsResponse"
+        resources:
+           $ref: "#/components/schemas/DatsetsFilterTermsResourceResponse"
+    DatasetsFilterTermsResponse:
+      type : array
+      description: |
+        List of filtering terms for querying this Beacon.
+      required:
+        - id
+        - type
+      items:
+        type : object
+        properties:
+          id:
+            type: string
+            description: |
+              The field id in the case of numeric or alphanumeric fields, or the term id in the case of ontology or custom terms. CURIE syntax in the case of an ontology term.
+            example: NCIT:C28421 
+          type:
+            type: string
+            description: |
+              Either "custom", "alphanumeric" or ontology/terminology full name.
+            example: alphanumeric
+          label:
+            type: string
+            description: |
+              This would be the "preferred Label" in the case of an ontology term.
+            example : sex
+          scopes:
+           type: array
+           items:
+              type: string
+              example: '["datasets","study"]'
+    DatsetsFilterTermsResourceResponse:
+      type: array
+      description: |
+        Description of an ontology resource defined externally to this beacon implementation, such as MeSH or EFO, based on the phenopackets resource object (https://phenopacket-schema.readthedocs.io/en/latest/resource.html)
+      items:
+        type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            description: |
+              Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
+          name:
+            type: string
+            description: |
+              The name of the ontology referred to by the id element
+          url:
+            type: string
+            description: |
+              Uniform Resource Locator of the resource
+            example: 'http://example.com/ontology'
+          version:
+            type: string
+            description: |
+              The version of the resource or ontology used to make the annotation
+          nameSpacePrefix:
+            type: string
+            description: |
+              The prefix used in the CURIE of an OntologyClass
+          iriPrefix:
+            type: string
+            description: |
+              The full Internationalized Resource Identifier (IRI) prefix
+        
+    GetOneDataset:
+      required:
+        - meta
+        - response
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/GetOneDatasetRespose"
+      description: |
+        The filtering terms response provides information about available individual filters for a beacon's entry types as well as optional information about the ontologies the filters belong to.
+    GetOneDatasetRespose:
+      description: |
+       Get details about one dataset, identified by its (unique) 'id'
+      required:
+        - responseSummary
+      properties:
+        responseSummary:
+          type: object
+          description: |
+           Boolean (true/false) response section.
+          required:
+            - exists
+          properties:
+            exists :
+              type: boolean
+              example: true
+    
     DatasetsRequest:
       required:
         - meta
