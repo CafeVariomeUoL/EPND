@@ -10,7 +10,7 @@
 * [Try out this API in Swagger](#-try-out-the-api-)
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
-    * [Datasets endpoint](#-s-endpoint-)
+    * [Study endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
       * [Filters description](#-study-filters-description-)
       * [Example request & response](#-example-request-and-response-for-study-)
@@ -28,7 +28,7 @@
  
 <h2 id="#-try-out-the-api-"> Try out the API </h2>
 
-Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis-docs/deepthivs/EPND/datasetsv1.0
+Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v1.0
 
 <hr>
 
@@ -36,7 +36,7 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/datasets](#-study-endpoint-).
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/study](#-study-endpoint-).
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
@@ -49,13 +49,13 @@ This specification defines POST endpoints to request information about resources
 
 
 <hr>
-<h3 id="-study-endpoint-"> Datasets endpoint </h3>
+<h3 id="-study-endpoint-"> Study endpoint </h3>
 
 > Method: POST
 
-[/datasets](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
+[/study](#-study-endpoint-) endpoint returns the **cohorts of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
 
-<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the datasets endpoint </h4>
+<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
 
 > **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
 
@@ -71,51 +71,87 @@ This specification defines POST endpoints to request information about resources
         </tr>
     </thead>
     <tbody>
-        <td rowspan="4"><b>Sex</b>
+        <tr>
+            <td rowspan="13"><b>Available Diseases</b></td>
+            <td rowspan="13">Alphanumerical</td>
+            <td rowspan="13">NCIT:C2991</td>
+            <td rowspan="13">=</td>
+            <td>CG</td>    
+        </tr>
+        <tr><td>AD</td></tr>
+        <tr><td>PD</td></tr>
+        <tr><td>DLB</td></tr>
+        <tr><td>iRBD</td></tr>
+        <tr><td>CAA</td></tr>
+        <tr><td>FTD</td></tr>
+        <tr><td>ALS</td></tr>
+        <tr><td>PSP</td></tr>
+        <tr><td>CBD</td></tr>
+        <tr><td>MSA</td></tr>
+        <tr><td>HD</td></tr>
+        <tr><td>AT</td></tr>
+    <tr>
+        <td rowspan="7"><b>Available Samples</b>
         </td>
-        <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT:C28421 </td>
-        <td rowspan="4">=</td>
+        <td rowspan="7">Alphanumerical</td>
+        <td rowspan="7">NCIT:C43412</td>
+        <td rowspan="7">=</td>
         <td>
-        Unknown
+        CSF
         </td>
     </tr>
-    <tr><td>Female</td></tr>
-    <tr><td>Male</td></tr>
-    <tr><td>Other</td></tr>
+    <tr><td>Serum</td></tr>
+    <tr><td>Plasma</td></tr>
+    <tr><td>DNA</td></tr>
+    <tr><td>Saliva</td></tr>
+    <tr><td>Faeces</td></tr>
+     <tr><td>Urine</td></tr>
     <tr>
+        <td rowspan="4"><b>Available Imaging</b></td>
+        <td rowspan="4">Alphanumerical</td>
+        <td rowspan="4">NCIT:C17369</td>
+        <td rowspan="4">=</td>
+        <td>MRI</td>
+    </tr>
+    <tr><td>PET-Amyloid</td></tr>
+    <tr><td>PET-Tau</td></tr>
+    <tr><td>DaT Scan</td></tr>
     <tr>
-     <tr>
-      <td><b>Number of Subjects</b></td>
+        <td rowspan="2">
+            <b>Cohort Design</b>
+        </td>
+        <td rowspan="2">
+            Custom
+        </td>
+        <td rowspan="2">
+            CD:cognitive_data
+        </td>
+        <td rowspan="2">
+            =
+        </td>
+        <td>
+            Cross-sectional
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Logitudinal
+        </td>
+    </tr>
+    <tr>
+      <td><b>Number of participants</b></td>
         <td>Custom</td>
         <td>nos:number_of_subjects</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
     <tr>
-        <td rowspan="15"><b>Dataset Types</b>
-        </td>
-        <td rowspan="15">Alphanumerical</td>
-        <td rowspan="15">NCIT:C47824</td>
-        <td rowspan="15">=</td>
-        <td>
-        NCIT:C142447(Clinical Information)
-        </td>
+      <td><b>Country</b></td>
+        <td>Alphanumerical</td>
+        <td>ISO:3166-1</td>
+        <td>=</td>
+        <td>https://www.iso.org/obp/ui/#search</td>
     </tr>
-    <tr><td>NCIT:C19591(Diagnostic marker)</td></tr>
-    <tr><td>NCIT:C17369(Imaging)</td></tr>
-    <tr><td>NCIT:C16540(Electrophysiology)</td></tr>
-    <tr><td>NCIT:C16495(Demographics)</td></tr>
-    <tr><td>NCIT:C20641(Functional Ratings)</td></tr>
-    <tr><td>NCIT:C28367(Motor)</td></tr>
-    <tr><td>NCIT:C100772(Neuropsychiatric)</td></tr>
-    <tr><td>NCIT:C165543(Neuropsychological Assessment)</td></tr>
-    <tr><td>NCIT:C17047(Quality of Life)</td></tr>
-    <tr><td>NCIT:C121705(Sleepscales)</td></tr>
-    <tr><td>NCIT:C114457(Digital Data)</td></tr>
-    <tr><td>NCIT:C18479(Neuropathology)</td></tr>
-    <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
-    <tr><td>Other</td></tr>
   
 
 </tbody>
@@ -127,23 +163,58 @@ This specification defines POST endpoints to request information about resources
 
 
 
-<h3 id="-study-filters-description-"> Dataset endpoint Filters Description </h3>
+<h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
 
-**Sex**: A single value or an array of biological sex of an individual, eg : Male or [Male,Female]
+**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD]
 
-**Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
+**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
 
-**Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
+**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid]
 
+**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal]
 
+**Number of Subjects**: The number of subjects in the cohort . eg : >10 ,<20 or =100
+
+**Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
 
 [ ^ Back to the top](#top)
 
 <hr>
 
-<h3 id="-example-request-and-response-for-study-"> Example request and response for datasets </h3>
 
-**EXAMPLE /datasets REQUEST**
+<table>
+    <thead>
+        <tr>
+            <th>Abbreviation</th>
+            <th>Definiton</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CG</td>
+            <td>Cognitively normal</td>
+        </tr>
+        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
+        <tr><td>PD</td><td>Parkinson's disease</td></tr>
+        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
+        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
+        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
+        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
+        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
+        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
+        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
+        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
+        <tr><td>HD</td><td>Huntington's disease</td></tr>
+        <tr><td>AT</td><td>Ataxia</td></tr>
+    
+</tbody>
+</table>
+
+<hr>
+
+<h3 id="-example-request-and-response-for-study-"> Example request and response for study </h3>
+
+**EXAMPLE /study REQUEST**
 
 ```JSON
 { 
@@ -154,9 +225,29 @@ This specification defines POST endpoints to request information about resources
       
 "filters": [
              {
-               "id": "NCIT:C28421",
+               "id": "NCIT:C2991",
                "operator": "=",
-               "value": ["Female","Male"]
+               "value": ["CG","AD"]
+             },
+             {
+               "id": "NCIT:C43412",
+               "operator": "=",
+               "value": ["Serum","Plasma"]
+             },
+             {
+               "id": "NCIT:C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
+             {
+               "id": "CD:cognitive_data",
+               "operator": "=",
+               "value": "Cross-sectional"
+             },
+             {
+               "id": "nos:number_of_subjects",
+               "operator": ">",
+               "value": 100
              },
              {
                "id": "nos:number_of_subjects",
@@ -164,9 +255,9 @@ This specification defines POST endpoints to request information about resources
                "value": 1000
              },
              {
-               "id": "NCIT:C47824",
+               "id": "ISO:3166-1",
                "operator": "=",
-               "value": "NCIT:C19591"
+               "value": ["AT","BH"]
              }
        ],
       "requestedGranularity": "record"
@@ -181,7 +272,7 @@ This specification defines POST endpoints to request information about resources
 
 The following is an example response 
 
-**EXAMPLE /datasets RESPONSE**
+**EXAMPLE /study RESPONSE**
 ```JSON
 {
     "meta": {
@@ -193,9 +284,29 @@ The following is an example response
             "requestedSchemas": [],
             "filters": [
              {
-               "id": "NCIT:C28421",
+               "id": "NCIT:C2991",
                "operator": "=",
-               "value": ["Female","Male"]
+               "value": ["CG","AD"]
+             },
+             {
+               "id": "NCIT:C43412",
+               "operator": "=",
+               "value": ["Serum","Plasma"]
+             },
+             {
+               "id": "NCIT:C164234",
+               "operator": "=",
+               "value": "MRI"
+             }, 
+             {
+               "id": "CD:cognitive_data",
+               "operator": "=",
+               "value": "Cross-sectional"
+             },
+             {
+               "id": "nos:number_of_subjects",
+               "operator": ">",
+               "value": 100
              },
              {
                "id": "nos:number_of_subjects",
@@ -203,9 +314,9 @@ The following is an example response
                "value": 1000
              },
              {
-               "id": "NCIT:C47824",
+               "id": "ISO:3166-1",
                "operator": "=",
-               "value": "NCIT:C19591"
+               "value": ["AT","BH"]
              }
        ],
             "requestParameters": {},
@@ -219,8 +330,8 @@ The following is an example response
         },
         "returnedSchemas": [
             {
-               "entityType": "datasets",
-               "schema": "ga4gh-beacon-dataset-v2.0.0",
+               "entityType": "study",
+               "schema": "beacon-cohort-v2.0.0",
             }
         ]
     },
@@ -228,7 +339,7 @@ The following is an example response
         "exists": true,
         "numTotalResults": 2
     },
-   "response": {
+    "response": {
         "resultSets": [
         {
             "exists": true,
@@ -239,7 +350,7 @@ The following is an example response
                     "name": "Basic Element example three",
                     "info":{
                     "type": "dataset",
-                    "resourceURLs": ["https://www.example.com"],
+                    "url": "string",
                     "description": "string",
                     "releaseLicense": "license URL",
                     "language": "language code",
@@ -250,12 +361,7 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        },
-                      "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
+                        }
                     }
                 },
                 {
@@ -263,7 +369,7 @@ The following is an example response
                     "name": "Basic Element example four",
                     "info":{
                     "type": "dataset",
-                    "resourceURLs": ["https://www.example.com"],
+                    "url": "string",
                     "description": "string",
                     "releaseLicense": "license URL",
                     "language": "language code",
@@ -274,12 +380,7 @@ The following is an example response
                       "contactName": "epnd",
                       "url": "string",
                       "location": "Italy"
-                        },
-                      "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
+                        }
                     }
                 }
             ],
@@ -332,16 +433,13 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
         "numTotalResults": 1
     },
     "info": {
-    "warnings": {
-      "unsupportedFilters": [
-        "NCIT:C47824"
-      ],
-      "unsupportedFilterValues": [
-        "NCIT:C19591"
-      ]
-    }
-  },
-      "response": {
+        "warnings": {
+            "unsupportedFilters": [
+                
+            ]
+        }
+    },
+    "response": {
         "resultSets": [
         {
             "exists": true,
@@ -351,24 +449,19 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
                     "id": "BEex3",
                     "name": "Basic Element example three",
                     "info":{
-                      "type": "dataset",
-                      "resourceURLs": ["https://www.example.com"],
-                      "description": "string",
-                      "releaseLicense": "license URL",
-                      "language": "language code",
-                      "publisher": {
-                        "publisherType": "",
-                        "name": "epnd.org",
-                        "contactEmail": "epnd@gmail.com",
-                        "contactName": "epnd",
-                        "url": "string",
-                        "location": "Italy"
-                          },
-                        "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
+                    "type": "dataset",
+                    "url": "string",
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        }
                     }
                 }
             ],
@@ -465,21 +558,21 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "NCIT:C47824",
+               "id": "NCIT:C164234",
                "operator": "=",
-               "value": "NCIT:C19591"
+               "value": "MRI"
              }, 
              {
-               "id": "NCIT:C28421",
+               "id": "cognitive_data",
                "operator": "=",
-               "value": "Female"
+               "value": "Cross-sectional"
              },
       ]
     }
 }
 ```
 
-This filter is asking for datsets that have datatset types  as MDiagnostic marker **AND** sex  as Female .
+This filter is asking for cohorts that have Imaging as MRI  **and** cognitive_data as Cross-sectional .
 
 
 [ ^ Back to the top](#top)
@@ -498,20 +591,20 @@ To query for records with more than one instance of any of the filters you can s
     {
       "filters": [
         {
-               "id": "NCIT:C47824",
+               "id": "NCIT:C43412",
                "operator": "=",
-               "value": "NCIT:C19591"
+               "value": "Serum"
              }, 
              {
-               "id": "NCIT:C47824",
+               "id": "NCIT:C43412",
                "operator": "=",
-               "value": "NCIT:C17369"
+               "value": "Saliva"
              },
       ]
    }
 }
 ```
-This query is looking for datsets with dataset types  Diagnostic marker AND Imaging.
+This query is looking for cohorts with biosample Serum AND Saliva biosample.
 
 
 [ ^ Back to the top](#top)
@@ -528,15 +621,15 @@ This query is looking for datsets with dataset types  Diagnostic marker AND Imag
     {
       "filters": [
          {
-               "id": "NCIT:C28421",
+               "id": "NCIT:C2991",
                "operator": "=",
-               "value": ["Male","Female"]
+               "value": ["CG","AD"]
              },
       ]
    }
 }
 ```
-This query is looking for datasets either with Male OR Female.
+This query is looking for cohorts either with Cognitively normal disease OR Alzheimer's disease.
 
 > **Note**: There are no OR operators available **between** filters with beacon queries.
 
@@ -804,7 +897,7 @@ This specification defines GET endpoints to request information about resources.
 
 <h2 id="swagger-auth"> Authentication using Header for Swagger </h2>
 
-In Swagger, to query using both the /individuals endpoint & /datasets endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
+In Swagger, to query using both the /individuals endpoint & /study endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
 
 ![image](https://user-images.githubusercontent.com/24955128/203320000-a9cbc5a5-4c49-4a2b-8666-4e0cb17a5a62.png)
 
