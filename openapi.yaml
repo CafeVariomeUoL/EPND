@@ -8,11 +8,11 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: datasetsv1.0
+  version: v1.0
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/deepthivs/EPND/datasetsv1.0
+    url: https://virtserver.swaggerhub.com/deepthivs/EPND/v1.0
 paths:
   /info:
     get:
@@ -85,18 +85,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EntryTypesResponse"
-  /datasets:
+                $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
+  /study:
     post:
-      summary: "Request to get datasets."
+      summary: "Request to get cohorts."
       tags:
         - Query Endpoints
-      operationId: datasets_request
+      operationId: study_request
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DatasetsRequest"
+              $ref: "#/components/schemas/StudyRequest"
         required: true
       responses:
         "200":
@@ -104,170 +104,16 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: "#/components/schemas/DatasetsResponse"
+                  $ref: "#/components/schemas/StudyResponse"
         "400":
           description: "Input data malformed"
           content: {}
         "403":
           description: "The data source does not allow this API call"
           content: {}
-  /datasets/{id}:
-    get:
-      summary: "Get details about one dataset, identified by its (unique) 'id'."
-      tags:
-        -  GET Endpoints
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-           type: string
-      description: "The unique identifier of the dataset."
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetOneDataset"   
-  /datasets/filtering_terms:
-    get:
-      summary: "Get the list of filtering terms that could be used with datasets."
-      tags:
-        - GET Endpoints
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DatasetsFilteringTerms"
-
 components:
   schemas:
-    DatasetsFilteringTerms:
-      required:
-        - meta
-        - response
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/MetaContent"
-        response:
-          $ref: "#/components/schemas/DatasetsFilterTermsResponseContent"
-      description: |
-        Get details about one dataset, identified by its (unique) 'id'.
-
-    DatasetsFilterTermsResponseContent:
-      required:
-        - filteringTerms
-      properties:
-        filteringTerms:
-          $ref: "#/components/schemas/DatasetsFilterTermsResponse"
-        resources:
-           $ref: "#/components/schemas/DatsetsFilterTermsResourceResponse"
-    DatasetsFilterTermsResponse:
-      type : array
-      description: |
-        List of filtering terms for querying this Beacon.
-      required:
-        - id
-        - type
-      items:
-        type : object
-        properties:
-          id:
-            type: string
-            description: |
-              The field id in the case of numeric or alphanumeric fields, or the term id in the case of ontology or custom terms. CURIE syntax in the case of an ontology term.
-            example: NCIT:C28421 
-          type:
-            type: string
-            description: |
-              Either "custom", "alphanumeric" or ontology/terminology full name.
-            example: alphanumeric
-          label:
-            type: string
-            description: |
-              This would be the "preferred Label" in the case of an ontology term.
-            example : sex
-          scopes:
-           type: array
-           items:
-              type: string
-              example:
-               - datasets
-               - study
-    DatsetsFilterTermsResourceResponse:
-      type: array
-      description: |
-        Description of an ontology resource defined externally to this beacon implementation, such as MeSH or EFO, based on the phenopackets resource object (https://phenopacket-schema.readthedocs.io/en/latest/resource.html)
-      items:
-        type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            description: |
-              Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
-            example : hp
-          name:
-            type: string
-            description: |
-              The name of the ontology referred to by the id element
-            example : Human Phenotype Ontology
-          url:
-            type: string
-            description: |
-              Uniform Resource Locator of the resource
-            example: https://purl.obolibrary.org/obo/hp.owl
-          version:
-            type: string
-            description: |
-              The version of the resource or ontology used to make the annotation
-            example : 17-06-2019
-          nameSpacePrefix:
-            type: string
-            description: |
-              The prefix used in the CURIE of an OntologyClass
-            example : HP
-          iriPrefix:
-            type: string
-            description: |
-              The full Internationalized Resource Identifier (IRI) prefix
-            example : https://purl.obolibrary.org/obo/HP_
-        
-    GetOneDataset:
-      required:
-        - meta
-        - response
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/MetaContent"
-        response:
-          $ref: "#/components/schemas/GetOneDatasetRespose"
-      description: |
-        The filtering terms response provides information about available individual filters for a beacon's entry types as well as optional information about the ontologies the filters belong to.
-    GetOneDatasetRespose:
-      description: |
-       Get details about one dataset, identified by its (unique) 'id'
-      required:
-        - responseSummary
-      properties:
-        responseSummary:
-          type: object
-          description: |
-           Boolean (true/false) response section.
-          required:
-            - exists
-          properties:
-            exists :
-              type: boolean
-              example: true
-    
-    DatasetsRequest:
+    StudyRequest:
       required:
         - meta
         - query
@@ -276,26 +122,26 @@ components:
         meta:
           $ref: "#/components/schemas/MetaContent"
         query:
-          $ref: "#/components/schemas/DatasetsRequestQuery"
-      description: "Request to return datasets"
-    DatasetsRequestQuery:
+          $ref: "#/components/schemas/StudyRequestQuery"
+      description: "Request to return cohorts"
+    StudyRequestQuery:
       type: object
       properties:
         filters:
-          $ref: "#/components/schemas/DatasetsRequestFilter"
+          $ref: "#/components/schemas/StudyRequestFilter"
         requestedGranularity:
           type: string
           description: |
             Granularity 
-          example: record
+          example: boolean
       description: "Input of the query"
-    DatasetsRequestFilter:
+    StudyRequestFilter:
       type: array
       items:
         anyOf:
-          - $ref: "#/components/schemas/DatasetsAlphanumericRequestFilter"
-          - $ref: "#/components/schemas/DatasetsCustomRequestFilter"
-    DatasetsAlphanumericRequestFilter:
+          - $ref: "#/components/schemas/StudyAlphanumericRequestFilter"
+          - $ref: "#/components/schemas/StudyCustomRequestFilter"
+    StudyAlphanumericRequestFilter:
       required:
         - id
         - operator
@@ -307,9 +153,11 @@ components:
           description: >
             Concept ID of CDEs. 
               Allowed terms:
-               * `NCIT:C28421` - Sex
-               * `NCIT:C47824` - Dataset Types
-          example: "NCIT:C28421"
+               * `NCIT_C2991` - Available Diseases
+               * `NCIT_C43412` - Available Sample
+               * `NCIT_C164232` - Available Imaging
+               * `ISO_3166-1` - Country
+          example: "NCIT_C2991"
         operator:
           type: string
           description: |
@@ -319,45 +167,54 @@ components:
           example: "="
         value:
           anyOf:
-            - $ref: "#/components/schemas/DatasetsStringValue"
-            - $ref: "#/components/schemas/DatasetsArrayValues"
+            - $ref: "#/components/schemas/StudyStringValue"
+            - $ref: "#/components/schemas/StudyArrayValues"
       description: "Query parameters to filter individuals based on CDEs."
-    DatasetsStringValue:
+    StudyStringValue:
       type: string
-      example: " Female "
+      example: "AD"
       description: |
         The actual value of the CDE in string format. Allowed values:
-          * For `NCIT_C2991`(Sex): 
-            * `Unknown`
-            * `Female`
-            * `Male`
-            * `Other`
-              * Ex: \"Female\"
-          * For `NCIT:C47824`(Dataset Types): 
-            * `NCIT:C142447`
-            * `NCIT:C19591`
-            * `NCIT:C17369`
-            * `NCIT:C16540`
-            * `NCIT:C16495`
-            * `NCIT:C20641`
-            * `NCIT:C28367`
-            * `NCIT:C100772`
-            * `NCIT:C165543`
-            * `NCIT:C17047`
-            * `NCIT:C121705`
-            * `NCIT:C28220`
-            * `NCIT:C18479`
-            * `NCIT:C16564`
-            * `Other`
-              * Ex: \"NCIT:C16564\"
-    DatasetsArrayValues:
+          * For `NCIT_C2991`(Available Diseases): 
+            * `CG`
+            * `PD`
+            * `DLB
+            * `iRBD`
+            * `CAA`
+            * `FTD`
+            * `ALS`
+            * `PSP`
+            * `CBD`
+            * `MSA`
+            * `HD`
+            * `AT`
+              * Ex: \"CG\"
+          * For `NCIT_C43412`(Available Samples): 
+            * `CSF`
+            * `Serum
+            * `Plasma`
+            * `DNA`
+            * `Saliva`
+            * `Faeces`
+            * `Urine`
+              * Ex: \"Serum\"
+          * For `NCIT_C83164` (Available Imaging)
+            * `MRI
+            * `PET-Amyloid
+            * `PET-Tau`
+            * `DaT Scan`
+              * Ex: MRI
+          * For `ISO_3166-1`(Country):
+            * Any country code
+              * Ex: BH
+    StudyArrayValues:
       type: array
       items:
         type: string
-      example: '["NCIT:C16564","NCIT:C18479"]'
+      example: '["Serum","Plasma"]'
       description: |
         An array of allowed value(s) in string format.
-    DatasetsCustomRequestFilter:
+    StudyCustomRequestFilter:
       required:
         - id
         - operator
@@ -369,8 +226,9 @@ components:
           description: >
             Concept ID. 
               Allowed terms:
-               * `nos:number_of_subjects` - Number of subjects
-          example: "nos:number_of_subjects"
+               * `congnitive_data =Cohort Design
+               * `number_of_participants` - Number of participants
+          example: "number_of_participants"
         operator:
           type: string
           description: |
@@ -380,15 +238,27 @@ components:
           example: ">"
         value:
           anyOf:
-            - $ref: "#/components/schemas/DatasetsCustomDatasetsValue"
+            - $ref: "#/components/schemas/StudyCustomStudyValue"
+            - $ref: "#/components/schemas/StudyCustomStudyArrayValue"
       description: "Query parameters to filter individuals based on CDEs."
-    DatasetsCustomDatasetsValue:
+    StudyCustomStudyValue:
       type: string
       example: "1"
       description: |
         Any Interger valur:
-          * For `nos:number_of_subjects`(Number of Subjects):
+          * For `number_of_participants`(Number of participants):
               * Ex: \"100\"
+          * For `cognitive_data`(Cohort Design): 
+            * `Cross-sectional`
+            * `Logitudinal
+              * Ex: \"Logitudinal\"
+    StudyCustomStudyArrayValue:
+      type: array
+      items:
+        type: string
+      example: '["Logitudinal","Cross-sectional"]'
+      description: |
+        An array of allowed value(s) in string format.
     InfoResponse:
       required:
         - meta
@@ -432,24 +302,17 @@ components:
             type: string
             description: |
               The field id in the case of numeric or alphanumeric fields, or the term id in the case of ontology or custom terms. CURIE syntax in the case of an ontology term.
-            example: NCIT:C28421 
+            example: ncit:C28421
           type:
             type: string
             description: |
               Either "custom", "alphanumeric" or ontology/terminology full name.
-            example: alphanumeric
+            example: alphanumeric or ontology or custom
           label:
             type: string
             description: |
               This would be the "preferred Label" in the case of an ontology term.
-            example : sex
-          scopes:
-           type: array
-           items:
-              type: string
-              example:
-                - "datasets"
-                - "study"
+            example: Symptom Onset
     FilterTermsResourceResponse:
       type: array
       description: |
@@ -463,32 +326,27 @@ components:
             type: string
             description: |
               Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
-            example : hp
           name:
             type: string
             description: |
               The name of the ontology referred to by the id element
-            example : Human Phenotype Ontology
           url:
             type: string
             description: |
               Uniform Resource Locator of the resource
-            example: https://purl.obolibrary.org/obo/hp.owl
+            example: 'http://example.com/ontology'
           version:
             type: string
             description: |
               The version of the resource or ontology used to make the annotation
-            example : 17-06-2019
           nameSpacePrefix:
             type: string
             description: |
               The prefix used in the CURIE of an OntologyClass
-            example : HP
           iriPrefix:
             type: string
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
-            example : https://purl.obolibrary.org/obo/HP_
     Service:
       description: 'GA4GH service'
       type: object
@@ -595,7 +453,6 @@ components:
       properties:
         $schema:
           type : string
-          example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
         endpointSets:
            $ref: "#/components/schemas/MapEndpointsSetsResponse"
     MapEndpointsSetsResponse:
@@ -609,7 +466,6 @@ components:
         entryType:
           type: string
           description: "Specifies the type of entries this Beacon handles."
-          example : epnd:dataset
         openAPIEndpointsDefinition:
           type: string
           description: |
@@ -620,11 +476,9 @@ components:
         singleEntryUrl:
           type: string
           description: "URL to access a single entry in this Beacon."
-          example : 
         filteringTermsUrl:
           type: string
           description: "URL to access filtering terms supported by this Beacon."
-          example : 
         endpoints:
           type: object
           additionalProperties: 
@@ -661,6 +515,7 @@ components:
       required:
         - id
         - name
+        - ontologyTermForThisType
         - partOfSpecification
         - defaultSchema
       properties:
@@ -686,13 +541,41 @@ components:
         partOfSpecification:
           type: string
         defaultSchema:
-          type: string
-          description: Definition of the basic element extended with a description
+          type: object
+          required:
+              - referenceToSchemaDefinition
+              - id
+              - name
+          properties:
+              referenceToSchemaDefinition:
+                type: string
+              schemaVersion:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string  
         additionallySupportedSchemas:
           type: array
           items:
-            type: string
-          description: List of additional schemas that could be used for this concept in this instance of Beacon.
+            type: object
+            required:
+              - referenceToSchemaDefinition
+              - id
+              - name
+            properties:
+              referenceToSchemaDefinition:
+                type: string
+              schemaVersion:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
         aCollectionOf:
           type: string
         filteringTerms:
@@ -765,26 +648,6 @@ components:
           $ref: "#/components/schemas/ConfigurationResponseContent"
       description: |
         Information about the Beacon. Aimed to Beacon clients like web pages or Beacon networks.
-    EntryTypesResponse:
-      required:
-        - meta
-        - response
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/MetaContent"
-        response:
-          $ref: "#/components/schemas/EntryTypesResponseContent"
-      description: |
-        Information about the Beacon. Aimed to Beacon clients like web pages or Beacon networks.
-    EntryTypesResponseContent:
-      description: |
-       Returning the Beacon Entry Types
-      required:
-        - entryTypes
-      properties:
-        entryTypes:
-           $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
     MetaContent:
       description: |
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
@@ -798,12 +661,12 @@ components:
           type: string
           description: |
             Version of the API.
-          example: v2.0.1
+          example: v2.0
         beaconId:
           type: string
           description: |
             Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv3.epnd.org
+          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
         returnedSchemas:
           type: array
           description: |
@@ -813,10 +676,8 @@ components:
             properties:
               entityType:
                 type: string
-                example : epnd:dataset
               schema:
                 type: string
-                example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
     InfoResponseContent:
       description: |
         Metadata describing a Beacon instance.
@@ -831,7 +692,7 @@ components:
           type: string
           description: |
             Version of the API provided by the Beacon.
-          example: v2.0.1
+          example: v2.0
         environment:
           type: string
           description: |
@@ -841,12 +702,10 @@ components:
           type: string
           description: |
             Unique identifier of the Beacon. Use reverse domain name notation.
-          example: org.example.beacon.v2
         name:
           type: string
           description: |
             Name of the Beacon.
-          example : CafeVariome
         organisation:
           type: object
           description: |
@@ -863,12 +722,6 @@ components:
               type: string
               description: |
                 Name of the organization.
-            address:
-              type: string
-            logoUrl:
-              type: string
-            welcomeUrl:
-              type: string
         description:
           type: string
           description: |
@@ -877,22 +730,19 @@ components:
           type: string
           description: |
             TODO: This is a legacy use / duplication?
-          example: v2.0.1
+          example: v2.01
         welcomeUrl:
           type: string
           description: |
             URL to the welcome page for this Beacon (RFC 3986 format).
-          example : https://example.org/wiki/Main_Page
         alternativeUrl:
           type: string
           description: |
             Alternative URL to the API, e.g. a restricted version of this Beacon (RFC 3986 format).
-          example : https://example.org/beacon/authenticated
         createDateTime:
           type: string
           description: |
             The date/time the Beacon was created (ISO 8601 format).
-          example : 2017-01-17 20:33:40
         updateDateTime:
           type: string
           description: |
@@ -901,7 +751,7 @@ components:
           type: object
           description: |
             Additional unspecified metadata about the Beacon service.
-    DatasetsMetaResponseContent:
+    StudyMetaResponseContent:
       description: |
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
       required:
@@ -919,7 +769,7 @@ components:
           type: string
           description: |
             Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv3.epnd.org
+          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
         receivedRequestSummary:
           required:
             - apiVersion
@@ -935,11 +785,11 @@ components:
               type: object
               description: |
                 Filters as submitted in the request.
-              $ref: "#/components/schemas/DatasetsRequestFilter"
+              $ref: "#/components/schemas/StudyRequestFilter"
             requestedGranularity:
               type: string
               example: boolean, count, aggregated, record
-              default: record
+              default: count
             requestedSchemas:
               type: object
               description: |
@@ -952,7 +802,7 @@ components:
         returnedGranularity:
           type: string
           example: boolean, count, aggregated, record
-          default: record
+          default: count
         returnedSchemas:
           type: object
           description: |
@@ -962,7 +812,7 @@ components:
               type: string
             schema:
               type: string
-    DatasetsResponse:
+    StudyResponse:
       required:
         - meta
         - response
@@ -970,15 +820,15 @@ components:
       type: object
       properties:
         meta:
-          $ref: "#/components/schemas/DatasetsMetaResponseContent"
+          $ref: "#/components/schemas/StudyMetaResponseContent"
         response:
           required:
             - resultSets
           properties:
             resultSets:
-              $ref: "#/components/schemas/DatasetsResults"
+              $ref: "#/components/schemas/StudyResults"
         responseSummary:
-          $ref: "#/components/schemas/DatasetsResponseContent"
+          $ref: "#/components/schemas/StudyResponseContent"
         info:
           description: |
             Beacon only responds with this info object if there are any unsupported filters in the query.
@@ -1001,23 +851,23 @@ components:
                 type: string
                 description: |
                   In an array of strings, any filter(s) that are unsupported by an implementation go here.
-                example: "data_2295"
+                example: '"data_2295"'
             unsupportedFilterValues:
               type: array
               items:
                 type: string
                 description: |
                   If an implementation does not support a filter value, let's say, for example, 'NCIT_C124294'(Undetermined) Sex, this unsupported value goes here as a string, and will be ignored while a partial query is performed with other supported filter(s) from the request body (if any).
-                example: "NCIT_C124294"
+                example: '"NCIT_C124294","NCIT_C179980"'
           description: |
-            Respond with a list of unsupported filter(s) and unsupported filter values.
-          example:
-            unsupportedFilters: 
-              - "NCIT:C47824"
-            unsupportedFilterValues: 
-              - "NCIT:C142447"
-              - "NCIT:C19591"
-    DatasetsResponseContent:
+            Respond with a list of (comma-separated) unsupported filter(s).
+          example: |
+            {
+            unsupportedFilters: ["NCIT_C156420"], 
+
+            unsupportedFilterValues:["NCIT_C124294"]
+            }
+    StudyResponseContent:
       required:
         - exists
         - numTotalResults
@@ -1031,17 +881,28 @@ components:
         numTotalResults:
           type: integer
           description: |
-            Response of the query indicating if the query yield any results. If the query is successful then the list records will be returned as a response.
-          example: 1
-    DatasetsResults:
+            Response of the query indicating if the query yield any results. If the query is successful then the count will be returned as a response.
+    StudyResults:
       type: array
       items:
         type: object
         required:
+          - id
+          - type
           - exists
           - resultCount
           - results
         properties:
+          id:
+            type: string
+            description: |
+              id of the result
+            example: "result0123"
+          type:
+            type: string
+            description: |
+              Type of result
+            example: "Dataset"
           exists:
             type: boolean
             description: |
@@ -1050,17 +911,16 @@ components:
             type: integer
             description: |
               Number of results in this Resultset.
-            example: 1
           results:
             description: |
               Array set of the records matching with the query.
             type: array
             items:
-              $ref: "#/components/schemas/DatasetsResultSetsResult"
+              $ref: "#/components/schemas/StudyResultSetsResult"
           resultsHandover:
             description: |
               Handover to the resultant record page, if any.
-    DatasetsResultSetsResult:
+    StudyResultSetsResult:
       type: object
       required:
         - id
@@ -1070,82 +930,8 @@ components:
           type: string
           description: |
             id of the result
-          example: "BEex3"
+        
         name:
           type: string
           description: |
             Name
-          example: "Basic Element example three"
-        info:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfo"
-    DatasetsResultSetsResultInfo:
-      type: object
-      required:
-        - type
-        - resourceURLs
-        - publisher
-        - datasetVersions
-      properties:
-        type:
-          type: string
-          example: "dataset"
-        resourceURLs:
-          type: array
-          items:
-            type: string
-            example: "www.example.com"
-        description:
-          type: string
-          example: "string"
-        releaseLicense:
-          type: string
-          example: "license URL"
-        language:
-          type: string
-          example: "language code"
-        publisher:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
-        datasetVersions:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
-    DatasetsResultSetsResultInfoPublisher:
-      type: object
-      required:
-        - publisherType
-        - name
-        - contactEmail
-      properties:
-        publisherType:
-          type: string
-          example: ""
-        name:
-          type: string
-          example: "epnd.org"
-        contactEmail:
-          type: string
-          example: "epnd@gmail.com"
-        contactName:
-          type: string
-          example: "epnd"
-        url:
-          type: string
-          example: "string"
-        location:
-          type: string
-          example: "Italy"
-    DatasetsResultSetsResultInfoDatasetVersions:
-      type: array
-      items:
-        type : object
-        required:
-          - versionName
-          - numberOfSubjects
-        properties:
-          versionName:
-            type: string
-            example: "v1.0.0"
-          numberOfSubjects:
-            type: integer
-            example: 100
-
-    
-      
