@@ -8,11 +8,11 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: datasetsv1.0
+  version: v1.0
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/deepthivs/EPND/datasetsv1.0
+    url: https://virtserver.swaggerhub.com/deepthivs/EPND/v1.0
 paths:
   /info:
     get:
@@ -85,7 +85,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
+                $ref: "#/components/schemas/EntryTypesResponse"
   /datasets:
     post:
       summary: "Request to get datasets."
@@ -136,7 +136,6 @@ paths:
         "403":
           description: "The data source does not allow this API call"
           content: {}
-  
   /datasets/{id}:
     get:
       summary: "Get details about one dataset, identified by its (unique) 'id'."
@@ -221,7 +220,9 @@ components:
            type: array
            items:
               type: string
-              example: '["datasets","study"]'
+              example:
+               - datasets
+               - study
     DatsetsFilterTermsResourceResponse:
       type: array
       description: |
@@ -235,27 +236,32 @@ components:
             type: string
             description: |
               Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
+            example : hp
           name:
             type: string
             description: |
               The name of the ontology referred to by the id element
+            example : Human Phenotype Ontology
           url:
             type: string
             description: |
               Uniform Resource Locator of the resource
-            example: 'http://example.com/ontology'
+            example: https://purl.obolibrary.org/obo/hp.owl
           version:
             type: string
             description: |
               The version of the resource or ontology used to make the annotation
+            example : 17-06-2019
           nameSpacePrefix:
             type: string
             description: |
               The prefix used in the CURIE of an OntologyClass
+            example : HP
           iriPrefix:
             type: string
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
+            example : https://purl.obolibrary.org/obo/HP_
         
     GetOneDataset:
       required:
@@ -554,6 +560,88 @@ components:
       example: '["Logitudinal","Cross-sectional"]'
       description: |
         An array of allowed value(s) in string format.
+    StudyMetaResponseContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - beaconId
+        - returnedGranularity
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0
+        beaconId:
+          type: string
+          description: |
+            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
+          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
+        receivedRequestSummary:
+          required:
+            - apiVersion
+            - requestedGranularity
+            - requestedSchemas
+          type: object
+          description: |
+            Section of the response that summarize the request with the following fields received as its been interpreted by the Beacon server. This could also just return the complete Beacon request made by the user.
+          properties:
+            apiVersion:
+              type: string
+            filters:
+              type: object
+              description: |
+                Filters as submitted in the request.
+              $ref: "#/components/schemas/StudyRequestFilter"
+            requestedGranularity:
+              type: string
+              example: boolean, count, aggregated, record
+              default: count
+            requestedSchemas:
+              type: object
+              description: |
+                Set of schemas to be used in the response to a request.
+              properties:
+                entityType:
+                  type: string
+                schema:
+                  type: string
+        returnedGranularity:
+          type: string
+          example: boolean, count, aggregated, record
+          default: count
+        returnedSchemas:
+          type: object
+          description: |
+            Set of schemas to be used in the response to a request.
+          properties:
+            entityType:
+              type: string
+            schema:
+              type: string
+    StudyResponse:
+      required:
+        - meta
+        - response
+        - responseSummary
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/StudyMetaResponseContent"
+        response:
+          required:
+            - resultSets
+          properties:
+            resultSets:
+              $ref: "#/components/schemas/StudyResults"
+        responseSummary:
+          $ref: "#/components/schemas/StudyResponseContent"
+        info:
+          description: |
+            Beacon only responds with this info object if there are any unsupported filters in the query.
+          $ref: "#/components/schemas/WarningResponse"
     InfoResponse:
       required:
         - meta
@@ -612,7 +700,9 @@ components:
            type: array
            items:
               type: string
-              example: '["datasets","study"]'
+              example:
+                - "datasets"
+                - "study"
     FilterTermsResourceResponse:
       type: array
       description: |
@@ -626,27 +716,32 @@ components:
             type: string
             description: |
               Preferably OBO ID representing the resource; alternatively a URI pointing towards the definitions may be used if not in OBO.
+            example : hp
           name:
             type: string
             description: |
               The name of the ontology referred to by the id element
+            example : Human Phenotype Ontology
           url:
             type: string
             description: |
               Uniform Resource Locator of the resource
-            example: 'http://example.com/ontology'
+            example: https://purl.obolibrary.org/obo/hp.owl
           version:
             type: string
             description: |
               The version of the resource or ontology used to make the annotation
+            example : 17-06-2019
           nameSpacePrefix:
             type: string
             description: |
               The prefix used in the CURIE of an OntologyClass
+            example : HP
           iriPrefix:
             type: string
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
+            example : https://purl.obolibrary.org/obo/HP_
     Service:
       description: 'GA4GH service'
       type: object
@@ -753,6 +848,7 @@ components:
       properties:
         $schema:
           type : string
+          example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
         endpointSets:
            $ref: "#/components/schemas/MapEndpointsSetsResponse"
     MapEndpointsSetsResponse:
@@ -766,6 +862,7 @@ components:
         entryType:
           type: string
           description: "Specifies the type of entries this Beacon handles."
+          example : epnd:dataset
         openAPIEndpointsDefinition:
           type: string
           description: |
@@ -776,9 +873,11 @@ components:
         singleEntryUrl:
           type: string
           description: "URL to access a single entry in this Beacon."
+          example : 
         filteringTermsUrl:
           type: string
           description: "URL to access filtering terms supported by this Beacon."
+          example : 
         endpoints:
           type: object
           additionalProperties: 
@@ -815,7 +914,6 @@ components:
       required:
         - id
         - name
-        - ontologyTermForThisType
         - partOfSpecification
         - defaultSchema
       properties:
@@ -841,41 +939,13 @@ components:
         partOfSpecification:
           type: string
         defaultSchema:
-          type: object
-          required:
-              - referenceToSchemaDefinition
-              - id
-              - name
-          properties:
-              referenceToSchemaDefinition:
-                type: string
-              schemaVersion:
-                type: string
-              id:
-                type: string
-              name:
-                type: string
-              description:
-                type: string  
+          type: string
+          description: Definition of the basic element extended with a description
         additionallySupportedSchemas:
           type: array
           items:
-            type: object
-            required:
-              - referenceToSchemaDefinition
-              - id
-              - name
-            properties:
-              referenceToSchemaDefinition:
-                type: string
-              schemaVersion:
-                type: string
-              id:
-                type: string
-              name:
-                type: string
-              description:
-                type: string
+            type: string
+          description: List of additional schemas that could be used for this concept in this instance of Beacon.
         aCollectionOf:
           type: string
         filteringTerms:
@@ -948,6 +1018,26 @@ components:
           $ref: "#/components/schemas/ConfigurationResponseContent"
       description: |
         Information about the Beacon. Aimed to Beacon clients like web pages or Beacon networks.
+    EntryTypesResponse:
+      required:
+        - meta
+        - response
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/MetaContent"
+        response:
+          $ref: "#/components/schemas/EntryTypesResponseContent"
+      description: |
+        Information about the Beacon. Aimed to Beacon clients like web pages or Beacon networks.
+    EntryTypesResponseContent:
+      description: |
+       Returning the Beacon Entry Types
+      required:
+        - entryTypes
+      properties:
+        entryTypes:
+           $ref: "#/components/schemas/ConfigurationEntryTypesResponse"
     MetaContent:
       description: |
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
@@ -980,88 +1070,6 @@ components:
               schema:
                 type: string
                 example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
-    StudyMetaResponseContent:
-      description: |
-        Information about the response that could be relevant for the Beacon client in order to interpret the results.
-      required:
-        - apiVersion
-        - beaconId
-        - returnedGranularity
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: |
-            Version of the API.
-          example: v2.0
-        beaconId:
-          type: string
-          description: |
-            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
-        receivedRequestSummary:
-          required:
-            - apiVersion
-            - requestedGranularity
-            - requestedSchemas
-          type: object
-          description: |
-            Section of the response that summarize the request with the following fields received as its been interpreted by the Beacon server. This could also just return the complete Beacon request made by the user.
-          properties:
-            apiVersion:
-              type: string
-            filters:
-              type: object
-              description: |
-                Filters as submitted in the request.
-              $ref: "#/components/schemas/StudyRequestFilter"
-            requestedGranularity:
-              type: string
-              example: boolean, count, aggregated, record
-              default: count
-            requestedSchemas:
-              type: object
-              description: |
-                Set of schemas to be used in the response to a request.
-              properties:
-                entityType:
-                  type: string
-                schema:
-                  type: string
-        returnedGranularity:
-          type: string
-          example: boolean, count, aggregated, record
-          default: count
-        returnedSchemas:
-          type: object
-          description: |
-            Set of schemas to be used in the response to a request.
-          properties:
-            entityType:
-              type: string
-            schema:
-              type: string
-    StudyResponse:
-      required:
-        - meta
-        - response
-        - responseSummary
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/StudyMetaResponseContent"
-        response:
-          required:
-            - resultSets
-          properties:
-            resultSets:
-              $ref: "#/components/schemas/StudyResults"
-        responseSummary:
-          $ref: "#/components/schemas/StudyResponseContent"
-        info:
-          description: |
-            Beacon only responds with this info object if there are any unsupported filters in the query.
-          $ref: "#/components/schemas/WarningResponse"
     StudyResponseContent:
       required:
         - exists
