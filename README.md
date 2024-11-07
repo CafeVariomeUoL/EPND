@@ -47,8 +47,254 @@ The request and response conforms to the [Beacon Reference Framework](https://gi
 
 This specification defines POST endpoints to request information about resources. Each endpoint makes use of the [Filters](http://docs.genomebeacons.org/filters/) capability of the Beacon API.
 
+<hr>
+<h3 id="-study-endpoint-"> Datasets endpoint </h3>
+
+> Method: POST
+
+[/datasets](#-study-endpoint-) endpoint returns the **datasets of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
+
+<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the datasets endpoint </h4>
+
+> **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Metadata Schema Concept</th>
+            <th>Beacon Filter Type</th>
+            <th>ID</th>
+            <th>Operator</th>
+            <th>Query Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        <td rowspan="4"><b>Sex</b>
+        </td>
+        <td rowspan="4">Alphanumerical</td>
+        <td rowspan="4">NCIT:C28421 </td>
+        <td rowspan="4">=</td>
+        <td>
+        Unknown
+        </td>
+    </tr>
+    <tr><td>Female</td></tr>
+    <tr><td>Male</td></tr>
+    <tr><td>Other</td></tr>
+    <tr>
+    <tr>
+     <tr>
+      <td><b>Number of Subjects</b></td>
+        <td>Custom</td>
+        <td>nos:number_of_subjects</td>
+        <td>>,<,=,>=,<=</td>
+        <td>any integer</td>
+    </tr>
+    <tr>
+        <td rowspan="15"><b>Dataset Types</b>
+        </td>
+        <td rowspan="15">Alphanumerical</td>
+        <td rowspan="15">NCIT:C47824</td>
+        <td rowspan="15">=</td>
+        <td>
+        NCIT:C142447(Clinical Information)
+        </td>
+    </tr>
+    <tr><td>NCIT:C19591(Diagnostic marker)</td></tr>
+    <tr><td>NCIT:C17369(Imaging)</td></tr>
+    <tr><td>NCIT:C16540(Electrophysiology)</td></tr>
+    <tr><td>NCIT:C16495(Demographics)</td></tr>
+    <tr><td>NCIT:C20641(Functional Ratings)</td></tr>
+    <tr><td>NCIT:C28367(Motor)</td></tr>
+    <tr><td>NCIT:C100772(Neuropsychiatric)</td></tr>
+    <tr><td>NCIT:C165543(Neuropsychological Assessment)</td></tr>
+    <tr><td>NCIT:C17047(Quality of Life)</td></tr>
+    <tr><td>NCIT:C121705(Sleepscales)</td></tr>
+    <tr><td>NCIT:C114457(Digital Data)</td></tr>
+    <tr><td>NCIT:C18479(Neuropathology)</td></tr>
+    <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
+    <tr><td>Other</td></tr>
+  
+
+</tbody>
+</table>
+
+
+[ ^ Back to the top](#top)
+<hr>
+
+
+
+<h3 id="-study-filters-description-"> Dataset endpoint Filters Description </h3>
+
+**Sex**: A single value or an array of biological sex of an individual, eg : Male or [Male,Female]
+
+**Number of Subjects**: The number of subjects in the dataset . eg : >10 ,<20 or =100
+
+**Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
+
+
+
+[ ^ Back to the top](#top)
 
 <hr>
+
+<h3 id="-example-request-and-response-for-study-"> Example request and response for datasets </h3>
+
+**EXAMPLE /datasets REQUEST**
+
+```JSON
+{ 
+ "meta":{
+      "apiVersion": "v2.0.1"
+ },
+ "query": {
+      
+"filters": [
+             {
+               "id": "NCIT:C28421",
+               "operator": "=",
+               "value": ["Female","Male"]
+             },
+             {
+               "id": "nos:number_of_subjects",
+               "operator": "<",
+               "value": 1000
+             },
+             {
+               "id": "NCIT:C47824",
+               "operator": "=",
+               "value": "NCIT:C19591"
+             }
+       ],
+      "requestedGranularity": "record"
+    }
+}
+```
+
+
+**requestedGranularity**: It is not mandatory to respond with the exact requested granularity, but the response granularity must specify the actual granularity level of the response in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
+
+> **Note**:If the Beacon service supports record-level granularity but the client requests count-level granularity, the service should aggregate the matching records and provide the count of those records as the response.
+
+The following is an example response 
+
+**EXAMPLE /datasets RESPONSE**
+```JSON
+{
+    "meta": {
+        "beaconId": "org.example.beacon.v2",
+        "apiVersion": "v2.0.1",
+        "returnedGranularity": "record",
+        "receivedRequestSummary": {
+            "apiVersion": "v2.0.1",
+            "requestedSchemas": [],
+            "filters": [
+             {
+               "id": "NCIT:C28421",
+               "operator": "=",
+               "value": ["Female","Male"]
+             },
+             {
+               "id": "nos:number_of_subjects",
+               "operator": "<",
+               "value": 1000
+             },
+             {
+               "id": "NCIT:C47824",
+               "operator": "=",
+               "value": "NCIT:C19591"
+             }
+       ],
+            "requestParameters": {},
+            "includeResultsetResponses": "HIT",
+            "pagination": {
+                "skip": 0,
+                "limit": 50
+            },
+            "requestedGranularity": "record",
+            "testMode": false
+        },
+        "returnedSchemas": [
+            {
+               "entityType": "datasets",
+               "schema": "ga4gh-beacon-dataset-v2.0.0",
+            }
+        ]
+    },
+    "responseSummary": {
+        "exists": true,
+        "numTotalResults": 2
+    },
+   "response": {
+        "resultSets": [
+        {
+            "exists": true,
+            "resultsCount": 2,
+            "results": [
+                {
+                    "id": "BEex3",
+                    "name": "Basic Element example three",
+                    "info":{
+                    "type": "dataset",
+                    "resourceURLs": ["https://www.example.com"],
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        },
+                      "datasetVersions": [
+                          {
+                            "versionName": "v1.0.0",
+                            "numberOfSubjects": 100
+                          }]
+                    }
+                },
+                {
+                    "id": "BEex4",
+                    "name": "Basic Element example four",
+                    "info":{
+                    "type": "dataset",
+                    "resourceURLs": ["https://www.example.com"],
+                    "description": "string",
+                    "releaseLicense": "license URL",
+                    "language": "language code",
+                    "publisher": {
+                      "publisherType": "",
+                      "name": "epnd.org",
+                      "contactEmail": "epnd@gmail.com",
+                      "contactName": "epnd",
+                      "url": "string",
+                      "location": "Italy"
+                        },
+                      "datasetVersions": [
+                          {
+                            "versionName": "v1.0.0",
+                            "numberOfSubjects": 100
+                          }]
+                    }
+                }
+            ],
+            
+            
+        }
+    ]
+    }
+}
+```
+
+[ ^ Back to the top](#top)
+
+<hr>
+
+
 <h3 id="-study-endpoint-"> Study endpoint </h3>
 
 > Method: POST
