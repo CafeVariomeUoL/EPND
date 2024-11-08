@@ -245,7 +245,7 @@ components:
       type: object
       properties:
         meta:
-          $ref: "#/components/schemas/MetaContent"
+          $ref: "#/components/schemas/DatasetMetaContent"
         response:
           $ref: "#/components/schemas/GetOneDatasetRespose"
       description: |
@@ -266,7 +266,6 @@ components:
             exists :
               type: boolean
               example: true
-    
     DatasetsRequest:
       required:
         - meta
@@ -274,7 +273,7 @@ components:
       type: object
       properties:
         meta:
-          $ref: "#/components/schemas/MetaContent"
+          $ref: "#/components/schemas/DatasetMetaContent"
         query:
           $ref: "#/components/schemas/DatasetsRequestQuery"
       description: "Request to return datasets"
@@ -617,14 +616,15 @@ components:
         rootUrl:
           type: string
           description: "The base URL for the Beacon endpoints."
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/dataset
         singleEntryUrl:
           type: string
           description: "URL to access a single entry in this Beacon."
-          example : 
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/datasets/1
         filteringTermsUrl:
           type: string
           description: "URL to access filtering terms supported by this Beacon."
-          example : 
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/dataset/filteringTermsUrl
         endpoints:
           type: object
           additionalProperties: 
@@ -813,10 +813,42 @@ components:
             properties:
               entityType:
                 type: string
-                example : epnd:dataset
+                example : info
               schema:
                 type: string
-                example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
+                example : https://www.example.org/schemas/ga4gh-beacon-v2.0.0.json
+    DatasetMetaContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - requestedSchemas
+      properties:
+        "$schema":
+          type: string
+          description: |
+            Refers to the JSON Schema which describes the set of valid attributes for this particular document type. This attribute is mostly used in schemas that should be tested in Beacon implementations.
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0.1
+        requestedSchemas:
+          type: array
+          description: |
+            Set of schemas to be used in the response..
+          items:
+            type: object
+            required:
+              - entityType
+              - schema
+            properties:
+              entityType:
+                type: string
+                example: epnd:datasets
+              schema:
+                type: string
+                example: ./ga4gh-beacon-dataset-v2.0.0
     InfoResponseContent:
       description: |
         Metadata describing a Beacon instance.
@@ -908,6 +940,8 @@ components:
         - apiVersion
         - beaconId
         - returnedGranularity
+        - receivedRequestSummary
+        - returnedSchemas
       type: object
       properties:
         apiVersion:
@@ -938,7 +972,8 @@ components:
               $ref: "#/components/schemas/DatasetsRequestFilter"
             requestedGranularity:
               type: string
-              example: boolean, count, aggregated, record
+              example: record
+              description : Requested granularity for the response which may differe from the response's actual granularity.Can have values record, boolean, count
               default: record
             requestedSchemas:
               type: object
@@ -947,11 +982,13 @@ components:
               properties:
                 entityType:
                   type: string
+                  example : epnd:dataset
                 schema:
                   type: string
         returnedGranularity:
           type: string
-          example: boolean, count, aggregated, record
+          example: record
+          description : Granularity of the Beacon response which may differ from the requested one. Can have values record, boolean, count
           default: record
         returnedSchemas:
           type: object
@@ -1038,10 +1075,21 @@ components:
       items:
         type: object
         required:
+          - id
+          - type
           - exists
           - resultCount
           - results
         properties:
+          id:
+            type : string
+            description: |
+              Node ID
+          setType:
+            type : string
+            description : |
+              Entry type of resultSet. It SHOULD MATCH an entry type declared as collection in the Beacon configuration.
+            example: epnd:dataset
           exists:
             type: boolean
             description: |
@@ -1057,14 +1105,14 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/DatasetsResultSetsResult"
-          resultsHandover:
-            description: |
-              Handover to the resultant record page, if any.
     DatasetsResultSetsResult:
       type: object
       required:
         - id
         - name
+        - resourceURLs
+        - publisher
+        - datasetVersions
       properties:
         id:
           type: string
@@ -1076,24 +1124,15 @@ components:
           description: |
             Name
           example: "Basic Element example three"
-        info:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfo"
-    DatasetsResultSetsResultInfo:
-      type: object
-      required:
-        - type
-        - resourceURLs
-        - publisher
-        - datasetVersions
-      properties:
-        type:
-          type: string
-          example: "dataset"
         resourceURLs:
           type: array
           items:
             type: string
             example: "www.example.com"
+        publisher:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
+        datasetVersions:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
         description:
           type: string
           example: "string"
@@ -1103,10 +1142,6 @@ components:
         language:
           type: string
           example: "language code"
-        publisher:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
-        datasetVersions:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
     DatasetsResultSetsResultInfoPublisher:
       type: object
       required:
@@ -1146,6 +1181,3 @@ components:
           numberOfSubjects:
             type: integer
             example: 100
-
-    
-      
