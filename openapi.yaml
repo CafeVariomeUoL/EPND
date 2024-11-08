@@ -237,34 +237,6 @@ components:
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
             example : https://purl.obolibrary.org/obo/HP_
-    GetOneDataset:
-      required:
-        - meta
-        - response
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/DatasetMetaContent"
-        response:
-          $ref: "#/components/schemas/GetOneDatasetRespose"
-      description: |
-        The filtering terms response provides information about available individual filters for a beacon's entry types as well as optional information about the ontologies the filters belong to.
-    GetOneDatasetRespose:
-      description: |
-       Get details about one dataset, identified by its (unique) 'id'
-      required:
-        - responseSummary
-      properties:
-        responseSummary:
-          type: object
-          description: |
-           Boolean (true/false) response section.
-          required:
-            - exists
-          properties:
-            exists :
-              type: boolean
-              example: true
     DatasetsRequest:
       required:
         - meta
@@ -965,9 +937,6 @@ components:
               type: string
               example : v2.0.1
             filters:
-              type: object
-              description: |
-                Filters as submitted in the request.
               $ref: "#/components/schemas/DatasetsRequestFilter"
             requestedGranularity:
               type: string
@@ -999,6 +968,58 @@ components:
               example: epnd:dataset
             schema:
               type: string
+    GetOneDatasetsMetaResponseContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - beaconId
+        - returnedGranularity
+        - returnedSchemas
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0.1
+        beaconId:
+          type: string
+          description: |
+            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
+          example: BeaconAPI.cv3.epnd.org
+        returnedGranularity:
+          type: string
+          example: record
+          description : Granularity of the Beacon response which may differ from the requested one. Can have values record, boolean, count
+          default: record
+        returnedSchemas:
+          type: object
+          description: |
+            Set of schemas to be used in the response to a request.
+          properties:
+            entityType:
+              type: string
+              example: epnd:dataset
+            schema:
+              type: string
+    GetOneDataset:
+      required:
+        - meta
+        - response
+        - responseSummary
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/GetOneDatasetsMetaResponseContent"
+        response:
+          required:
+            - resultSets
+          properties:
+            resultSets:
+              $ref: "#/components/schemas/DatasetsResults"
+        responseSummary:
+          $ref: "#/components/schemas/DatasetsResponseContent"
     DatasetsResponse:
       required:
         - meta
@@ -1017,8 +1038,6 @@ components:
         responseSummary:
           $ref: "#/components/schemas/DatasetsResponseContent"
         info:
-          description: |
-            Beacon only responds with this info object if there are any unsupported filters in the query.
           $ref: "#/components/schemas/WarningResponse"
     WarningResponse:
       description: |
