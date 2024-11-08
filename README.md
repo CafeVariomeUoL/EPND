@@ -184,14 +184,12 @@ The following is an example response
 **EXAMPLE /datasets RESPONSE**
 ```JSON
 {
-    "meta": {
-        "beaconId": "org.example.beacon.v2",
-        "apiVersion": "v2.0.1",
-        "returnedGranularity": "record",
-        "receivedRequestSummary": {
-            "apiVersion": "v2.0.1",
-            "requestedSchemas": [],
-            "filters": [
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "BeaconAPI.cv3.epnd.org",
+    "receivedRequestSummary": {
+      "apiVersion": "v2.0.1",
+       "filters": [
              {
                "id": "NCIT:C28421",
                "operator": "=",
@@ -208,86 +206,94 @@ The following is an example response
                "value": "NCIT:C19591"
              }
        ],
-            "requestParameters": {},
-            "includeResultsetResponses": "HIT",
-            "pagination": {
-                "skip": 0,
-                "limit": 50
-            },
-            "requestedGranularity": "record",
-            "testMode": false
-        },
-        "returnedSchemas": [
-            {
-               "entityType": "datasets",
-               "schema": "ga4gh-beacon-dataset-v2.0.0",
-            }
-        ]
+      "requestedGranularity": "record",
+      "requestedSchemas": {
+        "entityType": "epnd:dataset",
+        "schema": "string"
+      }
     },
-    "responseSummary": {
-        "exists": true,
-        "numTotalResults": 2
-    },
-   "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 2,
-            "results": [
-                {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                    "type": "dataset",
-                    "resourceURLs": ["https://www.example.com"],
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        },
-                      "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
-                    }
-                },
-                {
-                    "id": "BEex4",
-                    "name": "Basic Element example four",
-                    "info":{
-                    "type": "dataset",
-                    "resourceURLs": ["https://www.example.com"],
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        },
-                      "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
-                    }
-                }
-            ],
-            
-            
-        }
-    ]
+    "returnedGranularity": "record",
+    "returnedSchemas": {
+      "entityType": "epnd:dataset",
+      "schema": "string"
     }
+  },
+  "response": {
+    "resultSets": [
+      {
+        "id": "Node ID",
+        "type": "epnd:dataset",
+        "exists": true,
+        "resultCount": 2,
+        "results": [
+          {
+            "id": "BEex3",
+            "name": "Basic Element example three",
+            "resourceURLs": [
+              "www.example.com"
+            ],
+            "publisher": {
+              "publisherType": "",
+              "name": "epnd.org",
+              "contactEmail": "epnd@gmail.com",
+              "contactName": "epnd",
+              "url": "string",
+              "location": "Italy"
+            },
+            "datasetVersions": [
+              {
+                "versionName": "v1.0.0",
+                "numberOfSubjects": 100
+              }
+            ],
+            "description": "string",
+            "releaseLicense": "license URL",
+            "language": "language code"
+          },
+          {
+            "id": "BEex4",
+            "name": "Basic Element example four",
+            "resourceURLs": [
+              "www.example.com"
+            ],
+            "publisher": {
+              "publisherType": "",
+              "name": "epnd.org",
+              "contactEmail": "epnd@gmail.com",
+              "contactName": "epnd",
+              "url": "string",
+              "location": "Italy"
+            },
+            "datasetVersions": [
+              {
+                "versionName": "v1.0.0",
+                "numberOfSubjects": 100
+              }
+            ],
+            "description": "string",
+            "releaseLicense": "license URL",
+            "language": "language code"
+          }
+        ],
+        
+      }
+    ]
+  },
+  "responseSummary": {
+    "exists": true,
+    "numTotalResults": 1
+  },
+  "info": {
+    "warnings": {
+      "unsupportedFilters": [
+        "NCIT:C47824"
+      ],
+      "unsupportedFilterValues": [
+        "NCIT:C142447",
+        "NCIT:C19591"
+      ]
+    }
+  }
 }
 ```
 
@@ -303,80 +309,86 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
 
 ```JSON
 {
-    "meta": {
-        "beaconId": "org.example.beacon.v2",
-        "apiVersion": "v2.0.2",
-        "returnedGranularity": "record",
-        "receivedRequestSummary": {
-            "apiVersion": "v2.0.0",
-            "requestedSchemas": [],
-            "filters": [
-                {}
-            ],
-            "requestParameters": {},
-            "includeResultsetResponses": "HIT",
-            "pagination": {
-                "skip": 0,
-                "limit": 50
-            },
-            "requestedGranularity": "record",
-            "testMode": false
+  "meta": {
+    "apiVersion": "v2.0",
+    "beaconId": "BeaconAPI.cv3.epnd.org",
+    "receivedRequestSummary": {
+      "apiVersion": "string",
+      "filters": [
+        {
+          "id": "NCIT:C28421",
+          "operator": "=",
+          "value": " Female "
         },
-        "returnedSchemas": [
-            { 
-            }
-        ]
+        {
+          "id": "nos:number_of_subjects",
+          "operator": ">",
+          "value": "1"
+        }
+      ],
+      "requestedGranularity": "record",
+      "requestedSchemas": {
+        "entityType": "epnd:dataset",
+        "schema": "string"
+      }
     },
-    "responseSummary": {
+    "returnedGranularity": "record",
+    "returnedSchemas": {
+      "entityType": "string",
+      "schema": "string"
+    }
+  },
+  "response": {
+    "resultSets": [
+      {
+        "id": "Node ID",
+        "type": "epnd:dataset",
         "exists": true,
-        "numTotalResults": 1
-    },
-    "info": {
+        "resultCount": 1,
+        "results": [
+          {
+            "id": "BEex3",
+            "name": "Basic Element example three",
+            "resourceURLs": [
+              "www.example.com"
+            ],
+            "publisher": {
+              "publisherType": "",
+              "name": "epnd.org",
+              "contactEmail": "epnd@gmail.com",
+              "contactName": "epnd",
+              "url": "string",
+              "location": "Italy"
+            },
+            "datasetVersions": [
+              {
+                "versionName": "v1.0.0",
+                "numberOfSubjects": 100
+              }
+            ],
+            "description": "string",
+            "releaseLicense": "license URL",
+            "language": "language code"
+          }
+        ]
+      }
+    ]
+  },
+  "responseSummary": {
+    "exists": true,
+    "numTotalResults": 1
+  },
+  "info": {
     "warnings": {
       "unsupportedFilters": [
         "NCIT:C47824"
       ],
       "unsupportedFilterValues": [
+        "NCIT:C142447",
         "NCIT:C19591"
       ]
     }
-  },
-      "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 1,
-            "results": [
-                {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                      "type": "dataset",
-                      "resourceURLs": ["https://www.example.com"],
-                      "description": "string",
-                      "releaseLicense": "license URL",
-                      "language": "language code",
-                      "publisher": {
-                        "publisherType": "",
-                        "name": "epnd.org",
-                        "contactEmail": "epnd@gmail.com",
-                        "contactName": "epnd",
-                        "url": "string",
-                        "location": "Italy"
-                          },
-                        "datasetVersions": [
-                          {
-                            "versionName": "v1.0.0",
-                            "numberOfSubjects": 100
-                          }]
-                    }
-                }
-            ],
-            
-            
-        }
-    ]
-    }
+  }
 }
 ```
 

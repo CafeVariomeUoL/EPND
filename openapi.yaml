@@ -845,7 +845,7 @@ components:
             properties:
               entityType:
                 type: string
-                example: epnd:datasets
+                example: epnd:dataset
               schema:
                 type: string
                 example: ./ga4gh-beacon-dataset-v2.0.0
@@ -948,7 +948,7 @@ components:
           type: string
           description: |
             Version of the API.
-          example: v2.0
+          example: v2.0.1
         beaconId:
           type: string
           description: |
@@ -965,6 +965,7 @@ components:
           properties:
             apiVersion:
               type: string
+              example : v2.0.1
             filters:
               type: object
               description: |
@@ -997,6 +998,7 @@ components:
           properties:
             entityType:
               type: string
+              example: epnd:dataset
             schema:
               type: string
     DatasetsResponse:
@@ -1085,7 +1087,7 @@ components:
             type : string
             description: |
               Node ID
-          setType:
+          type:
             type : string
             description : |
               Entry type of resultSet. It SHOULD MATCH an entry type declared as collection in the Beacon configuration.
