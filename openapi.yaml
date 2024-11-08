@@ -237,7 +237,6 @@ components:
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
             example : https://purl.obolibrary.org/obo/HP_
-        
     GetOneDataset:
       required:
         - meta
@@ -822,7 +821,6 @@ components:
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
       required:
         - apiVersion
-        - requestedSchemas
       properties:
         "$schema":
           type: string
