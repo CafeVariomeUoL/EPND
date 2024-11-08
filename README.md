@@ -385,7 +385,7 @@ The following is an example response
         </td>
     </tr>
     <tr>
-      <td><b>Number of participants</b></td>
+      <td><b>Number of Subjects</b></td>
         <td>Custom</td>
         <td>nos:number_of_subjects</td>
         <td>>,<,=,>=,<=</td>
@@ -982,7 +982,7 @@ This specification defines GET endpoints to request information about resources.
 
 /configuration returns configuration aspects and the definition of the entry types (e.g. genomic variants, biosamples, cohorts) implemented in that specific Beacon server or instance.
 
-<h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
+<h3 id="-example-request-and-response-for-configuration"> Example response for configuration </h3>
 
 
 
@@ -1082,21 +1082,38 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-  "meta": {
-    "apiVersion": "v2.0.1",
-    "beaconId": "org.example.beacon.v2",
-    "returnedSchemas": [
-      {}
-    ]
-  },
-  "response": {
-    "filteringTerms": [
-      {}
-    ],
-    "resources": [
-      {}
-    ]
-  }
+    "meta": {
+        "apiVersion": "v2.0.1",
+        "beaconId": "org.cafevariome.beacon.v2",
+        "returnedSchemas": [
+            {
+                "schema": "beacon-map-v2.0.0"
+            }
+        ]
+    },
+    "response": {
+        "filteringTerms": [
+            
+            {
+                "id": "NCIT:C2991",
+                "label": "Disease",
+                "scopes": [
+                    "epnd:study"
+                ],
+                "type": "alphanumeric"
+            }
+        ],
+        "resources": [
+            {
+                "id": "ncit",
+                "iriPrefix": "https://purl.obolibrary.org/obo/",
+                "name": "NCIT",
+                "namespacePrefix": "obo",
+                "url": "https://purl.obolibrary.org/obo/ncit.owl",
+                "version": "2023-101-19"
+            }
+        ]
+    }
 }
 ``` 
 
@@ -1122,15 +1139,17 @@ This specification defines GET endpoints to request information about resources.
   "response": {
     "$schema": "string",
     "endpointSets": {
-      "property1": {
-       "entryType": "",
+      "datasets": {
+       "entryType": "epnd:datasets",
        "rootUrl": "",
-       "filteringTermsUrl": ""
+       "filteringTermsUrl": "",
+       "singleEntryUrl": ""
       },
-      "property2": {
-       "entryType": "",
+      "study": {
+       "entryType": "epnd:study",
        "rootUrl": "",
-       "filteringTermsUrl": ""
+       "filteringTermsUrl": "",
+       "singleEntryUrl": ""
       }
     }
   }
@@ -1139,21 +1158,4 @@ This specification defines GET endpoints to request information about resources.
 
 [ ^ Back to the top](#top)
 
-<!-- <hr>
 
-<h2 id="swagger-auth"> Authentication using Header for Swagger </h2>
-
-In Swagger, to query using both the /individuals endpoint & /study endpoint (which are POST requests), you have to authorize the query using the **Authorize** button (extreme right, beside Servers dropdown in Swagger UI). 
-
-![image](https://user-images.githubusercontent.com/24955128/203320000-a9cbc5a5-4c49-4a2b-8666-4e0cb17a5a62.png)
-
-![image](https://user-images.githubusercontent.com/24955128/205334330-c90f760d-5d1e-4685-8640-030787233454.png)
-
-Use one of the authentication token provided to perform record level queries.
-![image](https://user-images.githubusercontent.com/24955128/205334443-fce92738-a515-4f0e-8f9f-b701561c283b.png)
-
-> Developers Note: No matter the user agent being used to query (i.e., SwaggerUI, Postman, cURL, etc.,), the authentication header **auth-key is required**. 
-
-[ ^ Back to the top](#top)
-
-<hr> -->

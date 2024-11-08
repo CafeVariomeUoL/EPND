@@ -299,7 +299,7 @@ components:
       type: object
       properties:
         meta:
-          $ref: "#/components/schemas/MetaContent"
+          $ref: "#/components/schemas/DatasetMetaContent"
         query:
           $ref: "#/components/schemas/DatasetsRequestQuery"
       description: "Request to return datasets"
@@ -421,7 +421,7 @@ components:
       type: object
       properties:
         meta:
-          $ref: "#/components/schemas/MetaContent"
+          $ref: "#/components/schemas/StudyMetaContent"
         query:
           $ref: "#/components/schemas/StudyRequestQuery"
       description: "Request to return cohorts"
@@ -454,11 +454,11 @@ components:
           description: >
             Concept ID of CDEs. 
               Allowed terms:
-               * `NCIT_C2991` - Available Diseases
-               * `NCIT_C43412` - Available Sample
-               * `NCIT_C164232` - Available Imaging
-               * `ISO_3166-1` - Country
-          example: "NCIT_C2991"
+               * `NCIT:C2991` - Available Diseases
+               * `NCIT:C43412` - Available Sample
+               * `NCIT:C164232` - Available Imaging
+               * `ISO:3166-1` - Country
+          example: "NCIT:C2991"
         operator:
           type: string
           description: |
@@ -476,7 +476,7 @@ components:
       example: "AD"
       description: |
         The actual value of the CDE in string format. Allowed values:
-          * For `NCIT_C2991`(Available Diseases): 
+          * For `NCIT:C2991`(Available Diseases): 
             * `CG`
             * `PD`
             * `DLB
@@ -490,7 +490,7 @@ components:
             * `HD`
             * `AT`
               * Ex: \"CG\"
-          * For `NCIT_C43412`(Available Samples): 
+          * For `NCIT:C43412`(Available Samples): 
             * `CSF`
             * `Serum
             * `Plasma`
@@ -499,13 +499,13 @@ components:
             * `Faeces`
             * `Urine`
               * Ex: \"Serum\"
-          * For `NCIT_C83164` (Available Imaging)
+          * For `NCIT:C83164` (Available Imaging)
             * `MRI
             * `PET-Amyloid
             * `PET-Tau`
             * `DaT Scan`
               * Ex: MRI
-          * For `ISO_3166-1`(Country):
+          * For `ISO:3166-1`(Country):
             * Any country code
               * Ex: BH
     StudyArrayValues:
@@ -529,7 +529,7 @@ components:
               Allowed terms:
                * `congnitive_data =Cohort Design
                * `number_of_participants` - Number of participants
-          example: "number_of_participants"
+          example: "nos:number_of_subjects"
         operator:
           type: string
           description: |
@@ -606,8 +606,10 @@ components:
               properties:
                 entityType:
                   type: string
+                  example: epnd:study
                 schema:
                   type: string
+                  example : https://www.example.org/schemas/ga4gh-beacon-study-v2.0.0.json
         returnedGranularity:
           type: string
           example: boolean, count, aggregated, record
@@ -870,14 +872,15 @@ components:
         rootUrl:
           type: string
           description: "The base URL for the Beacon endpoints."
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/dataset
         singleEntryUrl:
           type: string
           description: "URL to access a single entry in this Beacon."
-          example : 
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/datasets/1
         filteringTermsUrl:
           type: string
           description: "URL to access filtering terms supported by this Beacon."
-          example : 
+          example : https://cv3-dev.le.ac.uk/query/beacon/test/dataset/filteringTermsUrl
         endpoints:
           type: object
           additionalProperties: 
@@ -1066,10 +1069,75 @@ components:
             properties:
               entityType:
                 type: string
-                example : epnd:dataset
+                example : info
               schema:
                 type: string
-                example : https://www.example.org/schemas/ga4gh-beacon-dataset-v2.0.0.json
+                example : https://www.example.org/schemas/ga4gh-beacon-v2.0.0.json
+    StudyMetaContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      type: object
+      required:
+        - apiVersion
+        - requestedSchemas
+      properties:
+        "$schema":
+          type: string
+          description: |
+            Refers to the JSON Schema which describes the set of valid attributes for this particular document type. This attribute is mostly used in schemas that should be tested in Beacon implementations.
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0.1
+        requestedSchemas:
+          type: array
+          description: |
+            Set of schemas to be used in the response.
+          items:
+            type: object
+            required:
+              - entityType
+              - schema
+            properties:
+              entityType:
+                type: string
+                example: epnd:study
+              schema:
+                type: string
+                example: ./ga4gh-beacon-study-v2.0.0
+    DatasetMetaContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - requestedSchemas
+      properties:
+        "$schema":
+          type: string
+          description: |
+            Refers to the JSON Schema which describes the set of valid attributes for this particular document type. This attribute is mostly used in schemas that should be tested in Beacon implementations.
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0.1
+        requestedSchemas:
+          type: array
+          description: |
+            Set of schemas to be used in the response..
+          items:
+            type: object
+            required:
+              - entityType
+              - schema
+            properties:
+              entityType:
+                type: string
+                example: epnd:datasets
+              schema:
+                type: string
+                example: ./ga4gh-beacon-dataset-v2.0.0
     StudyResponseContent:
       required:
         - exists
@@ -1190,6 +1258,10 @@ components:
               type: string
             welcomeUrl:
               type: string
+            contactUrl:
+              type: string
+            info:
+              type: object
         description:
           type: string
           description: |
@@ -1268,8 +1340,10 @@ components:
               properties:
                 entityType:
                   type: string
+                  example : epnd:dataset
                 schema:
                   type: string
+                  example : https://www.example.org/schemas/ga4gh-beacon-datasets-v2.0.0.json
         returnedGranularity:
           type: string
           example: boolean, count, aggregated, record
@@ -1281,8 +1355,10 @@ components:
           properties:
             entityType:
               type: string
+              example : epnd:dataset
             schema:
               type: string
+              example : https://www.example.org/schemas/ga4gh-beacon-datasets-v2.0.0.json
     DatasetsResponse:
       required:
         - meta
