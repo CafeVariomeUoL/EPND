@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: Virtual platform Beacon API
+  title: EPND Beacon API
   x-beaconVersion: v2.0
-  description: EJPRD virtual platform data record APIs
+  description: EPND Beacon API
   contact:
     email: admin@cafevariome.org
   license:
@@ -262,36 +262,6 @@ components:
             description: |
               The full Internationalized Resource Identifier (IRI) prefix
             example : https://purl.obolibrary.org/obo/HP_
-        
-    GetOneDataset:
-      required:
-        - meta
-        - response
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/MetaContent"
-        response:
-          $ref: "#/components/schemas/GetOneDatasetRespose"
-      description: |
-        The filtering terms response provides information about available individual filters for a beacon's entry types as well as optional information about the ontologies the filters belong to.
-    GetOneDatasetRespose:
-      description: |
-       Get details about one dataset, identified by its (unique) 'id'
-      required:
-        - responseSummary
-      properties:
-        responseSummary:
-          type: object
-          description: |
-           Boolean (true/false) response section.
-          required:
-            - exists
-          properties:
-            exists :
-              type: boolean
-              example: true
-    
     DatasetsRequest:
       required:
         - meta
@@ -1111,7 +1081,6 @@ components:
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
       required:
         - apiVersion
-        - requestedSchemas
       properties:
         "$schema":
           type: string
@@ -1134,7 +1103,7 @@ components:
             properties:
               entityType:
                 type: string
-                example: epnd:datasets
+                example: epnd:dataset
               schema:
                 type: string
                 example: ./ga4gh-beacon-dataset-v2.0.0
@@ -1301,13 +1270,15 @@ components:
         - apiVersion
         - beaconId
         - returnedGranularity
+        - receivedRequestSummary
+        - returnedSchemas
       type: object
       properties:
         apiVersion:
           type: string
           description: |
             Version of the API.
-          example: v2.0
+          example: v2.0.1
         beaconId:
           type: string
           description: |
@@ -1324,14 +1295,13 @@ components:
           properties:
             apiVersion:
               type: string
+              example : v2.0.1
             filters:
-              type: object
-              description: |
-                Filters as submitted in the request.
               $ref: "#/components/schemas/DatasetsRequestFilter"
             requestedGranularity:
               type: string
-              example: boolean, count, aggregated, record
+              example: record
+              description : Requested granularity for the response which may differe from the response's actual granularity.Can have values record, boolean, count
               default: record
             requestedSchemas:
               type: object
@@ -1343,10 +1313,10 @@ components:
                   example : epnd:dataset
                 schema:
                   type: string
-                  example : https://www.example.org/schemas/ga4gh-beacon-datasets-v2.0.0.json
         returnedGranularity:
           type: string
-          example: boolean, count, aggregated, record
+          example: record
+          description : Granularity of the Beacon response which may differ from the requested one. Can have values record, boolean, count
           default: record
         returnedSchemas:
           type: object
@@ -1355,10 +1325,61 @@ components:
           properties:
             entityType:
               type: string
-              example : epnd:dataset
+              example: epnd:dataset
             schema:
               type: string
-              example : https://www.example.org/schemas/ga4gh-beacon-datasets-v2.0.0.json
+    GetOneDatasetsMetaResponseContent:
+      description: |
+        Information about the response that could be relevant for the Beacon client in order to interpret the results.
+      required:
+        - apiVersion
+        - beaconId
+        - returnedGranularity
+        - returnedSchemas
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: |
+            Version of the API.
+          example: v2.0.1
+        beaconId:
+          type: string
+          description: |
+            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
+          example: BeaconAPI.cv3.epnd.org
+        returnedGranularity:
+          type: string
+          example: record
+          description : Granularity of the Beacon response which may differ from the requested one. Can have values record, boolean, count
+          default: record
+        returnedSchemas:
+          type: object
+          description: |
+            Set of schemas to be used in the response to a request.
+          properties:
+            entityType:
+              type: string
+              example: epnd:dataset
+            schema:
+              type: string
+    GetOneDataset:
+      required:
+        - meta
+        - response
+        - responseSummary
+      type: object
+      properties:
+        meta:
+          $ref: "#/components/schemas/GetOneDatasetsMetaResponseContent"
+        response:
+          required:
+            - resultSets
+          properties:
+            resultSets:
+              $ref: "#/components/schemas/DatasetsResults"
+        responseSummary:
+          $ref: "#/components/schemas/DatasetsResponseContent"
     DatasetsResponse:
       required:
         - meta
@@ -1377,8 +1398,6 @@ components:
         responseSummary:
           $ref: "#/components/schemas/DatasetsResponseContent"
         info:
-          description: |
-            Beacon only responds with this info object if there are any unsupported filters in the query.
           $ref: "#/components/schemas/WarningResponse"
     WarningResponse:
       description: |
@@ -1435,10 +1454,21 @@ components:
       items:
         type: object
         required:
+          - id
+          - seTtype
           - exists
           - resultCount
           - results
         properties:
+          id:
+            type : string
+            description: |
+              Node ID
+          setType:
+            type : string
+            description : |
+              Entry type of resultSet. It SHOULD MATCH an entry type declared as collection in the Beacon configuration.
+            example: epnd:dataset
           exists:
             type: boolean
             description: |
@@ -1454,14 +1484,14 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/DatasetsResultSetsResult"
-          resultsHandover:
-            description: |
-              Handover to the resultant record page, if any.
     DatasetsResultSetsResult:
       type: object
       required:
         - id
         - name
+        - resourceURLs
+        - publisher
+        - datasetVersions
       properties:
         id:
           type: string
@@ -1473,24 +1503,15 @@ components:
           description: |
             Name
           example: "Basic Element example three"
-        info:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfo"
-    DatasetsResultSetsResultInfo:
-      type: object
-      required:
-        - type
-        - resourceURLs
-        - publisher
-        - datasetVersions
-      properties:
-        type:
-          type: string
-          example: "dataset"
         resourceURLs:
           type: array
           items:
             type: string
             example: "www.example.com"
+        publisher:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
+        datasetVersions:
+          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
         description:
           type: string
           example: "string"
@@ -1500,10 +1521,6 @@ components:
         language:
           type: string
           example: "language code"
-        publisher:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
-        datasetVersions:
-          $ref: "#/components/schemas/DatasetsResultSetsResultInfoDatasetVersions"
     DatasetsResultSetsResultInfoPublisher:
       type: object
       required:
