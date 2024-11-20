@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: Virtual platform Beacon API
+  title: EPND Beacon API
   x-beaconVersion: v2.0
-  description: EJPRD virtual platform data record APIs
+  description: EPND Beacon API
   contact:
     email: admin@cafevariome.org
   license:
@@ -1095,7 +1095,7 @@ components:
         type: object
         required:
           - id
-          - type
+          - setType
           - exists
           - resultCount
           - results
@@ -1104,7 +1104,7 @@ components:
             type : string
             description: |
               Node ID
-          type:
+          setType:
             type : string
             description : |
               Entry type of resultSet. It SHOULD MATCH an entry type declared as collection in the Beacon configuration.
