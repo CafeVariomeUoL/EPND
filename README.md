@@ -222,7 +222,7 @@ The following is an example response
     "resultSets": [
       {
         "id": "Node ID",
-        "type": "epnd:dataset",
+        "setType": "epnd:dataset",
         "exists": true,
         "resultCount": 2,
         "results": [
@@ -342,7 +342,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
     "resultSets": [
       {
         "id": "Node ID",
-        "type": "epnd:dataset",
+        "setType": "epnd:dataset",
         "exists": true,
         "resultCount": 1,
         "results": [
