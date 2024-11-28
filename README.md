@@ -10,7 +10,7 @@
 * [Try out this API in Swagger](#-try-out-the-api-)
 * [Specification](#-specification-)
 * [Query Endpoints](#-query-endpoints-)
-    * [Study endpoint](#-s-endpoint-)
+    * [Datasets endpoint](#-s-endpoint-)
       * [List of filters](#-list-of-filters-and-permitted-values-for-the-study-endpoint-)
       * [Filters description](#-study-filters-description-)
       * [Example request & response](#-example-request-and-response-for-study-)
@@ -28,7 +28,7 @@
  
 <h2 id="#-try-out-the-api-"> Try out the API </h2>
 
-Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis/deepthivs/EPND/v1.0
+Latest version (v2.0) of this specification is available on Swagger here: https://app.swaggerhub.com/apis-docs/deepthivs/EPND/datasetsv1.0
 
 <hr>
 
@@ -36,7 +36,7 @@ Latest version (v2.0) of this specification is available on Swagger here: https:
 
 The request and response conforms to the [Beacon Reference Framework](https://github.com/ga4gh-beacon/beacon-v2). This Specification defines two types of endpoints - **[The Query Endpoints](#-query-endpoints-)** and **[The Informational Endpoints](#-informational-endpoints-)**. 
 
-[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/study](#-study-endpoint-).
+[Query Endpoints](#-query-endpoints-) require the requester to provide a JSON body and send request using the POST method. This document defines query endpoints to query resources using filters -  [/datasets](#-study-endpoint-).
 
 [Informational Endpoints](#-informational-endpoints-) are simple GET requests without needing a request body, and respond with information relavant to this Beacon Specification. These are: /info, /configuration, /entry_types, /filtering_terms and /map. A special /service-info endpoint (also a GET request), responds with metadata relevant to this Beacon using the [GA4GH ServiceInfo format](https://github.com/ga4gh-discovery/ga4gh-service-info/). 
 
@@ -46,6 +46,7 @@ The request and response conforms to the [Beacon Reference Framework](https://gi
 <h2 id="-query-endpoints-"> Query Endpoints </h2>
 
 This specification defines POST endpoints to request information about resources. Each endpoint makes use of the [Filters](http://docs.genomebeacons.org/filters/) capability of the Beacon API.
+
 
 <hr>
 <h3 id="-study-endpoint-"> Datasets endpoint </h3>
@@ -184,9 +185,8 @@ The following is an example response
 ```JSON
 {
   "meta": {
+    "apiVersion": "v2.0.1",
     "beaconId": "BeaconAPI.cv3.epnd.org",
-    "apiVersion": "v2.0.1", 
-    "returnedGranularity": "record",
     "receivedRequestSummary": {
       "apiVersion": "v2.0.1",
        "filters": [
@@ -212,7 +212,7 @@ The following is an example response
         "schema": "string"
       }
     },
-    
+    "returnedGranularity": "record",
     "returnedSchemas": {
       "entityType": "epnd:dataset",
       "schema": "string"
@@ -391,434 +391,6 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
   }
 }
 ```
-[ ^ Back to the top](#top)
-
-<hr>
-
-
-<h3 id="-study-endpoint-"> Study endpoint </h3>
-
-> Method: POST
-
-[/study](#-study-endpoint-) endpoint returns the **cohorts of EPND resources** as response. Filters are provided as a part of the body while using a POST request to query resources.
-
-<h4 id="-list-of-filters-and-permitted-values-for-the-study-endpoint-"> List of filters and permitted values for the study endpoint </h4>
-
-> **Note**: Elements within arrays in **value** fields are treated as **ORs** and always use logical **AND** between the query parameters ,i.e all conditions in the query have to be met.
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Metadata Schema Concept</th>
-            <th>Beacon Filter Type</th>
-            <th>ID</th>
-            <th>Operator</th>
-            <th>Query Values</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td rowspan="13"><b>Available Diseases</b></td>
-            <td rowspan="13">Alphanumerical</td>
-            <td rowspan="13">NCIT:C2991</td>
-            <td rowspan="13">=</td>
-            <td>CG</td>    
-        </tr>
-        <tr><td>AD</td></tr>
-        <tr><td>PD</td></tr>
-        <tr><td>DLB</td></tr>
-        <tr><td>iRBD</td></tr>
-        <tr><td>CAA</td></tr>
-        <tr><td>FTD</td></tr>
-        <tr><td>ALS</td></tr>
-        <tr><td>PSP</td></tr>
-        <tr><td>CBD</td></tr>
-        <tr><td>MSA</td></tr>
-        <tr><td>HD</td></tr>
-        <tr><td>AT</td></tr>
-    <tr>
-        <td rowspan="7"><b>Available Samples</b>
-        </td>
-        <td rowspan="7">Alphanumerical</td>
-        <td rowspan="7">NCIT:C43412</td>
-        <td rowspan="7">=</td>
-        <td>
-        CSF
-        </td>
-    </tr>
-    <tr><td>Serum</td></tr>
-    <tr><td>Plasma</td></tr>
-    <tr><td>DNA</td></tr>
-    <tr><td>Saliva</td></tr>
-    <tr><td>Faeces</td></tr>
-     <tr><td>Urine</td></tr>
-    <tr>
-        <td rowspan="4"><b>Available Imaging</b></td>
-        <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT:C17369</td>
-        <td rowspan="4">=</td>
-        <td>MRI</td>
-    </tr>
-    <tr><td>PET-Amyloid</td></tr>
-    <tr><td>PET-Tau</td></tr>
-    <tr><td>DaT Scan</td></tr>
-    <tr>
-        <td rowspan="2">
-            <b>Cohort Design</b>
-        </td>
-        <td rowspan="2">
-            Custom
-        </td>
-        <td rowspan="2">
-            CD:cognitive_data
-        </td>
-        <td rowspan="2">
-            =
-        </td>
-        <td>
-            Cross-sectional
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Logitudinal
-        </td>
-    </tr>
-    <tr>
-      <td><b>Number of Subjects</b></td>
-        <td>Custom</td>
-        <td>nos:number_of_subjects</td>
-        <td>>,<,=,>=,<=</td>
-        <td>any integer</td>
-    </tr>
-    <tr>
-      <td><b>Country</b></td>
-        <td>Alphanumerical</td>
-        <td>ISO:3166-1</td>
-        <td>=</td>
-        <td>https://www.iso.org/obp/ui/#search</td>
-    </tr>
-  
-
-</tbody>
-</table>
-
-
-[ ^ Back to the top](#top)
-<hr>
-
-
-
-<h3 id="-study-filters-description-"> Study endpoint Filters Description </h3>
-
-**Available Diseases**: A single value or an array of diseases, eg : AD or [CG,AD]
-
-**Available Samples**: A single value or an array of samples, eg : Serum or [Serum,Plasma]
-
-**Available Imaging**: A single value or an array of imaging technique, eg : MRI or [MRI,PET-Amyloid]
-
-**Cohort Design**: A single value or an array of cohort design, eg : Cross-sectional or [Cross-sectional,Longitudinal]
-
-**Number of Subjects**: The number of subjects in the cohort . eg : >10 ,<20 or =100
-
-**Country**: A single value or an array of two-letter country codes eg : AF OR [AF,AT]
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Abbreviation</th>
-            <th>Definiton</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>CG</td>
-            <td>Cognitively normal</td>
-        </tr>
-        <tr><td>AD</td><td>Alzheimer's disease</td></tr>
-        <tr><td>PD</td><td>Parkinson's disease</td></tr>
-        <tr><td>DLB</td><td>Dementia with Lewy bodies</td></tr>
-        <tr><td>iRBD</td><td>Isolated REM sleep behavior disorder </td></tr>
-        <tr><td>CAA</td><td>Cerebral amyloid angiopathy </td></tr>
-        <tr><td>FTD</td><td>Frontotemporal dementia </td></tr>
-        <tr><td>ALS</td><td>Amyotrophic lateral sclerosis </td></tr>
-        <tr><td>PSP</td><td>Progressive supranuclear palsy </td></tr>
-        <tr><td>CBD</td><td>Corticobasal degeneration </td></tr>
-        <tr><td>MSA</td><td>Multiple system atrophy </td></tr>
-        <tr><td>HD</td><td>Huntington's disease</td></tr>
-        <tr><td>AT</td><td>Ataxia</td></tr>
-    
-</tbody>
-</table>
-
-<hr>
-
-<h3 id="-example-request-and-response-for-study-"> Example request and response for study </h3>
-
-**EXAMPLE /study REQUEST**
-
-```JSON
-{ 
- "meta":{
-      "apiVersion": "v2.0.1"
- },
- "query": {
-      
-"filters": [
-             {
-               "id": "NCIT:C2991",
-               "operator": "=",
-               "value": ["CG","AD"]
-             },
-             {
-               "id": "NCIT:C43412",
-               "operator": "=",
-               "value": ["Serum","Plasma"]
-             },
-             {
-               "id": "NCIT:C164234",
-               "operator": "=",
-               "value": "MRI"
-             }, 
-             {
-               "id": "CD:cognitive_data",
-               "operator": "=",
-               "value": "Cross-sectional"
-             },
-             {
-               "id": "nos:number_of_subjects",
-               "operator": ">",
-               "value": 100
-             },
-             {
-               "id": "nos:number_of_subjects",
-               "operator": "<",
-               "value": 1000
-             },
-             {
-               "id": "ISO:3166-1",
-               "operator": "=",
-               "value": ["AT","BH"]
-             }
-       ],
-      "requestedGranularity": "record"
-    }
-}
-```
-
-
-**requestedGranularity**: It is not mandatory to respond with the exact requested granularity, but the response granularity must specify the actual granularity level of the response in the response metadata. Allowed granularity values include "boolean", "count", "aggregated" and "record", with "record" being the default value.
-
-> **Note**:If the Beacon service supports record-level granularity but the client requests count-level granularity, the service should aggregate the matching records and provide the count of those records as the response.
-
-The following is an example response 
-
-**EXAMPLE /study RESPONSE**
-```JSON
-{
-    "meta": {
-        "beaconId": "org.example.beacon.v2",
-        "apiVersion": "v2.0.1",
-        "returnedGranularity": "record",
-        "receivedRequestSummary": {
-            "apiVersion": "v2.0.1",
-            "requestedSchemas": [],
-            "filters": [
-             {
-               "id": "NCIT:C2991",
-               "operator": "=",
-               "value": ["CG","AD"]
-             },
-             {
-               "id": "NCIT:C43412",
-               "operator": "=",
-               "value": ["Serum","Plasma"]
-             },
-             {
-               "id": "NCIT:C164234",
-               "operator": "=",
-               "value": "MRI"
-             }, 
-             {
-               "id": "CD:cognitive_data",
-               "operator": "=",
-               "value": "Cross-sectional"
-             },
-             {
-               "id": "nos:number_of_subjects",
-               "operator": ">",
-               "value": 100
-             },
-             {
-               "id": "nos:number_of_subjects",
-               "operator": "<",
-               "value": 1000
-             },
-             {
-               "id": "ISO:3166-1",
-               "operator": "=",
-               "value": ["AT","BH"]
-             }
-       ],
-            "requestParameters": {},
-            "includeResultsetResponses": "HIT",
-            "pagination": {
-                "skip": 0,
-                "limit": 50
-            },
-            "requestedGranularity": "record",
-            "testMode": false
-        },
-        "returnedSchemas": [
-            {
-               "entityType": "study",
-               "schema": "beacon-cohort-v2.0.0",
-            }
-        ]
-    },
-    "responseSummary": {
-        "exists": true,
-        "numTotalResults": 2
-    },
-    "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 2,
-            "results": [
-                {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        }
-                    }
-                },
-                {
-                    "id": "BEex4",
-                    "name": "Basic Element example four",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        }
-                    }
-                }
-            ],
-            
-            
-        }
-    ]
-    }
-}
-```
-
-[ ^ Back to the top](#top)
-
-<hr>
-
-
-The filter **SHOULD** be one of the terms from the [filters and permitted values table](#-list-of-filters-and-permitted-values-for-the-study-endpoint-). Please note that not all resources will support all of the filters. In such cases the response **MUST** include a [warning message in the 'info' part](#warning-response-example) indicating which requested filters are unsupported and these were not included in the query.
-
-**EXAMPLE warning when unsupported filters are requested**
-
-
-```JSON
-{
-    "meta": {
-        "beaconId": "org.example.beacon.v2",
-        "apiVersion": "v2.0.2",
-        "returnedGranularity": "record",
-        "receivedRequestSummary": {
-            "apiVersion": "v2.0.0",
-            "requestedSchemas": [],
-            "filters": [
-                {}
-            ],
-            "requestParameters": {},
-            "includeResultsetResponses": "HIT",
-            "pagination": {
-                "skip": 0,
-                "limit": 50
-            },
-            "requestedGranularity": "record",
-            "testMode": false
-        },
-        "returnedSchemas": [
-            { 
-            }
-        ]
-    },
-    "responseSummary": {
-        "exists": true,
-        "numTotalResults": 1
-    },
-    "info": {
-        "warnings": {
-            "unsupportedFilters": [
-                
-            ]
-        }
-    },
-    "response": {
-        "resultSets": [
-        {
-            "exists": true,
-            "resultsCount": 1,
-            "results": [
-                {
-                    "id": "BEex3",
-                    "name": "Basic Element example three",
-                    "info":{
-                    "type": "dataset",
-                    "url": "string",
-                    "description": "string",
-                    "releaseLicense": "license URL",
-                    "language": "language code",
-                    "publisher": {
-                      "publisherType": "",
-                      "name": "epnd.org",
-                      "contactEmail": "epnd@gmail.com",
-                      "contactName": "epnd",
-                      "url": "string",
-                      "location": "Italy"
-                        }
-                    }
-                }
-            ],
-            
-            
-        }
-    ]
-    }
-}
-```
 
 
 
@@ -905,21 +477,21 @@ As shown above, different types of filters can be sent in a single query. These 
       "filters": [
         
         {
-               "id": "NCIT:C164234",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "MRI"
+               "value": "NCIT:C19591"
              }, 
              {
-               "id": "cognitive_data",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": "Cross-sectional"
+               "value": "Female"
              },
       ]
     }
 }
 ```
 
-This filter is asking for cohorts that have Imaging as MRI  **and** cognitive_data as Cross-sectional .
+This filter is asking for datsets that have datatset types  as MDiagnostic marker **AND** sex  as Female .
 
 
 [ ^ Back to the top](#top)
@@ -938,20 +510,20 @@ To query for records with more than one instance of any of the filters you can s
     {
       "filters": [
         {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "Serum"
+               "value": "NCIT:C19591"
              }, 
              {
-               "id": "NCIT:C43412",
+               "id": "NCIT:C47824",
                "operator": "=",
-               "value": "Saliva"
+               "value": "NCIT:C17369"
              },
       ]
    }
 }
 ```
-This query is looking for cohorts with biosample Serum AND Saliva biosample.
+This query is looking for datsets with dataset types  Diagnostic marker AND Imaging.
 
 
 [ ^ Back to the top](#top)
@@ -968,15 +540,15 @@ This query is looking for cohorts with biosample Serum AND Saliva biosample.
     {
       "filters": [
          {
-               "id": "NCIT:C2991",
+               "id": "NCIT:C28421",
                "operator": "=",
-               "value": ["CG","AD"]
+               "value": ["Male","Female"]
              },
       ]
    }
 }
 ```
-This query is looking for cohorts either with Cognitively normal disease OR Alzheimer's disease.
+This query is looking for datasets either with Male OR Female.
 
 > **Note**: There are no OR operators available **between** filters with beacon queries.
 
@@ -1083,7 +655,7 @@ This specification defines GET endpoints to request information about resources.
 
 /configuration returns configuration aspects and the definition of the entry types (e.g. genomic variants, biosamples, cohorts) implemented in that specific Beacon server or instance.
 
-<h3 id="-example-request-and-response-for-configuration"> Example response for configuration </h3>
+<h3 id="-example-request-and-response-for-configuration"> Example response for service-info </h3>
 
 
 
@@ -1183,38 +755,21 @@ This specification defines GET endpoints to request information about resources.
 
 ```JSON
 {
-    "meta": {
-        "apiVersion": "v2.0.1",
-        "beaconId": "org.cafevariome.beacon.v2",
-        "returnedSchemas": [
-            {
-                "schema": "beacon-map-v2.0.0"
-            }
-        ]
-    },
-    "response": {
-        "filteringTerms": [
-            
-            {
-                "id": "NCIT:C2991",
-                "label": "Disease",
-                "scopes": [
-                    "epnd:study"
-                ],
-                "type": "alphanumeric"
-            }
-        ],
-        "resources": [
-            {
-                "id": "ncit",
-                "iriPrefix": "https://purl.obolibrary.org/obo/",
-                "name": "NCIT",
-                "namespacePrefix": "obo",
-                "url": "https://purl.obolibrary.org/obo/ncit.owl",
-                "version": "2023-101-19"
-            }
-        ]
-    }
+  "meta": {
+    "apiVersion": "v2.0.1",
+    "beaconId": "org.example.beacon.v2",
+    "returnedSchemas": [
+      {}
+    ]
+  },
+  "response": {
+    "filteringTerms": [
+      {}
+    ],
+    "resources": [
+      {}
+    ]
+  }
 }
 ``` 
 
@@ -1240,17 +795,15 @@ This specification defines GET endpoints to request information about resources.
   "response": {
     "$schema": "string",
     "endpointSets": {
-      "datasets": {
-       "entryType": "epnd:datasets",
+      "property1": {
+       "entryType": "",
        "rootUrl": "",
-       "filteringTermsUrl": "",
-       "singleEntryUrl": ""
+       "filteringTermsUrl": ""
       },
-      "study": {
-       "entryType": "epnd:study",
+      "property2": {
+       "entryType": "",
        "rootUrl": "",
-       "filteringTermsUrl": "",
-       "singleEntryUrl": ""
+       "filteringTermsUrl": ""
       }
     }
   }
@@ -1258,5 +811,4 @@ This specification defines GET endpoints to request information about resources.
 ```
 
 [ ^ Back to the top](#top)
-
 

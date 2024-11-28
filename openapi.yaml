@@ -8,11 +8,11 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: v1.0
+  version: datasetsv1.0
 servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/deepthivs/EPND/v1.0
+    url: https://virtserver.swaggerhub.com/deepthivs/EPND/datasetsv1.0
 paths:
   /info:
     get:
@@ -105,31 +105,6 @@ paths:
             application/json:
               schema:
                   $ref: "#/components/schemas/DatasetsResponse"
-        "400":
-          description: "Input data malformed"
-          content: {}
-        "403":
-          description: "The data source does not allow this API call"
-          content: {}
-  /study:
-    post:
-      summary: "Request to get cohorts."
-      tags:
-        - Query Endpoints
-      operationId: study_request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/StudyRequest"
-        required: true
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                  $ref: "#/components/schemas/StudyResponse"
         "400":
           description: "Input data malformed"
           content: {}
@@ -384,236 +359,6 @@ components:
         Any Interger valur:
           * For `nos:number_of_subjects`(Number of Subjects):
               * Ex: \"100\"
-    StudyRequest:
-      required:
-        - meta
-        - query
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/StudyMetaContent"
-        query:
-          $ref: "#/components/schemas/StudyRequestQuery"
-      description: "Request to return cohorts"
-    StudyRequestQuery:
-      type: object
-      properties:
-        filters:
-          $ref: "#/components/schemas/StudyRequestFilter"
-        requestedGranularity:
-          type: string
-          description: |
-            Granularity 
-          example: boolean
-      description: "Input of the query"
-    StudyRequestFilter:
-      type: array
-      items:
-        anyOf:
-          - $ref: "#/components/schemas/StudyAlphanumericRequestFilter"
-          - $ref: "#/components/schemas/StudyCustomRequestFilter"
-    StudyAlphanumericRequestFilter:
-      required:
-        - id
-        - operator
-        - value
-      type: object
-      properties:
-        id:
-          type: string
-          description: >
-            Concept ID of CDEs. 
-              Allowed terms:
-               * `NCIT:C2991` - Available Diseases
-               * `NCIT:C43412` - Available Sample
-               * `NCIT:C164232` - Available Imaging
-               * `ISO:3166-1` - Country
-          example: "NCIT:C2991"
-        operator:
-          type: string
-          description: |
-            This is an advance filter option to include comparison operators in the query. 
-              * For `alphanumeric filter`, only `'='` is allowed. 
-              * For `numeric filter`, `'=,>,>=,<,<='` are allowed.
-          example: "="
-        value:
-          anyOf:
-            - $ref: "#/components/schemas/StudyStringValue"
-            - $ref: "#/components/schemas/StudyArrayValues"
-      description: "Query parameters to filter individuals based on CDEs."
-    StudyStringValue:
-      type: string
-      example: "AD"
-      description: |
-        The actual value of the CDE in string format. Allowed values:
-          * For `NCIT:C2991`(Available Diseases): 
-            * `CG`
-            * `PD`
-            * `DLB
-            * `iRBD`
-            * `CAA`
-            * `FTD`
-            * `ALS`
-            * `PSP`
-            * `CBD`
-            * `MSA`
-            * `HD`
-            * `AT`
-              * Ex: \"CG\"
-          * For `NCIT:C43412`(Available Samples): 
-            * `CSF`
-            * `Serum
-            * `Plasma`
-            * `DNA`
-            * `Saliva`
-            * `Faeces`
-            * `Urine`
-              * Ex: \"Serum\"
-          * For `NCIT:C83164` (Available Imaging)
-            * `MRI
-            * `PET-Amyloid
-            * `PET-Tau`
-            * `DaT Scan`
-              * Ex: MRI
-          * For `ISO:3166-1`(Country):
-            * Any country code
-              * Ex: BH
-    StudyArrayValues:
-      type: array
-      items:
-        type: string
-      example: '["Serum","Plasma"]'
-      description: |
-        An array of allowed value(s) in string format.
-    StudyCustomRequestFilter:
-      required:
-        - id
-        - operator
-        - value
-      type: object
-      properties:
-        id:
-          type: string
-          description: >
-            Concept ID. 
-              Allowed terms:
-               * `congnitive_data =Cohort Design
-               * `number_of_participants` - Number of participants
-          example: "nos:number_of_subjects"
-        operator:
-          type: string
-          description: |
-            This is an advance filter option to include comparison operators in the query. 
-              * For `alphanumeric filter`, only `'='` is allowed. 
-              * For `numeric filter`, `'=,>,>=,<,<='` are allowed.
-          example: ">"
-        value:
-          anyOf:
-            - $ref: "#/components/schemas/StudyCustomStudyValue"
-            - $ref: "#/components/schemas/StudyCustomStudyArrayValue"
-      description: "Query parameters to filter individuals based on CDEs."
-    StudyCustomStudyValue:
-      type: string
-      example: "1"
-      description: |
-        Any Interger valur:
-          * For `number_of_participants`(Number of participants):
-              * Ex: \"100\"
-          * For `cognitive_data`(Cohort Design): 
-            * `Cross-sectional`
-            * `Logitudinal
-              * Ex: \"Logitudinal\"
-    StudyCustomStudyArrayValue:
-      type: array
-      items:
-        type: string
-      example: '["Logitudinal","Cross-sectional"]'
-      description: |
-        An array of allowed value(s) in string format.
-    StudyMetaResponseContent:
-      description: |
-        Information about the response that could be relevant for the Beacon client in order to interpret the results.
-      required:
-        - apiVersion
-        - beaconId
-        - returnedGranularity
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: |
-            Version of the API.
-          example: v2.0
-        beaconId:
-          type: string
-          description: |
-            Identifier of the beacon, as defined in Beacon, in reverse domain name notation.
-          example: BeaconAPI.cv2.rdnexusdev.molgeniscloud.org
-        receivedRequestSummary:
-          required:
-            - apiVersion
-            - requestedGranularity
-            - requestedSchemas
-          type: object
-          description: |
-            Section of the response that summarize the request with the following fields received as its been interpreted by the Beacon server. This could also just return the complete Beacon request made by the user.
-          properties:
-            apiVersion:
-              type: string
-            filters:
-              type: object
-              description: |
-                Filters as submitted in the request.
-              $ref: "#/components/schemas/StudyRequestFilter"
-            requestedGranularity:
-              type: string
-              example: boolean, count, aggregated, record
-              default: count
-            requestedSchemas:
-              type: object
-              description: |
-                Set of schemas to be used in the response to a request.
-              properties:
-                entityType:
-                  type: string
-                  example: epnd:study
-                schema:
-                  type: string
-                  example : https://www.example.org/schemas/ga4gh-beacon-study-v2.0.0.json
-        returnedGranularity:
-          type: string
-          example: boolean, count, aggregated, record
-          default: count
-        returnedSchemas:
-          type: object
-          description: |
-            Set of schemas to be used in the response to a request.
-          properties:
-            entityType:
-              type: string
-            schema:
-              type: string
-    StudyResponse:
-      required:
-        - meta
-        - response
-        - responseSummary
-      type: object
-      properties:
-        meta:
-          $ref: "#/components/schemas/StudyMetaResponseContent"
-        response:
-          required:
-            - resultSets
-          properties:
-            resultSets:
-              $ref: "#/components/schemas/StudyResults"
-        responseSummary:
-          $ref: "#/components/schemas/StudyResponseContent"
-        info:
-          description: |
-            Beacon only responds with this info object if there are any unsupported filters in the query.
-          $ref: "#/components/schemas/WarningResponse"
     InfoResponse:
       required:
         - meta
@@ -1043,39 +788,6 @@ components:
               schema:
                 type: string
                 example : https://www.example.org/schemas/ga4gh-beacon-v2.0.0.json
-    StudyMetaContent:
-      description: |
-        Information about the response that could be relevant for the Beacon client in order to interpret the results.
-      type: object
-      required:
-        - apiVersion
-        - requestedSchemas
-      properties:
-        "$schema":
-          type: string
-          description: |
-            Refers to the JSON Schema which describes the set of valid attributes for this particular document type. This attribute is mostly used in schemas that should be tested in Beacon implementations.
-        apiVersion:
-          type: string
-          description: |
-            Version of the API.
-          example: v2.0.1
-        requestedSchemas:
-          type: array
-          description: |
-            Set of schemas to be used in the response.
-          items:
-            type: object
-            required:
-              - entityType
-              - schema
-            properties:
-              entityType:
-                type: string
-                example: epnd:study
-              schema:
-                type: string
-                example: ./ga4gh-beacon-study-v2.0.0
     DatasetMetaContent:
       description: |
         Information about the response that could be relevant for the Beacon client in order to interpret the results.
@@ -1107,74 +819,6 @@ components:
               schema:
                 type: string
                 example: ./ga4gh-beacon-dataset-v2.0.0
-    StudyResponseContent:
-      required:
-        - exists
-        - numTotalResults
-      type: object
-      properties:
-        exists:
-          type: boolean
-          description: |
-            Indicator of whether any individual was observed in the
-            data source for the given query with CDEs parameter. This should be non-null, unless there was an error, in which case `error` has to be non-null.
-        numTotalResults:
-          type: integer
-          description: |
-            Response of the query indicating if the query yield any results. If the query is successful then the count will be returned as a response.
-    StudyResults:
-      type: array
-      items:
-        type: object
-        required:
-          - id
-          - type
-          - exists
-          - resultCount
-          - results
-        properties:
-          id:
-            type: string
-            description: |
-              id of the result
-            example: "result0123"
-          type:
-            type: string
-            description: |
-              Type of result
-            example: "Dataset"
-          exists:
-            type: boolean
-            description: |
-              Whether the results exists or not.
-          resultCount:
-            type: integer
-            description: |
-              Number of results in this Resultset.
-          results:
-            description: |
-              Array set of the records matching with the query.
-            type: array
-            items:
-              $ref: "#/components/schemas/StudyResultSetsResult"
-          resultsHandover:
-            description: |
-              Handover to the resultant record page, if any.
-    StudyResultSetsResult:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: string
-          description: |
-            id of the result
-        
-        name:
-          type: string
-          description: |
-            Name
     InfoResponseContent:
       description: |
         Metadata describing a Beacon instance.
@@ -1227,10 +871,6 @@ components:
               type: string
             welcomeUrl:
               type: string
-            contactUrl:
-              type: string
-            info:
-              type: object
         description:
           type: string
           description: |
@@ -1455,7 +1095,7 @@ components:
         type: object
         required:
           - id
-          - seTtype
+          - setType
           - exists
           - resultCount
           - results
