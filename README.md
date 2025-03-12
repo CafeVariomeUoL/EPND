@@ -229,7 +229,7 @@ The following is an example response
           {
             "id": "BEex3",
             "name": "Basic Element example three",
-            "resourceURLs": [
+            "resourceUrls": [
               "www.example.com"
             ],
             "publisher": {
@@ -253,7 +253,7 @@ The following is an example response
           {
             "id": "BEex4",
             "name": "Basic Element example four",
-            "resourceURLs": [
+            "resourceUrls": [
               "www.example.com"
             ],
             "publisher": {
@@ -349,7 +349,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
           {
             "id": "BEex3",
             "name": "Basic Element example three",
-            "resourceURLs": [
+            "resourceUrls": [
               "www.example.com"
             ],
             "publisher": {
