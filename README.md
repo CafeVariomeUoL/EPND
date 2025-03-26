@@ -151,8 +151,6 @@ This specification defines POST endpoints to request information about resources
 
 **Free-text Search**: The free-text will sent a LIKE  query on the following fields:
 
-The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match.
-
 <ul>
   <li>sourceName</li>
   <li>publisher.name</li>
@@ -162,6 +160,7 @@ The inclusion of a percent sign (%) wildcard character within the value paramete
   <li>datasetDetails.keywords</li>
 </ul>
 
+The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match.
 
 
 [ ^ Back to the top](#top)
