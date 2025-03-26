@@ -340,6 +340,7 @@ components:
             Concept ID. 
               Allowed terms:
                * `nos:number_of_subjects` - Number of subjects
+               * `
           example: "nos:number_of_subjects"
         operator:
           type: string
@@ -351,14 +352,16 @@ components:
         value:
           anyOf:
             - $ref: "#/components/schemas/DatasetsCustomDatasetsValue"
-      description: "Query parameters to filter individuals based on CDEs."
+      description: "Query parameters to filter records"
     DatasetsCustomDatasetsValue:
       type: string
       example: "1"
       description: |
         Any Interger valur:
-          * For `nos:number_of_subjects`(Number of Subjects):
+          * For `epnd:number_of_subjects`(Number of Subjects):
               * Ex: \"100\"
+          * For epnd:search
+              * Ex: diabetes
     InfoResponse:
       required:
         - meta

@@ -88,7 +88,7 @@ This specification defines POST endpoints to request information about resources
      <tr>
       <td><b>Number of Subjects</b></td>
         <td>Custom</td>
-        <td>nos:number_of_subjects</td>
+        <td>epnd:number_of_subjects</td>
         <td>>,<,=,>=,<=</td>
         <td>any integer</td>
     </tr>
@@ -116,6 +116,20 @@ This specification defines POST endpoints to request information about resources
     <tr><td>NCIT:C18479(Neuropathology)</td></tr>
     <tr><td>NCIT:C16564(Ethnicity Coverage)</td></tr>
     <tr><td>Other</td></tr>
+
+   <tr>
+        <td rowspan="1"><b>Free-text Search</b>
+        </td>
+        <td rowspan="1">Custom Filter</td>
+        <td rowspan="1">epnd:search</td>
+        <td rowspan="1">=</td>
+        <td>
+        any string
+        </td>
+    </tr>
+   
+   
+    
   
 
 </tbody>
@@ -135,7 +149,16 @@ This specification defines POST endpoints to request information about resources
 
 **Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
 
+**Free-text Search**: The free-text will do free-text search on following fields.
 
+<ul>
+  <li>sourceName</li>
+  <li>publisher.name</li>
+  <li>publisher.contactName</li>
+  <li>publisher.location</li>
+  <li>description</li>
+  <li>datasetDetails.keywords</li>
+</ul>
 
 [ ^ Back to the top](#top)
 
@@ -159,7 +182,7 @@ This specification defines POST endpoints to request information about resources
                "value": ["Female","Male"]
              },
              {
-               "id": "nos:number_of_subjects",
+               "id": "epnd:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
@@ -196,7 +219,7 @@ The following is an example response
                "value": ["Female","Male"]
              },
              {
-               "id": "nos:number_of_subjects",
+               "id": "epnd:number_of_subjects",
                "operator": "<",
                "value": 1000
              },
@@ -321,7 +344,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
           "value": " Female "
         },
         {
-          "id": "nos:number_of_subjects",
+          "id": "epnd:number_of_subjects",
           "operator": ">",
           "value": "1"
         }
