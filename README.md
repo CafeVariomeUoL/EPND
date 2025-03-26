@@ -120,8 +120,8 @@ This specification defines POST endpoints to request information about resources
    <tr>
         <td rowspan="1"><b>Free-text Search</b>
         </td>
-        <td rowspan="1">Custom Filter</td>
-        <td rowspan="1">epnd:search</td>
+        <td rowspan="1">Alphanumberical</td>
+        <td rowspan="1">NCIT:C70764</td>
         <td rowspan="1">=</td>
         <td>
         %any string%
@@ -195,7 +195,7 @@ The inclusion of a percent sign (%) wildcard character within the value paramete
                "value": "NCIT:C19591"
              },
              {
-              "id": "epnd:search",
+              "id": "NCIT:C70764",
               "operator":"=",
               "value":"%cancer%"
              }
@@ -237,7 +237,7 @@ The following is an example response
                "value": "NCIT:C19591"
              },
              {
-              "id": "epnd:search",
+              "id": "NCIT:C70764",
               "operator":"=",
               "value":"%cancer%"
              }

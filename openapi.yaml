@@ -279,6 +279,7 @@ components:
               Allowed terms:
                * `NCIT:C28421` - Sex
                * `NCIT:C47824` - Dataset Types
+               * ` NCIT:C70764` - Free-text search
           example: "NCIT:C28421"
         operator:
           type: string
@@ -360,8 +361,6 @@ components:
         Any Interger valur:
           * For `epnd:number_of_subjects`(Number of Subjects):
               * Ex: \"100\"
-          * For epnd:search
-              * Ex: %diabetes%
     InfoResponse:
       required:
         - meta
