@@ -361,7 +361,7 @@ components:
           * For `epnd:number_of_subjects`(Number of Subjects):
               * Ex: \"100\"
           * For epnd:search
-              * Ex: diabetes
+              * Ex: %diabetes%
     InfoResponse:
       required:
         - meta

@@ -124,7 +124,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="1">epnd:search</td>
         <td rowspan="1">=</td>
         <td>
-        any string
+        %any string%
         </td>
     </tr>
    
@@ -149,7 +149,9 @@ This specification defines POST endpoints to request information about resources
 
 **Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
 
-**Free-text Search**: The free-text will do free-text search on following fields.
+**Free-text Search**: The free-text will sent a LIKE  query on the following fields:
+
+The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match.
 
 <ul>
   <li>sourceName</li>
@@ -159,6 +161,8 @@ This specification defines POST endpoints to request information about resources
   <li>description</li>
   <li>datasetDetails.keywords</li>
 </ul>
+
+
 
 [ ^ Back to the top](#top)
 
@@ -190,6 +194,11 @@ This specification defines POST endpoints to request information about resources
                "id": "NCIT:C47824",
                "operator": "=",
                "value": "NCIT:C19591"
+             },
+             {
+              "id": "epnd:search",
+              "operator":"=",
+              "value":"%cancer%"
              }
        ],
       "requestedGranularity": "record"
@@ -227,6 +236,11 @@ The following is an example response
                "id": "NCIT:C47824",
                "operator": "=",
                "value": "NCIT:C19591"
+             },
+             {
+              "id": "epnd:search",
+              "operator":"=",
+              "value":"%cancer%"
              }
        ],
       "requestedGranularity": "record",
