@@ -1149,6 +1149,7 @@ components:
           type: array
           items:
             type: string
+            format: uri
             example: "www.example.com"
         publisher:
           $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
@@ -1159,6 +1160,7 @@ components:
           example: "string"
         releaseLicense:
           type: string
+          format: uri
           example: "license URL"
         language:
           type: string
@@ -1172,19 +1174,26 @@ components:
       properties:
         publisherType:
           type: string
-          example: ""
+          enum:
+            - other
+            - organization
+            - individual
+            - agency
+          example: organization
         name:
           type: string
-          example: "epnd.org"
+          example: "epnd"
         contactEmail:
           type: string
+          format: email
           example: "epnd@gmail.com"
         contactName:
           type: string
           example: "epnd"
         url:
           type: string
-          example: "string"
+          format: uri
+          example: "www.example.com"
         location:
           type: string
           example: "Italy"

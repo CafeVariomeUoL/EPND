@@ -269,11 +269,11 @@ The following is an example response
               "www.example.com"
             ],
             "publisher": {
-              "publisherType": "",
+              "publisherType": "organization",
               "name": "epnd.org",
               "contactEmail": "epnd@gmail.com",
               "contactName": "epnd",
-              "url": "string",
+              "url": "www.epnd.org",
               "location": "Italy"
             },
             "datasetVersions": [
@@ -293,11 +293,11 @@ The following is an example response
               "www.example.com"
             ],
             "publisher": {
-              "publisherType": "",
+              "publisherType": "organization",
               "name": "epnd.org",
               "contactEmail": "epnd@gmail.com",
               "contactName": "epnd",
-              "url": "string",
+              "url": "www.epnd.org",
               "location": "Italy"
             },
             "datasetVersions": [
@@ -307,7 +307,7 @@ The following is an example response
               }
             ],
             "description": "string",
-            "releaseLicense": "license URL",
+            "releaseLicense": "www.example.com",
             "language": "language code"
           }
         ],
@@ -389,11 +389,11 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
               "www.example.com"
             ],
             "publisher": {
-              "publisherType": "",
+              "publisherType": "organization",
               "name": "epnd.org",
               "contactEmail": "epnd@gmail.com",
               "contactName": "epnd",
-              "url": "string",
+              "url": "www.example.com",
               "location": "Italy"
             },
             "datasetVersions": [
@@ -403,7 +403,7 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
               }
             ],
             "description": "string",
-            "releaseLicense": "license URL",
+            "releaseLicense": "www.example.com",
             "language": "language code"
           }
         ]
