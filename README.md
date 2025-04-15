@@ -283,8 +283,8 @@ The following is an example response
               }
             ],
             "description": "string",
-            "releaseLicense": "license URL",
-            "language": "language code"
+            "releaseLicense": "https://www.example.com",
+            "language": "en"
           },
           {
             "id": "BEex4",
@@ -307,8 +307,8 @@ The following is an example response
               }
             ],
             "description": "string",
-            "releaseLicense": "www.example.com",
-            "language": "language code"
+            "releaseLicense": "https://www.example.com",
+            "language": "en"
           }
         ],
         
@@ -386,14 +386,14 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
             "id": "BEex3",
             "name": "Basic Element example three",
             "resourceUrls": [
-              "www.example.com"
+             "https://www.example.com"
             ],
             "publisher": {
               "publisherType": "organization",
               "name": "epnd.org",
               "contactEmail": "epnd@gmail.com",
               "contactName": "epnd",
-              "url": "www.example.com",
+              "url": "https://www.example.com",
               "location": "Italy"
             },
             "datasetVersions": [
@@ -403,8 +403,8 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
               }
             ],
             "description": "string",
-            "releaseLicense": "www.example.com",
-            "language": "language code"
+            "releaseLicense": "https://www.example.com",
+            "language": "en"
           }
         ]
       }

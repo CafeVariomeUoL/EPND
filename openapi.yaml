@@ -340,9 +340,9 @@ components:
           description: >
             Concept ID. 
               Allowed terms:
-               * `nos:number_of_subjects` - Number of subjects
+               * `epnd:number_of_subjects` - Number of subjects
                * `
-          example: "nos:number_of_subjects"
+          example: "epnd:number_of_subjects"
         operator:
           type: string
           description: |
@@ -1150,7 +1150,7 @@ components:
           items:
             type: string
             format: uri
-            example: "www.example.com"
+            example: "https://www.example.com"
         publisher:
           $ref: "#/components/schemas/DatasetsResultSetsResultInfoPublisher"
         datasetVersions:
@@ -1161,10 +1161,12 @@ components:
         releaseLicense:
           type: string
           format: uri
-          example: "license URL"
+          example: "https://www.example.com"
+          description : "Full URI format with schema."
         language:
           type: string
-          example: "language code"
+          example: "en"
+          description: " Two-character code adhering to ISO639-1 standard, lower case."
     DatasetsResultSetsResultInfoPublisher:
       type: object
       required:
@@ -1193,7 +1195,7 @@ components:
         url:
           type: string
           format: uri
-          example: "www.example.com"
+          example: "https://www.example.com"
         location:
           type: string
           example: "Italy"
