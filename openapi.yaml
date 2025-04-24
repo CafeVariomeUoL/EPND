@@ -274,7 +274,7 @@ components:
       properties:
         id:
           type: string
-          description: >
+          description: 
             Concept ID of CDEs. 
               Allowed terms:
                * `NCIT:C28421` - Sex
@@ -321,6 +321,8 @@ components:
             * `NCIT:C16564`
             * `Other`
               * Ex: \"NCIT:C16564\"
+          * For `NCIT:C70764` (Free-text search filter):
+            * `%any string%`
     DatasetsArrayValues:
       type: array
       items:

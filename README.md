@@ -149,7 +149,7 @@ This specification defines POST endpoints to request information about resources
 
 **Dataset Types**: A single value or an array of dataset types , eg :NCIT:C19591 or [NCIT:C19591,NCIT:C17369].
 
-**Free-text Search**: The free-text will sent a LIKE  query on the following fields:
+**Free-text Search**: A single value or an array of values.The free-text will sent a LIKE  query on the following fields:
 
 <ul>
   <li>sourceName</li>
@@ -160,7 +160,12 @@ This specification defines POST endpoints to request information about resources
   <li>datasetDetails.keywords</li>
 </ul>
 
-The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match. For example, when the user inputs Alzheimer Center in the keyword field, the query will be sent out with the value %Alzheimer%Center%, where it matches with results  Alzheimer to come before Center, possibly with text in between.
+The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match. For example, when the user inputs Alzheimer in the keyword field, the query will be sent out with the value %Alzheimer%.
+
+For multiple keyword search, the value will be sent out as array of values.
+
+eg: ["%alzheimers%", "%disease%"].
+
 
 
 [ ^ Back to the top](#top)
@@ -197,7 +202,7 @@ The inclusion of a percent sign (%) wildcard character within the value paramete
              {
               "id": "NCIT:C70764",
               "operator":"=",
-              "value":"%cancer%diabetes%"
+              "value":"%cancer%"
              }
        ],
       "requestedGranularity": "record"
@@ -239,7 +244,7 @@ The following is an example response
              {
               "id": "NCIT:C70764",
               "operator":"=",
-              "value":"%cancer%diabetes%"
+              "value":["%cancer%","%diabetes%"]
              }
        ],
       "requestedGranularity": "record",
