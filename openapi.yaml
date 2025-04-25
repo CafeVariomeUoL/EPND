@@ -274,7 +274,7 @@ components:
       properties:
         id:
           type: string
-          description: 
+          description: >
             Concept ID of CDEs. 
               Allowed terms:
                * `NCIT:C28421` - Sex

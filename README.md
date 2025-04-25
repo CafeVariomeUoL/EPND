@@ -162,7 +162,7 @@ This specification defines POST endpoints to request information about resources
 
 The inclusion of a percent sign (%) wildcard character within the value parameter represents zero or more characters within a LIKE style string match. For example, when the user inputs Alzheimer in the keyword field, the query will be sent out with the value %Alzheimer%.
 
-For multiple keyword search, the value will be sent out as array of values.
+For multiple keyword search, the value will be sent out as array of values. Allows search for exact match when searching with quotes, for example: "Alzheimers Diseases"
 
 eg: ["%alzheimers%", "%disease%"].
 
@@ -191,7 +191,7 @@ eg: ["%alzheimers%", "%disease%"].
              },
              {
                "id": "epnd:number_of_subjects",
-               "operator": "<",
+               "operator": ">=",
                "value": 1000
              },
              {
