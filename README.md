@@ -283,8 +283,35 @@ The following is an example response
             },
             "datasetVersions": [
               {
-                "versionName": "v1.0.0",
-                "numberOfSubjects": 100
+                "datasetDetails": {
+                  "startDate": "01/01/1998",
+                  "versionId": "1.1.0",
+                  "endDate": "01/01/2008",
+                  "updateDate": "",
+                  "versionName": "v1.1.0",
+                  "publishedDate": "07/10/2013",
+                  "keywords": [
+                    "string"
+                  ],
+                  "connectionId": "a7422c0a899473379b7694ad29eed348"
+                },
+                "datasetContent": {
+                  "minAge": 65,
+                  "numberOfControlGroup": 76,
+                  "maxFollowUpDuration": 0,
+                  "averageFollowUpDuration": 98.4,
+                  "countries": [
+                    "https://www.iso.org/obp/ui/#iso:code:3166:FI"
+                  ],
+                  "sex": {
+                    "unknown": 0,
+                    "male": 0.28,
+                    "other": 0,
+                    "female": 0.72
+                  },
+                  "maxAge": 79,
+                  "numberOfSubjects": 140
+                }
               }
             ],
             "description": "string",
@@ -307,8 +334,35 @@ The following is an example response
             },
             "datasetVersions": [
               {
-                "versionName": "v1.0.0",
-                "numberOfSubjects": 100
+                "datasetDetails": {
+                  "startDate": "01/01/1998",
+                  "versionId": "1.1.0",
+                  "endDate": "01/01/2008",
+                  "updateDate": "",
+                  "versionName": "v1.1.0",
+                  "publishedDate": "07/10/2013",
+                  "keywords": [
+                    "string"
+                  ],
+                  "connectionId": "a7422c0a899473379b7694ad29eed348"
+                },
+                "datasetContent": {
+                  "minAge": 65,
+                  "numberOfControlGroup": 76,
+                  "maxFollowUpDuration": 0,
+                  "averageFollowUpDuration": 98.4,
+                  "countries": [
+                    "https://www.iso.org/obp/ui/#iso:code:3166:FI"
+                  ],
+                  "sex": {
+                    "unknown": 0,
+                    "male": 0.28,
+                    "other": 0,
+                    "female": 0.72
+                  },
+                  "maxAge": 79,
+                  "numberOfSubjects": 140
+                }
               }
             ],
             "description": "string",
@@ -403,8 +457,35 @@ The filter **SHOULD** be one of the terms from the [filters and permitted values
             },
             "datasetVersions": [
               {
-                "versionName": "v1.0.0",
-                "numberOfSubjects": 100
+                "datasetDetails": {
+                  "startDate": "01/01/1998",
+                  "versionId": "1.1.0",
+                  "endDate": "01/01/2008",
+                  "updateDate": "",
+                  "versionName": "v1.1.0",
+                  "publishedDate": "07/10/2013",
+                  "keywords": [
+                    "string"
+                  ],
+                  "connectionId": "a7422c0a899473379b7694ad29eed348"
+                },
+                "datasetContent": {
+                  "minAge": 65,
+                  "numberOfControlGroup": 76,
+                  "maxFollowUpDuration": 0,
+                  "averageFollowUpDuration": 98.4,
+                  "countries": [
+                    "https://www.iso.org/obp/ui/#iso:code:3166:FI"
+                  ],
+                  "sex": {
+                    "unknown": 0,
+                    "male": 0.28,
+                    "other": 0,
+                    "female": 0.72
+                  },
+                  "maxAge": 79,
+                  "numberOfSubjects": 140
+                }
               }
             ],
             "description": "string",
