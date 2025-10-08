@@ -71,18 +71,27 @@ This specification defines POST endpoints to request information about resources
         </tr>
     </thead>
     <tbody>
-        <td rowspan="4"><b>Sex</b>
+        <tr>
+        <td rowspan="1"><b>Minimum Age</b>
         </td>
-        <td rowspan="4">Alphanumerical</td>
-        <td rowspan="4">NCIT:C28421 </td>
-        <td rowspan="4">=</td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:minAge</td>
+        <td>>,<,=,>=,<=</td>
         <td>
-        Unknown
+        any integer
         </td>
     </tr>
-    <tr><td>Female</td></tr>
-    <tr><td>Male</td></tr>
-    <tr><td>Other</td></tr>
+     <tr>
+        <td rowspan="1"><b>Maximum Age</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:maxAge</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    </tr>
     <tr>
     <tr>
      <tr>
@@ -127,6 +136,7 @@ This specification defines POST endpoints to request information about resources
         %any string%
         </td>
     </tr>
+    
    
    
     
