@@ -165,7 +165,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="1"><b>Minimun Female Subject Count</b>
         </td>
         <td rowspan="1">Custom</td>
-        <td rowspan="1">epnd:femaleCount</td>
+        <td rowspan="1">epnd:femaleSubjectCount</td>
         <td>>,<,=,>=,<=</td>
         <td>
         any integer
@@ -175,7 +175,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="1"><b>Minimun Male Subject Count</b>
         </td>
         <td rowspan="1">Custom</td>
-        <td rowspan="1">epnd:maleCount</td>
+        <td rowspan="1">epnd:maleSubjectCount</td>
         <td>>,<,=,>=,<=</td>
         <td>
         any integer
@@ -185,7 +185,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="1"><b>Minimun Other Subject Count</b>
         </td>
         <td rowspan="1">Custom</td>
-        <td rowspan="1">epnd:otherCount</td>
+        <td rowspan="1">epnd:otherSubjectCount</td>
         <td>>,<,=,>=,<=</td>
         <td>
         any integer
@@ -195,7 +195,7 @@ This specification defines POST endpoints to request information about resources
         <td rowspan="1"><b>Minimun Unknown Subject Count</b>
         </td>
         <td rowspan="1">Custom</td>
-        <td rowspan="1">epnd:unknownCount</td>
+        <td rowspan="1">epnd:unknownSubjectCount</td>
         <td>>,<,=,>=,<=</td>
         <td>
         any integer
