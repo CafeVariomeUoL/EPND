@@ -91,6 +91,152 @@ This specification defines POST endpoints to request information about resources
         any integer
         </td>
     </tr>
+    <tr>
+        <td rowspan="1"><b>Number of Control Group</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:numberOfControlGroup</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Average Follow-Up Duration</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:averageFollowUpDuration</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+     <tr>
+        <td rowspan="1"><b>Maximum Follow-Up Duration</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:maxFollowUpDuration</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Published Date</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:publishedDate</td>
+        <td>=</td>
+        <td>
+        any date
+        </td>
+    </tr>
+        <tr>
+        <td rowspan="1"><b>Start Date</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:startDate</td>
+        <td>=</td>
+        <td>
+        any date
+        </td>
+    </tr>
+     <tr>
+        <td rowspan="1"><b>End Date</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:endDate</td>
+        <td>=</td>
+        <td>
+        any date
+        </td>
+    </tr>
+     <tr>
+        <td rowspan="1"><b>Update Date</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:updateDate</td>
+        <td>=</td>
+        <td>
+        any date
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Minimun Female Subject Count</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:femaleCount</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Minimun Male Subject Count</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:maleCount</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Minimun Other Subject Count</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:otherCount</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Minimun Unknown Subject Count</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:unknownCount</td>
+        <td>>,<,=,>=,<=</td>
+        <td>
+        any integer
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Country</b>
+        </td>
+        <td rowspan="1">Alphanumerical</td>
+        <td rowspan="1">ISO:3166-1</td>
+        <td>=</td>
+        <td>
+       An array of ISO 3166-1 alpha-2 code for a country <a href="https://raw.githubusercontent.com/BrookesLab/standards/main/cafe-variome-3/draft/schema/country-code.json" target="_blank">
+      refer country-code.json
+    </a>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="1"><b>Publisher Name</b>
+        </td>
+        <td rowspan="1">Custom</td>
+        <td rowspan="1">epnd:name</td>
+        <td>=</td>
+        <td>
+       any string
+        </td>
+    </tr>
+     <tr>
+        <td rowspan="4"><b>Publisher Type</b>
+        </td>
+        <td rowspan="4">Custom</td>
+        <td rowspan="4">epnd:publisherType</td>
+        <td rowspan="4">=</td>
+        <td>
+        organization
+        </td>
+    </tr>
+    <tr><td>individual</td></tr>
+    <tr><td>agency</td></tr>
+    <tr><td>other</td></tr>
+    </tr>
     </tr>
     <tr>
     <tr>
